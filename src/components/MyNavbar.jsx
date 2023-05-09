@@ -4,6 +4,9 @@ import {Navbar, Dropdown, Avatar, DarkThemeToggle} from 'flowbite-react'
 import {FaSignOutAlt} from 'react-icons/fa'
 import Particles from "react-tsparticles";
 import {loadFull} from "tsparticles";
+import { auth } from '../firebase';
+import { signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 import options from './particles.json'
 import logo from '../assets/logo.svg'
@@ -18,23 +21,49 @@ export default function MyNavbar(props){
     const [active, setActive] = useState(undefined)
     const navigate = useNavigate();
     const location = useLocation();
-
-    useEffect(() => {
-        const path = location.pathname.split('/')
-        setActive(path[path.length - 1])
-    }, [location])
-
-    const session = type === 'student' ? {
-        user : { name : 'Jack Connor', email: 'jackconnor@example.com' },
-        type : 'student',
-    } :
-    {
+    const [session, setSession] = useState(    {
         user : { name : 'Robert Smith' , email : 'robertsmith@example.com' },
         type : 'professor',
-    }
+    })
 
-    const handleLogout = () => {
-        navigate('/');
+    useEffect(() => {
+        //Authentication
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                //console.log(user);
+                setSession({
+                    ...session, 
+                    'user':{
+                        ...session.user,
+                        'email': user.email
+                    }
+                })
+            } else {
+              console.log("user is logged out")
+            }
+        });
+
+        const path = location.pathname.split('/')
+        setActive(path[path.length - 1])
+    }, [session, location])
+
+    // session = type === 'student' ? {
+    //     user : { name : 'Jack Connor', email: 'jackconnor@example.com' },
+    //     type : 'student',
+    // } :
+    // {
+    //     user : { name : 'Robert Smith' , email : 'robertsmith@example.com' },
+    //     type : 'professor',
+    // }
+
+    const handleLogout = () => {               
+        signOut(auth).then(() => {
+        // Sign-out successful.
+            navigate("/");
+            console.log("Signed out successfully")
+        }).catch((error) => {
+        // An error happened.
+        });
     }
 
     const nameInitials = () => {
