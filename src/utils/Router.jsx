@@ -19,6 +19,8 @@ import ProfManageExercise from '../pages/Professor/ManageExercise/ManageExercise
 import ProfMetrics from '../pages/Professor/Metrics/Metrics.jsx'
 
 import Error from '../pages/Error/Error.jsx'
+import Signup from "../pages/Authentication/SignUp";
+import Login from "../pages/Authentication/Login";
 
 export default function Router(){
 
@@ -53,6 +55,8 @@ export default function Router(){
                     { path: "metrics", element: <ProfMetrics /> },
                 ]
             },
+            { path: "/signup", element: <Signup /> }, 
+            { path: "/login", element: <Login/> },
             { path: "*", element: <Error /> },
         ]
     )

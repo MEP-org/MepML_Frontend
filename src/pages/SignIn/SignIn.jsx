@@ -6,11 +6,13 @@ export default function SignIn(){
     const navigate = useNavigate();
 
     const handleProfClick = () => {
-        navigate('/professor/classes')
+        //navigate('/professor/classes')
+        navigate('/login')
     }
 
     const handleStudentClick = () => {
-        navigate('/student/home')
+        //navigate('/student/home')
+        navigate('/signup')
     }
 
     const imageUrl = `https://static.ua.pt/idp/bg/b/00${Math.floor(Math.random() * 8) + 1}-min.jpg`
