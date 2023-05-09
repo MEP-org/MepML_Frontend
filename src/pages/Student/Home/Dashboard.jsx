@@ -30,8 +30,8 @@ export default function Dashboard(props){
                         </div>
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
-                                <span className="font-semibold text-3xl mr-2">{stats.total_submissions}</span>
-                                <span className="font-light text-sm">Exercises</span>
+                                <span className="font-semibold text-3xl mr-2">{stats.num_submissions}</span>
+                                <span className="font-light text-sm">Submissions</span>
                             </div>
                         </div>
                     </div>
@@ -43,8 +43,8 @@ export default function Dashboard(props){
                         </div>
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
-                                <span className="font-semibold text-3xl mr-2">{stats.total_exercises}</span>
-                                <span className="font-light text-sm">In total</span>
+                                <span className="font-semibold text-3xl mr-2">{stats.num_exercises}</span>
+                                <span className="font-light text-sm">Exercises</span>
                             </div>
                         </div>
                     </div>
@@ -56,8 +56,8 @@ export default function Dashboard(props){
                         </div>
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
-                            <p className="font-light text-sm">{stats.next_exercise.name}</p>
-                            <p className="font-semibold text-2xl mr-2">{stats.next_exercise.deadline}</p>
+                            <p className="font-light text-sm">Waiting for change</p>
+                            <p className="font-semibold text-2xl mr-2">{stats.next_deadline}</p>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export default function Dashboard(props){
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
                                 <span className="font-light text-sm mr-2">Top</span>
-                                <span className="font-semibold text-3xl">{stats.position}</span>
+                                <span className="font-semibold text-3xl">{stats.last_ranking}</span>
                             </div>
                         </div>
                     </div>

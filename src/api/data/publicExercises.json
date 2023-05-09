@@ -1,0 +1,58 @@
+{
+    "next": null,
+    "previous": null,
+    "total": 3,
+    "this_page": 3,
+    "results": {
+      "exercises": [
+        {
+          "id": 1,
+          "title": "Exercise 1",
+          "subtitle": "Subtitle 1",
+          "publish_date": "2023-04-29T11:00:31.637074Z",
+          "created_by": {
+            "id": 1,
+            "name": "Rafael Gonçalves"
+          },
+          "dataset": {
+            "train_dataset": "/media/train_MGArrll.csv",
+            "train_size": 1
+          }
+        },
+        {
+          "id": 2,
+          "title": "Exercise 2",
+          "subtitle": "Subtitle 2",
+          "publish_date": "2023-04-29T11:00:32.660680Z",
+          "created_by": {
+            "id": 1,
+            "name": "Rafael Gonçalves"
+          },
+          "dataset": {
+            "train_dataset": "/media/train_MGArrll.csv",
+            "train_size": 1
+          }
+        },
+        {
+          "id": 3,
+          "title": "Exercise 3",
+          "subtitle": "Subtitle 3",
+          "publish_date": "2023-04-29T11:00:33.685355Z",
+          "created_by": {
+            "id": 1,
+            "name": "Rafael Gonçalves"
+          },
+          "dataset": {
+            "train_dataset": "/media/train_MGArrll.csv",
+            "train_size": 1
+          }
+        }
+      ],
+      "professors": [
+        {
+          "id": 1,
+          "name": "Rafael Gonçalves"
+        }
+      ]
+    }
+  }

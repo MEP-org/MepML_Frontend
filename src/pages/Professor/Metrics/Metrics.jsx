@@ -6,22 +6,19 @@ import MyMetrics from './MyMetrics'
 import AddMetric from './AddMetric'
 import Loading from '../../../components/Loading'
 
-import { MetricsAPI } from '../../../api/MetricsApi'
+import { ProfessorAPI } from '../../../api/ProfessorAPI'
 
 export default function Metrics(){
+    const profId = 1
 
     const [metrics, setMetrics] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         setLoading(true)
-        MetricsAPI.getMetrics()
-        .then((data) => {
-            setMetrics(data)
-        })
-        .finally(() => {
-            setLoading(false)
-        })
+        ProfessorAPI.getMetrics(profId)
+        .then((data) => { setMetrics(data) })
+        .finally(() => { setLoading(false) })
     }, [])
 
 

@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react"
 import { Button} from "flowbite-react"
-import { FaPlusCircle, FaEye, FaEdit} from "react-icons/fa"
+import { FaPlusCircle, FaEye, FaEdit, FaTrash} from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 
 import ClassNameModal from "./ClassNameModal"
 
-export default function Banner({classData, setClassData}) {
+export default function Banner({classData, setClassData, loading}) {
 
     const [showModal, setShowModal] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (classData.id === undefined) setShowModal(true)
+        if (classData.id === undefined && loading) setShowModal(true)
     }, [classData.id])
 
     const handleSubmit = () => {
@@ -27,10 +27,15 @@ export default function Banner({classData, setClassData}) {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {
-                setClassData({...classData, img: reader.result})
+                setClassData({...classData, image: reader.result})
             };
         }
         input.click();
+    }
+
+    const handleDelete = () => {
+        console.log('delete')
+        navigate('/professor/classes')
     }
 
     return (
@@ -44,9 +49,14 @@ export default function Banner({classData, setClassData}) {
 
             <div className="mb-8">
                 <div className="font-bold text-5xl">
-                    {classData.id ? 
+                    {classData.id !== undefined ?
                         'View/Edit Class' : 
                         'Create new Class'
+                    }
+                    {classData.id !== undefined &&
+                        <div className="inline-block cursor-pointer text-red-700 hover:text-red-500 ml-2">
+                            <FaTrash size={32} onClick={handleDelete}/>
+                        </div>
                     }
                 </div>
             </div>
@@ -54,7 +64,7 @@ export default function Banner({classData, setClassData}) {
             <div className="grid grid-cols-3 gap-6">
                 
                 <div className='drop-shadow-lg h-52 relative'>
-                    <img src={classData.img} alt="class img" className="h-full w-full object-cover rounded-lg"/>
+                    <img src={classData.image} alt="class img" className="h-full w-full object-cover rounded-lg"/>
                     <div className="absolute top-0 right-0 p-4">
                         <Button className="dark:bg-gray-800 hover:!text-blue-500 dark:!border-gray-800" color='light' onClick={handleEditImage}>
                             <FaEdit size={20} />
@@ -85,7 +95,7 @@ export default function Banner({classData, setClassData}) {
                         </div>
                     </div>
                     <div className="grid grid-cols-3 gap-x-10 gap-y-4">
-                        <Button className='dark:bg-gray-800' color='light'>
+                        <Button className='dark:bg-gray-800' color='light' onClick={() => navigate('/professor/exercises')}>
                             <div className='w-40 text-center'>See exercises</div>
                             <FaEye />
                         </Button>

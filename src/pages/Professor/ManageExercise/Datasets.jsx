@@ -3,6 +3,7 @@ import { BsBarChartFill } from "react-icons/bs";
 import {MdAssignment} from "react-icons/md";
 import {Table} from "flowbite-react";
 import {AiFillCloseCircle} from "react-icons/ai";
+import PreviousDataset from "./PreviousDataset";
 
 export default function Datasets(props){
 
@@ -26,6 +27,8 @@ export default function Datasets(props){
             handleChange({target: {name: "dataset", value: {[type]: file}}})
         }
         reader.readAsText(file)
+        // hide id="previous_dataset"
+        document.getElementById("previous_dataset").style.display = "none"
     }
 
     const handleRemoveFile = (type) => {
@@ -138,6 +141,13 @@ export default function Datasets(props){
                 <div>
                     {renderTable(test)}
                 </div>
+
+
+                { exercise.id && (
+                    <div id="previous_dataset">
+                        <PreviousDataset dataset={exercise.dataset} />
+                    </div>
+                )}
 
             </div>
         </>

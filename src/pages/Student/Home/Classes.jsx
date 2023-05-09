@@ -20,8 +20,8 @@ export default function Classes(props){
 
         return (
             <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-4'>
-                {classes.map((item) => 
-                    <ClassCard key={item.id} item={item} />
+                {classes.map((c) => 
+                    <ClassCard key={c.id} class_={c} />
                 )}
             </div>
         );

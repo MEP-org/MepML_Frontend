@@ -1,22 +1,21 @@
 import { Label, TextInput, Select } from 'flowbite-react';
 import { FaSearch } from 'react-icons/fa'
+import { useState } from 'react';
 
 export default function Filters(props){
 
-    const {filter, setFilter, exercises} = props;
-    const classes = exercises.map((exercise) => {
-        return {
-            'id': exercise.studentClass.id,
-            'name': exercise.studentClass.name
-        }
-    });
+    const {filter, setFilter, classes} = props;
+
+    const [debounce, setDebounce] = useState(null)
 
     const handleFilter = (e, key) => {
-        console.log(e.target.value);
-        setFilter({
-            ...filter,
-            [key]: e.target.value
-        })
+        clearTimeout(debounce)
+        setDebounce(setTimeout(() => {
+            setFilter({
+                ...filter,
+                [key]: e.target.value
+            })
+        }, 300))       
     }
 
     return (

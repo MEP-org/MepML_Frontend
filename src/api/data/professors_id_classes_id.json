@@ -1,0 +1,23 @@
+{
+    "id": 1,
+    "name": "Class 1",
+    "image": "https://venturebeat.com/wp-content/uploads/2021/10/shutterstock_1703415496-1.jpg?w=1200&strip=all",
+    "students": [
+      {
+        "id": 1,
+        "user": {
+          "email": "jm@ua.pt",
+          "nmec": 654321,
+          "name": "João Mário"
+        }
+      },
+      {
+        "id": 2,
+        "user": {
+          "email": "rs@ua.pt",
+          "nmec": 987654,
+          "name": "Rafa Silva"
+        }
+      }
+    ]
+}

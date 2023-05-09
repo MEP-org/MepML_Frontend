@@ -13,16 +13,14 @@ export default function Datasets(props){
     }
 
 
-    const renderLoading = () => {
+    if (loading) {
         return (
             <div className='w-fit mx-auto'>
                 <Spinner size='xl' />
             </div> 
         )
     }
-
-
-    const renderDatasets = () => {
+    else {
 
         return (
             <>
@@ -35,22 +33,22 @@ export default function Datasets(props){
 
                         <div className="flex items-center justify-between w-full p-2">
                             <div>
-                                <div className="flex center">
+                                <div className="flex items-center">
                                     <p className="text-sm font-semibold truncate">
-                                        {datasets.train.name}
+                                        {datasets.train_name}
                                     </p>
                                     <p className="text-xs font-light truncate ml-1">
-                                        ({datasets.train.size} bytes)
+                                        ({datasets.train_size} bytes)
                                     </p>
                                 </div>
                                 <p className="mt-1 text-xs font-extralight truncate text-gray-400">
-                                    {datasets.train.uploadDate}
+                                    {datasets.train_upload_date}
                                 </p>
                             </div>
 
                             <BsCloudDownload 
                                 className="w-5 h-5 justify-self-end cursor-pointer text-gray-500 hover:text-green-500"
-                                onClick={(event) => downloadFile(event, datasets.train.url)} 
+                                onClick={(event) => downloadFile(event, datasets.train_dataset)} 
                             />
                         </div>
                     </div>
@@ -61,22 +59,22 @@ export default function Datasets(props){
 
                         <div className="flex items-center justify-between w-full p-2">
                             <div>
-                                <div className="flex center">
+                                <div className="flex items-center">
                                     <p className="text-sm font-semibold truncate">
-                                        {datasets.test.name}
+                                        {datasets.test_name}
                                     </p>
                                     <p className="text-xs font-light truncate ml-1">
-                                        ({datasets.test.size} bytes)
+                                        ({datasets.test_size} bytes)
                                     </p>
                                 </div>
                                 <p className="mt-1 text-xs font-extralight truncate text-gray-400">
-                                    {datasets.train.uploadDate}
+                                    {datasets.test_upload_date}
                                 </p>
                             </div>
 
                             <BsCloudDownload 
                                 className="w-5 h-5 justify-self-end cursor-pointer text-gray-500 hover:text-green-500"
-                                onClick={(event) => downloadFile(event, datasets.test.url)} 
+                                onClick={(event) => downloadFile(event, datasets.test_dataset)} 
                             />
                         </div>
                     </div>
@@ -84,11 +82,4 @@ export default function Datasets(props){
             </>
         )
     }
-
-
-    return (
-        <>
-            {loading ? renderLoading() : renderDatasets()}
-        </>
-    )
 }

@@ -4,15 +4,22 @@ import { FaUserEdit, FaTrash, FaPlusCircle } from "react-icons/fa"
 
 export default function StudentsTable({classData, setClassData}){
 
-    const [student, setStudent] = useState({nMec: '', name: ''})
+    const [student, setStudent] = useState({nMec: '', name: '', email: ''})
 
     const handleAddStudent = (e) => {
         e.preventDefault();
         setClassData({
             ...classData,
-            students: [...classData.students, student]
+            students: [...classData.students, {
+                id: student.nMec,
+                user : {
+                    nMec: student.nMec,
+                    name: student.name,
+                    email: student.email
+                }
+            }]
         })
-        setStudent({nMec: '', name: ''})
+        setStudent({nMec: '', name: '', email: ''})
 
     }
 
@@ -30,8 +37,8 @@ export default function StudentsTable({classData, setClassData}){
     return (
         <>
             <form>
-                <div className='grid grid-cols-7 gap-6 mb-8'>
-                    <div className='col-span-2'>
+                <div className='grid grid-cols-6 gap-6 mb-8'>
+                    <div className='col-span-1'>
                         <Label>Student N_mec</Label>
                         <div className='mb-2' />
                         <TextInput 
@@ -41,7 +48,7 @@ export default function StudentsTable({classData, setClassData}){
                         />
                     </div>
 
-                    <div className='col-span-4'>
+                    <div className='col-span-2'>
                         <Label>Student Name</Label>
                         <div className='mb-2' />
                         <TextInput 
@@ -51,8 +58,19 @@ export default function StudentsTable({classData, setClassData}){
                         />
                     </div>
 
+                    <div className='col-span-2'>
+                        <Label>Student Email</Label>
+                        <div className='mb-2' />
+                        <TextInput 
+                            placeholder='Email'
+                            type='email'
+                            value={student.email}
+                            onChange={(e) => setStudent({...student, email: e.target.value})}
+                        />
+                    </div>
+
                     <div className='mt-8' >
-                        <Button type="submit" onClick={handleAddStudent}>
+                        <Button type="submit" onClick={handleAddStudent} className="w-full">
                             <div className='w-32 text-center' id='manageStudent'>Add Students</div>
                             <FaPlusCircle />
                         </Button>
@@ -77,17 +95,23 @@ export default function StudentsTable({classData, setClassData}){
                         <Table.HeadCell>
                             Name
                         </Table.HeadCell>
+                        <Table.HeadCell >
+                            Email
+                        </Table.HeadCell>
                         <Table.HeadCell className='w-20'/>
                         <Table.HeadCell className='w-20'/>
                     </Table.Head>
                     <Table.Body>
                         {classData.students.map((student) => (
-                            <Table.Row key={student.nMec}>
+                            <Table.Row key={student.id}>
                                 <Table.Cell>
-                                    {student.nMec}
+                                    {student.user.nmec}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {student.name}
+                                    {student.user.name}
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {student.user.email}
                                 </Table.Cell>
                                 <Table.Cell className='cursor-pointer hover:text-blue-500' onClick={() => handleEditStudent(student.nMec, student.name)}>
                                     <FaUserEdit className="mx-auto" />

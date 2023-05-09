@@ -5,9 +5,8 @@ import 'react-circular-progressbar/dist/styles.css';
 export default function Results(props) {
     
     const [mode,, toggleMode] = useThemeMode(); 
-    const { results, loading } = props;
+    const { my_results, all_results, loading } = props;
     let aux = 0;
-
 
     const renderLoading = () => {
         return (
@@ -19,8 +18,6 @@ export default function Results(props) {
 
 
     const renderResults = () => {
-
-        if (!results || !results.class) {return null;}
 
         const chartStyle = {
             path: {stroke: '#1C64F2'},
@@ -40,13 +37,13 @@ export default function Results(props) {
                 {/* Students results */}
                 <div>
                     <p className='font-semibold text-2xl mb-10'>Evaluation of your model</p>
-                    <div className='grid grid-cols-3 place-items-center'>
-                        {results.student.map((res) => {
+                    <div className='grid grid-cols-4 place-items-center'>
+                        {my_results.map((res) => {
                             aux++; //just for now
                             return (
                                 <div key={aux} className='w-1/2'>
-                                    <CircularProgressbar value={res.value} text={`${res.value}%`} styles={chartStyle} />
-                                    <p className='text-center mt-2'>{res.metric}</p>
+                                    <CircularProgressbar value={(res.score * 100).toFixed(2)} text={`${(res.score * 100).toFixed(2)}%`} styles={chartStyle} />
+                                    <p className='text-center mt-2'>{res.metric.title}</p>
                                 </div>
                             )})}
                     </div>
@@ -57,14 +54,14 @@ export default function Results(props) {
 
 
                 {/* Class results */}
-                <div className='mb-20'>
+                {/* <div className='mb-20'>
                     <p className='font-semibold text-2xl mb-10'>Evaluation of class models</p>
 
                     <Table hoverable={true}>
                         <Table.Head>
                             <Table.HeadCell>Nmec</Table.HeadCell>
                             <Table.HeadCell>Name</Table.HeadCell>
-                            {results.student.map((res) => {
+                            {all_results[0].student.map((res) => {
                                 return (
                                     <Table.HeadCell key={res.metric}>
                                         {res.metric}
@@ -92,7 +89,7 @@ export default function Results(props) {
                                 )})}
                         </Table.Body>
                     </Table>
-                </div>
+                </div> */}
             </>
         )
     }

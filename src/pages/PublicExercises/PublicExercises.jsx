@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react';
-import {ExercisesAPI} from "../../api/ExercisesAPI";
 import Banner from './Banner';
 import Filters from './Filters';
 import Results from './Results';
-
+import {PublicAPI} from '../../api/PublicAPI';
 
 export default function PublicExercises(props){
 
@@ -17,19 +16,17 @@ export default function PublicExercises(props){
 
     const [loading, setLoading] = useState(false);
     const [exercises, setExercises] = useState([]);
+    const [profs, setProfs] = useState([]);
 
     useEffect(() => {
         setLoading(true);
-        ExercisesAPI.getPublic()
-        .then((data) => {
-            setExercises(data);
+        PublicAPI.getPublicExercises(filter)
+        .then((data) => { 
+            setExercises(data.results.exercises)
+            setProfs(data.results.professors)
         })
-        .finally(() => {
-            setLoading(false);
-        })
+        .finally(() => { setLoading(false) })
     }, [filter]);
-
-    const profs = []
 
     return (
         <>
@@ -38,7 +35,7 @@ export default function PublicExercises(props){
                 <div className='mb-10' />
                 <Filters filter={filter} setFilter={setFilter} profs={profs}/>
                 <div className='mb-10' />
-                <Results exercises={exercises} loading={loading} />
+                <Results exercises={exercises} loading={loading} user={props.user} />
             </div>
         </>
     )

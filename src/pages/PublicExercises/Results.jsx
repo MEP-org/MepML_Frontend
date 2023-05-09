@@ -33,7 +33,7 @@ export default function Results(props){
                 <div className='grid lg:grid-cols-2 gap-4'>
                     {exercises.map((exercise) => {
                         return (
-                            <ExerciseCard exercise={exercise} key={exercise.id} />
+                            <ExerciseCard exercise={exercise} key={exercise.id} user={props.user} />
                         )
                     })}
                 </div>

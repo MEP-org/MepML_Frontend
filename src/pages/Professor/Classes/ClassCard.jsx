@@ -28,14 +28,10 @@ export default function ClassCard(props){
                         {item.name}
                     </p>
 
-                    <div className="text-gray-700 dark:text-gray-400 font-light">
-                        <FaUser className='inline-block mr-2' size={12}  />
-                        <span className="inline-block text-sm">Prof. {item.professor.name}</span>
-                    </div>
 
                     <div className="text-gray-700 dark:text-gray-400 font-light">
                         <FaUserFriends className='inline-block mr-2' size={15} />
-                        <span className="inline-block text-sm">{item.memberCount} members</span>
+                        <span className="inline-block text-sm">{item.num_students} members</span>
                     </div>
                 </div>
             </div>

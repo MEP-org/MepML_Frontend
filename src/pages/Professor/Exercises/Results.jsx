@@ -25,17 +25,31 @@ export default function Results(props){
     }
 
     const exercisesFilter = (exercise) => {
-        // TODO: Implement filter
-        console.log(filter, exercise);
-        return true;
-    }   
+        return (
+            exercise.title.toLowerCase().includes(filter.title.toLowerCase()) &&
+            (filter.filter === 'all' || 
+            (filter.filter == exercise.students_class.id))
+        )
+    }
+
+    const sortExercises = (e1, e2) => {
+        if(filter.sort === 'recent'){
+            return e1.publish_date < e2.publish_date;
+        } else if(filter.sort === 'oldest'){
+            return e1.publish_date > e2.publish_date;
+        } else if(filter.sort === 'closestDeadline'){
+            return e1.deadline < e2.deadline;
+        } else if(filter.sort === 'farthestDeadline'){
+            return e1.deadline > e2.deadline;
+        }
+    }
+
 
     const renderExercises = () => {
-        let filteredExercises = exercises.filter(exercisesFilter);
+        const filteredExercises = exercises.filter(exercisesFilter).sort(sortExercises);
         if(filteredExercises.length === 0){
             return noResults();
         }
-        // TODO: Implement sort
         return (
             <>
                 <div>

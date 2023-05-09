@@ -1,32 +1,35 @@
 import { useEffect, useState } from "react"
-import { ClassesAPI } from "../../../api/ClassesAPI";
+import { StudentAPI } from '../../../api/StudentAPI';
 import Classes from "./Classes";
 import Dashboard from "./Dashboard";
 
-// temporary data
-import {student_stats} from '../../../api/data.json';
-
-
 export default function Home(){
-
+    const studentID = 100001;
     const [loadingStats, setLoadingStats] = useState(false);
     const [loadingClasses, setLoadingClasses] = useState(false);
     const [classes, setClasses] = useState([]);
-    const [stats, setStats] = useState(student_stats);
+    const [stats, setStats] = useState({});
 
     useEffect(() => {
         setLoadingStats(true);
         setLoadingClasses(true);
-        const studentID = 100001;
-        ClassesAPI.getByStudent(studentID)
+
+        StudentAPI.getHome(studentID)
         .then((data) => {
-            //TODO: get student stats
+            setStats(data);
+        })
+        .finally(() => {
+            setLoadingStats(false);
+        })
+
+        StudentAPI.getClasses(studentID)
+        .then((data) => {
             setClasses(data);
         })
         .finally(() => {
             setLoadingClasses(false);
-            setLoadingStats(false);
         })
+
     }, []);
 
     return (

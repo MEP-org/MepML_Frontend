@@ -10,7 +10,8 @@ import Evaluation from "./Evaluation";
 
 export default function AssignmentTab(props){
 
-    const { assignment, loading } = props;
+    const { assignment, results, submission, loading } = props;
+    const { description, evaluation, dataset } = assignment.exercise || {};
 
     return (
         <>
@@ -24,7 +25,7 @@ export default function AssignmentTab(props){
                     title="Description"
                     icon={BsFileRichtextFill}
                 >
-                    <Description description={assignment.description} loading={loading} />
+                    <Description description={description} loading={loading} />
                 </Tabs.Item>
 
                 <Tabs.Item
@@ -32,7 +33,7 @@ export default function AssignmentTab(props){
                     title="Evaluation Rules"
                     icon={BiCog}
                 >
-                    <Evaluation evaluationRules={assignment.evaluationRules} loading={loading} />
+                    <Evaluation evaluationRules={evaluation} loading={loading} />
                 </Tabs.Item>
 
 
@@ -40,7 +41,7 @@ export default function AssignmentTab(props){
                     title="Datasets"
                     icon={BsDatabaseDown}
                 >
-                    <Datasets datasets={assignment.datasets} loading={loading} />
+                    <Datasets datasets={dataset || {}} loading={loading} />
                 </Tabs.Item>
 
 
@@ -48,7 +49,7 @@ export default function AssignmentTab(props){
                     title="Results"
                     icon={BsBarChartFill}
                 >
-                    <Results results={assignment.results} loading={loading} />
+                    <Results my_results={assignment.my_results || []} all_results={results} loading={loading} />
                 </Tabs.Item>
 
 
@@ -56,7 +57,7 @@ export default function AssignmentTab(props){
                     title="Submission"
                     icon={BsFillCloudUploadFill}
                 >
-                    <Submissions submissions={assignment.submissions} loading={loading} />
+                    <Submissions submission={submission} loading={loading} />
                 </Tabs.Item>
 
 

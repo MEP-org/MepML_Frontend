@@ -6,7 +6,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function Submissions(props){
 
-    const { submissions, loading } = props;
+    const { submission, loading } = props;
     const [results, setResults] = useState();
     const [model, setModel] = useState();
     const [showModal, setShowModal] = useState(false);
@@ -155,9 +155,11 @@ export default function Submissions(props){
                         </Modal.Body>
                     </Modal>
                 </div>
-    
-    
-                <PreviousSubmissions submissions={submissions} />
+
+                { Object.keys(submission).length > 0 && (
+                    <PreviousSubmissions submission={submission} />
+                )}
+
             </>
         )
     }

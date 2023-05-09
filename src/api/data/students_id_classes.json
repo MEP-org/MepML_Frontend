@@ -1,0 +1,16 @@
+[
+    {
+      "id": 1,
+      "name": "Class 1",
+      "num_students": 2,
+      "image": "/media/image.png",
+      "created_by": {
+        "id": 1,
+        "user": {
+          "email": "rfg@ua.pt",
+          "nmec": 102534,
+          "name": "Rafael Gonçalves"
+        }
+      }
+    }
+  ]

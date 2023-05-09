@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function ExerciseCard(props) {
 
-    const {id, title, description, visible, maxAttempts, totalAnswers, maxAnswers, published, deadline, studentClass} = props.exercise;
+    const {exercise} = props;
     
     return ( 
         <>
@@ -13,11 +13,11 @@ export default function ExerciseCard(props) {
                 <div className='grid grid-cols-12'>
                     <div className='lg:col-span-10 col-span-12'>
                         <p className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                            {title}
+                            {exercise.title}
                         </p>
 
                         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            {description}
+                            {exercise.subtitle}
                         </p>
                     </div>
 
@@ -25,30 +25,24 @@ export default function ExerciseCard(props) {
                         <div className="text-gray-700 dark:text-gray-400 lg:text-right"> 
                             <span id="badge-dismiss-green" className="inline-flex items-center px-2 py-1 text-sm font-medium text-green-800 bg-green-100 rounded dark:bg-green-900 dark:text-green-300">
                                 <FaGlobeAmericas className='inline-block mr-2' size={12}  />
-                                {visible ? 'Public' : 'Private'}
+                                {exercise.visibility ? 'Public' : 'Private'}
                             </span>
                         </div>
 
                         <div className="text-gray-700 dark:text-gray-400 lg:text-right">
                             <FaBook className='inline-block mr-2' size={12}  />
                             <span className="inline-block text-xs font-light">
-                                {studentClass.name}
+                                {exercise.students_class.name}
                             </span>
                         </div>
 
                         <div className="text-gray-700 dark:text-gray-400 lg:text-right">
                             <span className="inline-block text-xs font-light pr-1">Nº attempts</span>
                             <span className="inline-block text-xs font-bold">
-                                {maxAttempts}
+                                {exercise.limit_of_attempts}
                             </span>
                         </div>
 
-                        <div className="text-gray-700 dark:text-gray-400 lg:text-right">
-                            <span className="inline-block text-xs font-bold pr-1">
-                                {totalAnswers}/{maxAnswers}
-                            </span>
-                            <span className="inline-block text-xs font-light pr-1"> Answers</span>
-                        </div>
                     </div>
 
                 </div>
@@ -58,19 +52,19 @@ export default function ExerciseCard(props) {
                         <div className="text-gray-700 dark:text-gray-400">
                             <span className="inline-block text-xs font-light pr-1">Published at</span>
                             <span className="inline-block text-xs font-bold">
-                                {published}
+                                {exercise.publish_date}
                             </span>
                         </div>
 
                         <div className="text-gray-700 dark:text-gray-400">
                             <span className="inline-block text-xs font-light pr-1">Due to</span>
                             <span className="inline-block text-xs font-bold">
-                                {deadline}
+                                {exercise.deadline}
                             </span>
                         </div>
                     </div>
 
-                    <Link to={`/professor/exercises/${id}`}>
+                    <Link to={`/professor/exercises/${exercise.id}`}>
                         <button className="my-btn h-11 w-11">
                             <FaArrowRight />
                         </button>

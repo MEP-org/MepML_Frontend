@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react"
 import Banner from './Banner';
 import MyClasses from './MyClasses';
-import { ClassesAPI } from "../../../api/ClassesAPI";
+import { ProfessorAPI } from '../../../api/ProfessorAPI';
 
 export default function Classes(){
+    const profId = 1;
 
     const [loading, setLoading] = useState(false);
     const [classes, setClasses] = useState([]);
 
     useEffect(() => {
         setLoading(true);
-        const profId = 1;
-        ClassesAPI.getByProfessor(profId)
-        .then((data) => {
-            setClasses(data);
-        })
-        .finally(() => {
-            setLoading(false);
-        })
+        ProfessorAPI.getClasses(profId)
+        .then((data) => { setClasses(data) })
+        .finally(() => { setLoading(false) })
     }, []);
 
     return (

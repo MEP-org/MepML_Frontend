@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function ExerciseCard(props){
 
     const navigate = useNavigate();
-    const { id, title, description, published } = props.exercise;
+    const { exercise, user } = props;
 
     return (
         <>
@@ -14,11 +14,11 @@ export default function ExerciseCard(props){
                 <div className="overflow-auto flex flex-col h-44">
                     <div>
                         <p className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                            {title}
+                            {exercise.title}
                         </p>
 
                         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            {description}
+                            {exercise.subtitle}
                         </p>
                     </div>
 
@@ -27,11 +27,13 @@ export default function ExerciseCard(props){
                         <div className="text-gray-700 dark:text-gray-400">
                             <span className="inline-block text-xs font-light pr-1">Published at</span>
                             <span className="inline-block text-xs font-bold">
-                                {published}
+                                {exercise.publish_date}
                             </span>
+                            <span className="inline-block text-xs font-light pl-1">by</span>
+                            <span className="inline-block text-xs font-bold pl-1">Prof. {exercise.created_by.name}</span>
                         </div>
 
-                        <Button className="!p-0 !h-11 !w-11" onClick={() => {navigate("/student/publicExercises/" + id)}}>
+                        <Button className="!p-0 !h-11 !w-11" onClick={() => {navigate("/"+user+"/publicExercises/" + exercise.id)}}>
                             <FaArrowRight />
                         </Button>
                     </div>

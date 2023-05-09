@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
 import AssignmentTab from "./AssignmentTab";
-import { ExercisesAPI } from "../../../api/ExercisesAPI";
+import { StudentAPI } from '../../../api/StudentAPI';
 import Banner from "./Banner";
-import { Assignment as AssignmentInit } from "../../../model/Assignment";
 
 
 export default function Assignment(){
 
     const { assignmentId } = useParams();
     const [loading, setLoading] = useState(false);
-    const [assignment, setAssignment] = useState(AssignmentInit);
+    const [assignment, setAssignment] = useState({});
+    const [submission, setSubmission] = useState({});
+    const [results, setResults] = useState({});
+    const studentId = 1;
 
 
     useEffect(() => {
         setLoading(true);
-        ExercisesAPI.getAssignmentById(assignmentId)
+
+        StudentAPI.getAssignment(studentId, assignmentId)
         .then((data) => {
-            setAssignment(data);
+            setAssignment(data.assignment);
+            setSubmission(data.submission);
+            setResults(data.all_results);
         })
         .finally(() => {
             setLoading(false);
-        })
+        });
+
     }, []);
 
     
     return (
         <>
             <div className='w-full container mt-8'>
-                <Banner assignment={assignment} loading={loading} />
-                <AssignmentTab assignment={assignment} loading={loading} />
+                <Banner exercise={assignment.exercise || {}} loading={loading} />
+                <AssignmentTab assignment={assignment} submission={submission} results={results} loading={loading} />
             </div>
         </>
     )

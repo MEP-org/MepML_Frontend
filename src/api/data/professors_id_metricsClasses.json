@@ -1,0 +1,29 @@
+{
+    "metrics": [
+        {
+            "id": 1,
+            "title": "Precision",
+            "description": "Precision is the ratio of number of true positives to the total number of true positives and false positives."
+        },
+        {
+            "id": 2,
+            "title": "Accuracy",
+            "description": "Accuracy is the ratio of number of correct predictions to the total number of input samples."
+        },
+        {
+            "id": 3,
+            "title": "Recall",
+            "description": "Recall is the ratio of number of true positives to the total number of true positives and false negatives."
+        }
+    ],
+    "classes": [
+        {
+            "id": 1,
+            "name": "Class 1"
+        },
+        {
+            "id": 2,
+            "name": "Class 2"
+        }
+    ]
+}

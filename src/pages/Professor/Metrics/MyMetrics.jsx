@@ -2,9 +2,7 @@ import MetricCard from "./MetricCard";
 
 export default function MyMetrics({metrics}) {
 
-    const myId = 1;
-
-    const myMetrics = metrics.filter(metric => metric.author.id === myId);
+    const myMetrics = [...metrics.my_metrics];
 
     return (
         <>
@@ -17,7 +15,7 @@ export default function MyMetrics({metrics}) {
                 <div className='grid grid-cols-3 gap-8'>
                 {myMetrics.map((metric) => {
                     return (
-                        <MetricCard metric={metric} key={metric.id} />
+                        <MetricCard metric={metric} key={metric.id} my={true} />
                     )
                 })}
                 </div>

@@ -4,10 +4,20 @@ import {BiHelpCircle} from "react-icons/bi"
 
 export default function Description(props){
 
-    const {handleChange, exercise, classes} = props
+    const {handleChange, exercise, classes, setExercise} = props
     const value = exercise.description || "# Description"
     const setValue = (value) => {
         handleChange({target: {name: "description", value: value}})
+    }
+
+    const changeClass = (e) => {
+        setExercise({
+            ...exercise,
+            students_class: {
+                id: e.target.value,
+                name: e.target.selectedOptions[0].text
+            }
+        })
     }
 
     return (
@@ -30,13 +40,12 @@ export default function Description(props){
                     <Label>Class</Label>
                     <Select
                         name="studentClass"
-                        onChange={handleChange}
+                        value={exercise.students_class.id || ""} 
+                        onChange={changeClass}
                         className="w-full mt-2"
+                        disabled={exercise.id !== undefined}
                     >
-                        {exercise.id ? 
-                            <option value={exercise.studentClass.id}>{exercise.studentClass.name}</option> 
-                            : <option value="">Select a class</option>
-                        }
+                        <option value="">Select a class</option>
                         {classes.map((item) => {
                             return (
                                 <option key={item.id} value={item.id}>
@@ -49,7 +58,7 @@ export default function Description(props){
                         <Checkbox 
                             id="visible" 
                             name="visible" 
-                            value={exercise.visible} 
+                            value={exercise.visibility} 
                             onChange={handleChange} 
                         />
                         <Tooltip
