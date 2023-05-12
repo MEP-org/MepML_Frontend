@@ -14,7 +14,7 @@ export default function ClassNameModal({classData, setClassData, showModal, setS
     const handleSubmitModal = (e) => {
         e.preventDefault()
         const name = document.getElementById('className').value
-        setClassData({...classData, name})
+        setClassData({...classData, name: name})
         setShowModal(false)
     }
 

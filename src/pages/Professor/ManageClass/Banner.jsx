@@ -85,12 +85,11 @@ export default function Banner({classData, setClassData, loading}) {
                                         <FaEdit size={20} onClick={() => setShowModal(true)}/>
                                     </div>
                                 </div>
+                                
                                 <Button className="mx-auto" onClick={handleSubmit}>
-                                    {classData.id ?
-                                        'Save changes' :
-                                        'Create class'
-                                    }
+                                    {classData.id !== undefined ? 'Save changes' : 'Create class'}
                                 </Button>
+                                
                             </div>
                         </div>
                     </div>

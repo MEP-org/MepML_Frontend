@@ -1,5 +1,5 @@
 import{ useState } from 'react'
-import { Label, TextInput, Dropdown, Checkbox } from 'flowbite-react'
+import { Label, TextInput } from 'flowbite-react'
 import Select from 'react-select';
 
 import DatePicker from "tailwind-datepicker-react"

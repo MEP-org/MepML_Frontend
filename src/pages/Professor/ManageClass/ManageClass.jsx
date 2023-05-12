@@ -37,9 +37,9 @@ export default function ManageClass(){
     const renderContent = () => {
         return (
             <>
-                <Banner classData={classData} loading={loading}/>
+                <Banner classData={classData} loading={loading} setClassData={setClassData}/>
                 <div className="mb-10"/>
-                <StudentsTable classData={classData}/>
+                <StudentsTable classData={classData} setClassData={setClassData}/>
             </>
         )
     }
