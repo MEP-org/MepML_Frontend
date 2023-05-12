@@ -16,7 +16,7 @@ export default function Banner(){
                     <br />
                     Whether you're just getting started with ML or you're a seasoned expert, our platform is the perfect place to explore and learn. Join us today and start your ML journey!
                 </p>
-                <Link to="/signin">
+                <Link to="/auth/signin">
                     <Button className='w-60 mt-6'>Start using now</Button>
                 </Link>
             </div>

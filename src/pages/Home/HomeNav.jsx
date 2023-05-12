@@ -17,7 +17,7 @@ export default function HomeNav(){
             </div>
 
             <div className='z-10 absolute top-2 right-2 p-2 flex center'>
-                <Link to="/signin">
+                <Link to="/auth/signin">
                     <Button>
                         Sign In
                     </Button>

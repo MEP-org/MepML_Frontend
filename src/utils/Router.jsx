@@ -3,7 +3,11 @@ import {createHashRouter, RouterProvider, Navigate} from "react-router-dom";
 import MyNavbar from '../components/MyNavbar'
 
 import Home from '../pages/Home/Home';
-import SignIn from '../pages/SignIn/SignIn';
+
+import AuthPage from '../pages/Authentication/AuthPage';
+import SignIn from "../pages/Authentication/SignIn";
+import Signup from "../pages/Authentication/SignUp";
+
 import StudentHome from '../pages/Student/Home/Home.jsx'
 import StudentAssignments from '../pages/Student/Assignments/Assignments.jsx'
 import StudentAssignment from '../pages/Student/Assignment/Assignment.jsx'
@@ -19,17 +23,22 @@ import ProfManageExercise from '../pages/Professor/ManageExercise/ManageExercise
 import ProfMetrics from '../pages/Professor/Metrics/Metrics.jsx'
 
 import Error from '../pages/Error/Error.jsx'
-import Signup from "../pages/Authentication/SignUp";
-import Login from "../pages/Authentication/Login";
 
 export default function Router(){
 
     const router = createHashRouter(
         [
             { path: "/", element: <Home /> },
-            { path: "/signin", element: <SignIn /> },
+            { 
+                path: "/auth", element: <AuthPage />,
+                children: [
+                    { index: true, element: <Navigate to="/auth/signin" /> },
+                    { path: "signin", element: <SignIn /> },
+                    { path: "signup", element: <Signup /> },
+                ]
+            },
             {
-                path: "/student", element: <MyNavbar type='student'/>,
+                path: "/student", element: <MyNavbar />,
                 children: [
                     { index: true, element: <Navigate to="/student/home" /> },
                     { path: "home", element: <StudentHome /> },
@@ -41,7 +50,7 @@ export default function Router(){
                 ]
             },
             {
-                path: "/professor", element: <MyNavbar type='professor'/>,
+                path: "/professor", element: <MyNavbar />,
                 children: [
                     { index: true, element: <Navigate to="/professor/classes" /> },
                     { path: "classes", element: <ProfHome /> },
@@ -55,8 +64,6 @@ export default function Router(){
                     { path: "metrics", element: <ProfMetrics /> },
                 ]
             },
-            { path: "/signup", element: <Signup /> }, 
-            { path: "/login", element: <Login/> },
             { path: "*", element: <Error /> },
         ]
     )

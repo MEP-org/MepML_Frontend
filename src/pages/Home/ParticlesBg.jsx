@@ -7,7 +7,6 @@ import { particles } from './particles.json'
 export default function ParticlesBg(){
 
     const particlesInit = useCallback(async engine => {
-        console.log(engine);
         await loadFull(engine);
     }, []);
 

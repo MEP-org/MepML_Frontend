@@ -1,69 +1,43 @@
-import {useState, useEffect, useCallback} from 'react'
+import {useState, useEffect, useCallback, useContext} from 'react'
 import {Link, useNavigate, Outlet, useLocation} from "react-router-dom";
 import {Navbar, Dropdown, Avatar, DarkThemeToggle} from 'flowbite-react'
 import {FaSignOutAlt} from 'react-icons/fa'
 import Particles from "react-tsparticles";
 import {loadFull} from "tsparticles";
-import { auth } from '../firebase';
+import { auth } from '../utils/firebase';
 import { signOut } from "firebase/auth";
-import { onAuthStateChanged } from "firebase/auth";
 
 import options from './particles.json'
 import logo from '../assets/logo.svg'
+import { MySession } from '../main.jsx';
 
-export default function MyNavbar(props){
+export default function MyNavbar(){
 
-    const particlesInit = useCallback(async engine => {
-        await loadFull(engine);
-    }, []);
-
-    const { type } = props
-    const [active, setActive] = useState(undefined)
     const navigate = useNavigate();
     const location = useLocation();
-    const [session, setSession] = useState(    {
-        user : { name : 'Robert Smith' , email : 'robertsmith@example.com' },
-        type : 'professor',
-    })
+
+    const [active, setActive] = useState(undefined)
+    const { session, setSession } = useContext(MySession);
 
     useEffect(() => {
-        //Authentication
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                //console.log(user);
-                setSession({
-                    ...session, 
-                    'user':{
-                        ...session.user,
-                        'email': user.email
-                    }
-                })
-            } else {
-              console.log("user is logged out")
-            }
-        });
-
         const path = location.pathname.split('/')
+        if(session.type !== path[1]){
+            navigate("/auth/signin")
+        }
         setActive(path[path.length - 1])
-    }, [session, location])
+    }, [location])
 
-    // session = type === 'student' ? {
-    //     user : { name : 'Jack Connor', email: 'jackconnor@example.com' },
-    //     type : 'student',
-    // } :
-    // {
-    //     user : { name : 'Robert Smith' , email : 'robertsmith@example.com' },
-    //     type : 'professor',
-    // }
 
     const handleLogout = () => {               
-        signOut(auth).then(() => {
-        // Sign-out successful.
+        // signOut(auth).then(() => {
+            setSession({
+                user : { name : "null" , email : null, id : null },
+                type : null,
+                token : null
+            })
+            localStorage.removeItem("session")
             navigate("/");
-            console.log("Signed out successfully")
-        }).catch((error) => {
-        // An error happened.
-        });
+        // })
     }
 
     const nameInitials = () => {
@@ -125,6 +99,10 @@ export default function MyNavbar(props){
             </>
         )
     }
+
+    const particlesInit = useCallback(async engine => {
+        await loadFull(engine);
+    }, []);
 
     return (
         <>
