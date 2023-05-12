@@ -67,17 +67,16 @@ export default function StudentsTable({classData, setClassData}){
                 <div className='grid grid-cols-6 gap-6 mb-8'>
                     <div className='col-span-4'>
                         <CreatableSelect
-                            defaultValue={[]}
-                            options={[]}
                             isMulti
                             classNames={customClassNames}
                             className='z-20'
                             placeholder='Type n_mec and press enter to add student'
-                            formatCreateLabel={(inputValue) => `Add student ${inputValue}`}
+                            formatCreateLabel={(inputValue) => `Add student with n_mec: ${inputValue}`}
                             components={{DropdownIndicator: null}}
                             onChange={(value) => setStudents(value)}
                             value={students}
                             isValidNewOption={(inputValue) => inputValue.match(/^\d+$/)}
+                            noOptionsMessage = {() => 'Start typing to add a student'}
                         />
                     </div>
 
