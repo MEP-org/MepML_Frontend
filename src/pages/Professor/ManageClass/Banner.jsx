@@ -38,6 +38,43 @@ export default function Banner({classData, setClassData, loading}) {
         navigate('/professor/classes')
     }
 
+    const addNmecs = (n_mecs) => {
+        n_mecs = n_mecs.filter((n_mec) => !isNaN(n_mec))
+        n_mecs = [...new Set(n_mecs)]
+
+        let newStudents = n_mecs.map((n_mec) => {
+            return {
+                id: n_mec,
+                user : {
+                    nmec: n_mec,
+                    name: 'name',
+                    email: 'email'
+                }
+            }
+        })
+        newStudents = newStudents.filter((student) => !classData.students.some((s) => s.id === student.id))
+        setClassData({
+            ...classData,
+            students: [...classData.students, ...newStudents]
+        })
+    }
+
+    const handleImportStudents = () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".csv";
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = () => {
+                const n_mecs = reader.result.split('\n').map((line) => line.split(',')[0])
+                addNmecs(n_mecs)       
+            };
+        }
+        input.click();
+    }
+
     return (
         <>
             <ClassNameModal 
@@ -98,11 +135,11 @@ export default function Banner({classData, setClassData, loading}) {
                             <div className='w-40 text-center'>See exercises</div>
                             <FaEye />
                         </Button>
-                        <Button className='dark:bg-gray-800' color='light'>
+                        <Button className='dark:bg-gray-800' color='light' onClick={() => navigate('/professor/exercises/add')}>
                             <div className='w-40 text-center'>Add exercise</div>
                             <FaPlusCircle />
                         </Button>
-                        <Button className='dark:bg-gray-800' color='light'>
+                        <Button className='dark:bg-gray-800' color='light' onClick={handleImportStudents}>
                             <div className='w-40 text-center'>Import Students</div>
                             <FaPlusCircle />
                         </Button>

@@ -7,12 +7,11 @@ import CreatableSelect from 'react-select/creatable';
 export default function StudentsTable({classData, setClassData}){
 
     const [students, setStudents] = useState([])
-    const [newStudents, setNewStudents] = useState([])
 
     const handleAddStudents = () => {
         const n_mecs = students.map((student) => student.value)
 
-        setNewStudents( n_mecs.map((n_mec) => {
+        let newStudents = n_mecs.map((n_mec) => {
             return {
                 id: n_mec,
                 user : {
@@ -21,8 +20,8 @@ export default function StudentsTable({classData, setClassData}){
                     email: 'email'
                 }
             }
-        }))
-        setNewStudents(newStudents.filter((student) => !classData.students.some((s) => s.id === student.id)))
+        })
+        newStudents = newStudents.filter((student) => !classData.students.some((s) => s.id === student.id))
         setClassData({
             ...classData,
             students: [...classData.students, ...newStudents]
@@ -66,7 +65,7 @@ export default function StudentsTable({classData, setClassData}){
     return (
         <>
                 <div className='grid grid-cols-6 gap-6 mb-8'>
-                    <div className='col-span-5'>
+                    <div className='col-span-4'>
                         <CreatableSelect
                             defaultValue={[]}
                             options={[]}
@@ -82,9 +81,14 @@ export default function StudentsTable({classData, setClassData}){
                         />
                     </div>
 
-                    <Button type="submit" onClick={handleAddStudents} className="w-full">
+                    <Button onClick={handleAddStudents} className="w-full">
                         <div className='w-32 text-center' id='manageStudent'>Add Students</div>
                         <FaPlusCircle />
+                    </Button>
+
+                    <Button onClick={() => setClassData({...classData, students: []})} className="w-full" color='failure'>
+                        <div className='w-32 text-center' id='manageStudent'>Delete All</div>
+                        <FaTrash />
                     </Button>
                 </div>
 
@@ -108,7 +112,7 @@ export default function StudentsTable({classData, setClassData}){
                         <Table.HeadCell >
                             Email
                         </Table.HeadCell>
-                        <Table.HeadCell className='w-20'/>
+                        <Table.HeadCell className='w-20' />
                     </Table.Head>
                     <Table.Body>
                         {classData.students.map((student) => (
