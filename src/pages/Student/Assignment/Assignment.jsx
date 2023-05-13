@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useState, useContext, useRef } from "react"
 import { useParams, useLocation } from 'react-router-dom';
 import { MySession } from '../../../main.jsx';
 import AssignmentTab from "./AssignmentTab";
@@ -12,10 +12,19 @@ export default function Assignment(){
     const { session } = useContext(MySession);
     const studentId = session.user.id;
     const location = useLocation();
+    const tabsRef = useRef(null)
     const [loading, setLoading] = useState(false);
     const [assignment, setAssignment] = useState({});
     const [submission, setSubmission] = useState({});
     const [results, setResults] = useState([]);
+
+    const hash2index = {
+        '#description': 0,
+        '#evaluation': 1,
+        '#datasets': 2,
+        '#results': 3,
+        '#submission': 4
+    }
 
 
     useEffect(() => {
@@ -30,7 +39,7 @@ export default function Assignment(){
         .finally(() => {
             setLoading(false);
         });
-
+        tabsRef.current.setActiveTab(hash2index[location.hash] || 0)
     }, [location]);
 
     
@@ -38,7 +47,7 @@ export default function Assignment(){
         <>
             <div className='w-full container mt-8'>
                 <Banner exercise={assignment.exercise || {}} submission={submission} loading={loading} />
-                <AssignmentTab assignment={assignment} submission={submission} results={results} loading={loading} />
+                <AssignmentTab assignment={assignment} submission={submission} results={results} loading={loading} tabsRef={tabsRef} />
             </div>
         </>
     )

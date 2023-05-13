@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
+import { useLocation } from 'react-router-dom';
+import { MySession } from '../../../main.jsx';
 import {Tabs} from 'flowbite-react'
 
 import AllMetrics from './AllMetrics'
@@ -9,17 +11,27 @@ import Loading from '../../../components/Loading'
 import { ProfessorAPI } from '../../../api/ProfessorAPI'
 
 export default function Metrics(){
-    const profId = 1
+    const { session } = useContext(MySession);
+    const profId = session.user.id;
 
+    const location = useLocation();
+    const tabsRef = useRef(null)
     const [metrics, setMetrics] = useState([])
     const [loading, setLoading] = useState(true)
+
+    const hash2index = {
+        '#all-metrics': 0,
+        '#my-metrics': 1,
+        '#add-metric': 2
+    }
 
     useEffect(() => {
         setLoading(true)
         ProfessorAPI.getMetrics(profId)
         .then((data) => { setMetrics(data) })
         .finally(() => { setLoading(false) })
-    }, [])
+        tabsRef.current.setActiveTab(hash2index[location.hash] || 0)
+    }, [location])
 
 
     return (
@@ -36,6 +48,7 @@ export default function Metrics(){
                     aria-label="Exercise Tabs"
                     style="underline"
                     className="sticky top-0 z-10 bg-white dark:bg-gray-900"
+                    ref={tabsRef}
                 >
                     <Tabs.Item
                         title="All Metrics"

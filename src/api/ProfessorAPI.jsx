@@ -25,11 +25,19 @@ export const ProfessorAPI = {
 
     createClass: async function(profId, classData) {
 
-        classData.students = classData.students.map((student) => student.id).join(',');
-        classData.image = classData.newImage;  
-        delete classData.newImage;
+        classData.students = classData.students.map((student) => student.id);
+        classData.image = classData.newImage;
+        const formData = new FormData();
+        Object.keys(classData).forEach((key) => {
+            if (key === 'students') return;
+            if (classData[key] === undefined) return;
+            formData.append(key, classData[key]);
+        });
+        classData.students.forEach((metricId) => {
+            formData.append('students', metricId);
+        });
 
-        const response = await axios.post(`${API_URL}/professors/${profId}/classes`, classData, {
+        const response = await axios.post(`${API_URL}/professors/${profId}/classes`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -41,11 +49,19 @@ export const ProfessorAPI = {
 
     updateClass: async function(profId, classId, classData) {
 
-        classData.students = classData.students.map((student) => student.id).join(',');
+        classData.students = classData.students.map((student) => student.id);
         classData.image = classData.newImage;
-        delete classData.newImage;
+        const formData = new FormData();
+        Object.keys(classData).forEach((key) => {
+            if (key === 'students') return;
+            if (classData[key] === undefined) return;
+            formData.append(key, classData[key]);
+        });
+        classData.students.forEach((metricId) => {
+            formData.append('students', metricId);
+        });
 
-        const response = await axios.put(`${API_URL}/professors/${profId}/classes/${classId}`, classData, {
+        const response = await axios.put(`${API_URL}/professors/${profId}/classes/${classId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -77,11 +93,11 @@ export const ProfessorAPI = {
 
     getExercise: async function(profId, exerciseId) {
 
+        
         const response = await axios.get(`${API_URL}/professors/${profId}/exercises/${exerciseId}`)
         .catch((error) => {
             console.log("Error while fetching exercise");
         });
-
         return response.data;
     },
 
@@ -91,7 +107,7 @@ export const ProfessorAPI = {
         exerciseData.students_class = exerciseData.students_class.id;
         exerciseData.train_dataset = exerciseData.dataset.training;
         exerciseData.test_dataset = exerciseData.dataset.test;
-        delete exerciseData.dataset;
+        if (exerciseData.deadline === '') exerciseData.deadline = (new Date()).toISOString().split('T')[0];
 
         const formData = new FormData();
         Object.keys(exerciseData).forEach((key) => {
@@ -119,11 +135,14 @@ export const ProfessorAPI = {
         exerciseData.students_class = exerciseData.students_class.id;
         exerciseData.train_dataset = exerciseData.dataset.training;
         exerciseData.test_dataset = exerciseData.dataset.test;
+        exerciseData.deadline = exerciseData.deadline.split(' ')[0].split('/').reverse().join('-');
+        delete exerciseData.created_by;
         delete exerciseData.dataset;
 
         const formData = new FormData();
         Object.keys(exerciseData).forEach((key) => {
             if (key === 'metrics') return;
+            if (exerciseData[key] === undefined) return;
             formData.append(key, exerciseData[key]);
         });
         exerciseData.metrics.forEach((metricId) => {
@@ -180,5 +199,29 @@ export const ProfessorAPI = {
         });
 
         return response.data;
-    }
+    },
+
+
+    addMetric: async function(profId, payload) {
+
+        const response = await axios.post(`${API_URL}/professors/${profId}/metrics`, payload, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .catch((error) => {
+            console.log("Error while creating metric");
+        });
+
+        return response.data;
+    },
+
+
+    deleteMetric: async function(profId, metricId) {
+
+        const response = await axios.delete(`${API_URL}/professors/${profId}/metrics/${metricId}`)
+        .catch((error) => {
+            console.log("Error while deleting metric");
+        });
+    },
 }

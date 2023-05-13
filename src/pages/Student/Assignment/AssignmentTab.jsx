@@ -11,9 +11,7 @@ import Evaluation from "./Evaluation";
 
 export default function AssignmentTab(props){
 
-    const location = useLocation();
-    const activeTab = location.hash || "#description";
-    const { assignment, results, submission, loading } = props;
+    const { assignment, results, submission, loading, tabsRef } = props;
     const { description, evaluation, dataset } = assignment.exercise || {};
 
     return (
@@ -21,13 +19,13 @@ export default function AssignmentTab(props){
             <Tabs.Group
                 aria-label="Tabs with icons"
                 style="underline"
+                ref={tabsRef}
             >
 
                 <Tabs.Item
                     className="my-tab"
                     title="Description"
                     icon={BsFileRichtextFill}
-                    active={activeTab === "#description"}
                 >
                     <Description description={description} loading={loading} />
                 </Tabs.Item>
@@ -36,7 +34,6 @@ export default function AssignmentTab(props){
                     className="my-tab"
                     title="Evaluation Rules"
                     icon={BiCog}
-                    active={activeTab === "#evaluation"}
                 >
                     <Evaluation evaluationRules={evaluation} loading={loading} />
                 </Tabs.Item>
@@ -45,7 +42,6 @@ export default function AssignmentTab(props){
                 <Tabs.Item
                     title="Datasets"
                     icon={BsDatabaseDown}
-                    active={activeTab === "#datasets"}
                 >
                     <Datasets datasets={dataset || {}} loading={loading} />
                 </Tabs.Item>
@@ -54,7 +50,6 @@ export default function AssignmentTab(props){
                 <Tabs.Item
                     title="Results"
                     icon={BsBarChartFill}
-                    active={activeTab === "#results"}
                 >
                     <Results my_results={assignment.my_results || []} results={results} loading={loading} />
                 </Tabs.Item>
@@ -63,7 +58,7 @@ export default function AssignmentTab(props){
                 <Tabs.Item
                     title="Submission"
                     icon={BsFillCloudUploadFill}
-                    active={activeTab === "#submission"}
+
                 >
                     <Submissions assignment={assignment} submission={submission} loading={loading} />
                 </Tabs.Item>

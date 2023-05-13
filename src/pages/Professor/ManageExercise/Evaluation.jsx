@@ -65,26 +65,28 @@ export default function Evaluation(props){
                 <div className="relative w-[296px]">
                     <Label>Deadline date</Label>
                     <div className='mt-2'/>
-                    <DatePicker
-                        value={Date.parse(exercise.deadline)}
-                        onChange={handleChangeDate} 
-                        show={show} 
-                        setShow={handleClose} 
-                        classNames="absolute"
-                        options={{
-                            autoHide: false,
-                            theme:{
-                                selected: "hover:bg-blue-500 dark:hover:bg-blue-500",
-                            }
-                        }}
-                    />
-                </div>
+                    {(exercise.deadline !== undefined || exercise.id === undefined )&&
+                        <DatePicker
+                            onChange={handleChangeDate} 
+                            show={show} 
+                            setShow={handleClose} 
+                            classNames="absolute"
+                            options={{
+                                autoHide: false,
+                                theme:{
+                                    selected: "hover:bg-blue-500 dark:hover:bg-blue-500",
+                                },
+                                defaultDate: exercise.deadline? new Date(exercise.deadline.split(' ')[0].split('/').reverse().join('-')) : new Date(),
+                            }}
+                        />
+                    }
+                    </div>
 
                 <div>
                     <Label>Attempts limit</Label>
                     <div className='mt-2'/>
                     <TextInput 
-                        name="attemptsLimit" 
+                        name="limit_of_attempts" 
                         type="number" 
                         placeholder="Unlimited" 
                         onChange={handleChange} 

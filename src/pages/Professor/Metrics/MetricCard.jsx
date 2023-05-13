@@ -1,11 +1,18 @@
+import {useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MySession } from '../../../main.jsx';
+import { ProfessorAPI } from '../../../api/ProfessorAPI';
 import { Card } from "flowbite-react"
 import { FaTrash } from "react-icons/fa"
 
 export default function MetricCard({ metric, my }) {
 
-    const handleDelete = () => {
-        console.log("Delete metric")
-        window.location.reload(false);
+    const { session } = useContext(MySession);
+    const navigate = useNavigate();
+
+    const handleDelete = (metricId) => {
+        ProfessorAPI.deleteMetric(session.user.id, metricId)
+        .finally(() => {navigate('/professor/metrics')})
     }
 
     return (
@@ -22,14 +29,14 @@ export default function MetricCard({ metric, my }) {
                     </div>
                     <div className="flex justify-end items-end">
                         <div className="text-sm text-gray-500">
-                            Metric added by: <span className="font-bold">{metric.created_by || "MepML"}</span>
+                            Metric added by: <span className="font-bold">{metric.created_by? metric.created_by.user.name : "MepML"}</span>
                         </div>
                     </div>
                 </div>
                 {my && (
                 <div className="absolute top-0 right-0 p-4">
                     <div className=" cursor-pointer text-red-700 hover:text-red-500 ml-2">
-                        <FaTrash size={24} onClick={handleDelete}/>
+                        <FaTrash size={24} onClick={() => handleDelete(metric.id)} />
                     </div>
                 </div>
                 )}
