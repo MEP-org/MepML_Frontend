@@ -39,7 +39,7 @@ export default function Home(){
     return (
         <>
             <div className='w-full container mt-8'>
-                <Dashboard stats={stats} loading={loadingStats}/>
+                <Dashboard stats={stats} session={session} loading={loadingStats}/>
                 <Classes classes={classes} loading={loadingClasses} />
             </div>
         </>

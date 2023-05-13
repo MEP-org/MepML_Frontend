@@ -1,3 +1,4 @@
+import { API_URL } from "../../../api/env"
 import { Button} from "flowbite-react"
 import { FaEye, FaUser} from "react-icons/fa"
 import {MdEmail} from "react-icons/md"
@@ -19,7 +20,7 @@ export default function Banner({classData}) {
             <div className="grid grid-cols-3 gap-6">
                 
                 <div className='drop-shadow-lg h-52 relative'>
-                    <img src={classData.image} alt="class img" className="h-full w-full object-cover rounded-lg"/>
+                    <img src={API_URL + classData.image} alt="class img" className="h-full w-full object-cover rounded-lg"/>
                 </div>
 
 

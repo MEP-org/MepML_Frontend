@@ -4,7 +4,7 @@ import {FaCheckCircle, FaFileAlt, FaHourglassHalf, FaGraduationCap} from 'react-
 
 export default function Dashboard(props){
 
-    const {stats, loading} = props;
+    const {stats, session, loading} = props;
 
     const renderLoading = () => {
         return (
@@ -84,7 +84,7 @@ export default function Dashboard(props){
 
     return (
         <>
-            <p className="font-bold text-4xl">Welcome, Jack Connor!</p>
+            <p className="font-bold text-4xl">Welcome, {session.user.name}!</p>
 
             {loading ? renderLoading() : renderStats()}
 

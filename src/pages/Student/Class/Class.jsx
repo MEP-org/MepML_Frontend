@@ -21,9 +21,11 @@ export default function Class() {
 
     useEffect(() => {
         setLoading(true)
+
         StudentAPI.getClass(studentId, id)
-        .then((data) => { setClassData(data) })
-        .finally(() => { setLoading(false) })
+            .then((data) => { setClassData(data) })
+            .finally(() => { setLoading(false) })
+
     }, [id])
 
 
