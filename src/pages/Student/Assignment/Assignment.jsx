@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import AssignmentTab from "./AssignmentTab";
 import { StudentAPI } from '../../../api/StudentAPI';
 import Banner from "./Banner";
@@ -7,7 +7,8 @@ import Banner from "./Banner";
 
 export default function Assignment(){
 
-    const { assignmentId } = useParams();
+    const { id } = useParams();
+    const location = useLocation();
     const [loading, setLoading] = useState(false);
     const [assignment, setAssignment] = useState({});
     const [submission, setSubmission] = useState({});
@@ -18,7 +19,7 @@ export default function Assignment(){
     useEffect(() => {
         setLoading(true);
 
-        StudentAPI.getAssignment(studentId, assignmentId)
+        StudentAPI.getAssignment(studentId, id)
         .then((data) => {
             setAssignment(data.assignment);
             setSubmission(data.submission);
@@ -28,7 +29,7 @@ export default function Assignment(){
             setLoading(false);
         });
 
-    }, []);
+    }, [location]);
 
     
     return (

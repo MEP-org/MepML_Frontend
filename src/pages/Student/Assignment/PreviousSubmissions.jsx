@@ -1,4 +1,5 @@
 import {BsCloudDownload} from "react-icons/bs";
+import { API_URL } from "../../../api/env";
 
 
 export default function PreviousSubmissions(props){
@@ -8,7 +9,7 @@ export default function PreviousSubmissions(props){
 
     const downloadFile = (event, downloadLink) => {
         event.preventDefault();
-        window.location.href = downloadLink;
+        window.location.href = API_URL + downloadLink;
     }
     
 
@@ -17,7 +18,7 @@ export default function PreviousSubmissions(props){
             <div>
                 <p className='mb-2 font-semibold text-2xl'>Your previous submission</p>
                 
-                <div className="w-64 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
+                <div className="w-1/2 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
                     <div className="flex items-center justify-between w-full h-full p-2">
                         <div>
                             <div className="flex items-center">
@@ -25,7 +26,7 @@ export default function PreviousSubmissions(props){
                                     {submission.file_name_result }
                                 </p>
                                 <p className="text-xs font-light truncate ml-1">
-                                    ({"----"} bytes)
+                                    ({submission.result_submission_size} bytes)
                                 </p>
                             </div>
                             <p className="mt-1 text-xs font-extralight truncate text-gray-400">
@@ -40,18 +41,18 @@ export default function PreviousSubmissions(props){
                     </div>
                 </div>
 
-                <div className="mt-2 w-64 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
+                <div className="mt-2 w-1/2 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
                     <div className="flex items-center justify-between w-full h-full p-2">
                         <div>
                             <div className="flex items-center">
-                                <p className="text-sm font-semibold truncate">
+                                <p className="text-sm font-semibold">
                                     {submission.file_name_code}
                                 </p>
-                                <p className="text-xs font-light truncate ml-1">
-                                    ({"----"} bytes)
+                                <p className="text-xs font-light ml-1">
+                                    ({submission.code_submission_size} bytes)
                                 </p>
                             </div>
-                            <p className="mt-1 text-xs font-extralight truncate text-gray-400">
+                            <p className="mt-1 text-xs font-extralight text-gray-400">
                                 {submission.code_submission_date}
                             </p>
                         </div>

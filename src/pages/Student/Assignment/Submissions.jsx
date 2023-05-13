@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import { StudentAPI } from '../../../api/StudentAPI';
+import { MySession } from '../../../main.jsx';
+
 import { Spinner, Button, Modal, Alert } from "flowbite-react";
 import PreviousSubmissions from "./PreviousSubmissions";
 import { BsBarChartFill, BsCodeSlash } from "react-icons/bs";
@@ -6,6 +10,9 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function Submissions(props){
 
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const { session, setSession } = useContext(MySession);
     const { submission, loading } = props;
     const [results, setResults] = useState();
     const [model, setModel] = useState();
@@ -30,10 +37,20 @@ export default function Submissions(props){
             setShowAlert(true);
             return;
         }
-        
-        //TODO: create a formdata and send it to backend via axios
 
-        setShowModal(false);
+        const payload = {
+            file_name_result: results.name,
+            file_name_code: model.name,
+            result_submission: results,
+            code_submission: model
+        }
+        
+        StudentAPI.postSubmission(session.user.id, id, payload)
+            .then(() => {})
+            .finally(() => {
+                setShowModal(false);
+                navigate(`/student/assignments/${id}/#results`);
+            })        
     }
     
 
@@ -91,7 +108,7 @@ export default function Submissions(props){
                                 <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">Python file (.py)</p>
                             </div>
-                            <input id="dropzone-model" type="file" accept=".py" className="hidden" onChange={(e) => handleFileUpload(e, "model")} />
+                            <input id="dropzone-model" type="file" accept=".ipynb,.py" className="hidden" onChange={(e) => handleFileUpload(e, "model")} />
                         </label>
     
                         { model && (
@@ -135,7 +152,7 @@ export default function Submissions(props){
                                     Are you sure you want to submit your answer?
                                 </p>
                                 <div className="flex justify-center gap-4">
-                                    <Button onClick={() => handleSubmit()} color="failure">Yes, I'm sure</Button>
+                                    <Button onClick={() => handleSubmit()} color="success">Yes, I'm sure</Button>
                                     <Button onClick={() => {setShowModal(false); setShowAlert(false)}} color="gray">
                                             No, cancel
                                     </Button>
@@ -156,7 +173,7 @@ export default function Submissions(props){
                     </Modal>
                 </div>
 
-                { Object.keys(submission).length > 0 && (
+                { submission && (
                     <PreviousSubmissions submission={submission} />
                 )}
 
