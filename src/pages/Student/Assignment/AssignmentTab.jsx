@@ -13,7 +13,6 @@ export default function AssignmentTab(props){
 
     const location = useLocation();
     const activeTab = location.hash || "#description";
-    console.log("activeTab", activeTab);
     const { assignment, results, submission, loading } = props;
     const { description, evaluation, dataset } = assignment.exercise || {};
 
@@ -57,7 +56,7 @@ export default function AssignmentTab(props){
                     icon={BsBarChartFill}
                     active={activeTab === "#results"}
                 >
-                    <Results my_results={assignment.my_results || []} all_results={results} loading={loading} />
+                    <Results my_results={assignment.my_results || []} results={results} loading={loading} />
                 </Tabs.Item>
 
 
