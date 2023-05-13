@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { MySession } from '../../../main.jsx';
 import Banner from './Banner';
 import Filters from './Filters';
 import Results from './Results';
 import { StudentAPI } from '../../../api/StudentAPI';
 
 export default function Assignments(){
-    const studentId = 1;
+
+    const { session } = useContext(MySession);
+    const studentId = session.user.id;
+    
     const [filter, setFilter] = useState({
         'title': '',
         'deadline': 'all',

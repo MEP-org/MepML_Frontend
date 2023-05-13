@@ -1,4 +1,5 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
+import { MySession } from '../../../main.jsx';
 import {useParams} from 'react-router-dom';
 
 import Banner from './Banner';
@@ -7,7 +8,8 @@ import { StudentAPI } from '../../../api/StudentAPI';
 import { Spinner } from "flowbite-react"
 
 export default function Class() {
-    const studentId = 1;
+    const { session } = useContext(MySession);
+    const studentId = session.user.id;
 
     const id = useParams().id || undefined
     const [loading, setLoading] = useState(false)

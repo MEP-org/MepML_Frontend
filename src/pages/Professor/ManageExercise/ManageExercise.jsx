@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
+import { MySession } from '../../../main.jsx';
 
 import { ProfessorAPI } from "../../../api/ProfessorAPI"
 import Banner from "./Banner"
 import ExercisesTab from "./ExercisesTab"
 
 export default function ManageExercise(props){
-    const profId = 1
+    const { session } = useContext(MySession);
+    const profId = session.user.id
 
     const id = useParams().id || undefined
     const [loading, setLoading] = useState(false)
@@ -21,14 +23,16 @@ export default function ManageExercise(props){
         evaluation: '',
         deadline: '',
         students_class: '',
-        limit_of_attempts: '',
+        limit_of_attempts: 1,
         visibility: false,
         dataset: {
             training: undefined,
             test: undefined
         },
-        results: []
+        results: [],
+        metrics: []
     })
+
     const [results, setResutls] = useState([])
 
     const handleChange = (event) => {
@@ -65,6 +69,7 @@ export default function ManageExercise(props){
                 <Banner 
                     exercise={exercise} 
                     loading={loading} 
+                    profId={profId}
                 />
                 <ExercisesTab 
                     exercise={exercise} 

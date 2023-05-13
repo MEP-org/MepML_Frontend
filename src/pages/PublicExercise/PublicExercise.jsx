@@ -7,14 +7,14 @@ import { PublicAPI } from "../../api/PublicAPI";
 
 export default function PublicExercise(){
 
-    const { exerciseId } = useParams();
+    const { id } = useParams();
     const [loading, setLoading] = useState(false);
     const [publicExercise, setPublicExercise] = useState({});
 
 
     useEffect(() => {
         setLoading(true);
-        PublicAPI.getPublicExercise(exerciseId)
+        PublicAPI.getPublicExercise(id)
         .then((data) => {
             setLoading(false);
             setPublicExercise(data);

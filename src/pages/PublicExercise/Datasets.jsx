@@ -1,3 +1,4 @@
+import { API_URL } from '../../api/env';
 import { Spinner } from 'flowbite-react';
 import { BsCloudDownload } from 'react-icons/bs';
 
@@ -9,7 +10,7 @@ export default function Datasets(props){
 
     const downloadFile = (event, downloadLink) => {
         event.preventDefault();
-        window.location.href = downloadLink;
+        window.location.href = API_URL + downloadLink;
     }
 
 
@@ -50,7 +51,7 @@ export default function Datasets(props){
 
                             <BsCloudDownload 
                                 className="w-5 h-5 justify-self-end cursor-pointer text-gray-500 hover:text-green-500"
-                                onClick={(event) => downloadFile(event, dataset.train_url)} 
+                                onClick={(event) => downloadFile(event, dataset.train_dataset)} 
                             />
                         </div>
                     </div>

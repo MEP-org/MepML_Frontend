@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { Spinner } from "flowbite-react"
 import { MySession } from '../../../main.jsx';
+import { Spinner } from "flowbite-react"
 
 import Banner from './Banner';
 import StudentsTable from './StudentsTable';

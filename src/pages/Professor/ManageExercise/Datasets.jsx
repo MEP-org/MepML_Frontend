@@ -12,10 +12,9 @@ export default function Datasets(props){
     const [test, setTest] = useState([])
 
     const handleFileUpload = (event, type) => {
-        // csv file
-        // put in exercise.dataset.{type}
-        // [[header1, header2, header3], [value1, value2, value3], [value1, value2, value3]]
         const file = event.target.files[0]
+        handleChange({target: {name: "dataset", value: {...exercise.dataset, [type]: file}}})
+        
         const reader = new FileReader()
         reader.onload = (e) => {
             const text = e.target.result
@@ -24,7 +23,6 @@ export default function Datasets(props){
                 return line.split(",")
             })
             type === "training" ? setTraining(data) : setTest(data)
-            handleChange({target: {name: "dataset", value: {[type]: file}}})
         }
         reader.readAsText(file)
         // hide id="previous_dataset"
@@ -72,14 +70,14 @@ export default function Datasets(props){
             <div className="grid lg:grid-cols-2 gap-4">
 
                 <div className="flex items-center justify-center w-full relative">
-                    <label htmlFor="dropzone-results" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <label htmlFor="dropzone-train" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <BsBarChartFill className="w-12 h-12 text-gray-400" />
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> Training dataser here</p>
                             <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                             <p className="text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
                         </div>
-                        <input id="dropzone-results" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "training")} />
+                        <input id="dropzone-train" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "training")} />
                     </label>
 
                     {exercise.dataset.training && (
@@ -103,14 +101,14 @@ export default function Datasets(props){
                 </div> 
 
                 <div className="flex items-center justify-center w-full relative">
-                    <label htmlFor="dropzone-model" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <label htmlFor="dropzone-test" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <MdAssignment className="w-12 h-12 text-gray-400" />
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> Test dataset here</p>
                             <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                             <p className="text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
                         </div>
-                        <input id="dropzone-model" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "test")} />
+                        <input id="dropzone-test" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "test")} />
                     </label>
 
                     {exercise.dataset.test && (

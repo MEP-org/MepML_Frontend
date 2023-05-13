@@ -1,27 +1,29 @@
 import { Button } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { FaTrash } from 'react-icons/fa'
+import { ProfessorAPI } from "../../../api/ProfessorAPI";
 
 export default function Bannner(props) {
 
-    const {exercise, loading} = props
+    const {exercise, loading, profId} = props
     const navigate = useNavigate()
 
     const handleSubmit = () => {
         if (loading) return;
-        console.log(exercise)
         if (exercise.id) {
-            console.log('edit exercise')
+            ProfessorAPI.updateExercise(profId, exercise.id, exercise)
+            .finally(() => { navigate('/professor/exercises') })
         }
         else {
-            console.log('create exercise')
+            ProfessorAPI.createExercise(profId, exercise)
+            .finally(() => { navigate('/professor/exercises') })
         }
-        navigate('/professor/exercises')
     }
 
     const handleDelete = () => {
-        console.log('delete exercise')
-        navigate('/professor/exercises')
+        if (loading) return;
+        ProfessorAPI.deleteExercise(profId, exercise.id)
+        .finally(() => { navigate('/professor/exercises') })
     }
 
     return (

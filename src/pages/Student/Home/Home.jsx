@@ -5,8 +5,9 @@ import Classes from "./Classes";
 import Dashboard from "./Dashboard";
 
 export default function Home(){
+    const { session } = useContext(MySession);
+    let studentId = session.user.id;
 
-    const { session, setSession } = useContext(MySession);
     const [loadingStats, setLoadingStats] = useState(false);
     const [loadingClasses, setLoadingClasses] = useState(false);
     const [classes, setClasses] = useState([]);
@@ -17,7 +18,7 @@ export default function Home(){
         setLoadingStats(true);
         setLoadingClasses(true);
 
-        StudentAPI.getHome(session.user.id)
+        StudentAPI.getHome(studentId)
         .then((data) => {
             setStats(data);
         })
@@ -25,7 +26,7 @@ export default function Home(){
             setLoadingStats(false);
         })
 
-        StudentAPI.getClasses(session.user.id)
+        StudentAPI.getClasses(studentId)
         .then((data) => {
             setClasses(data);
         })

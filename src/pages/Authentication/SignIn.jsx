@@ -25,7 +25,9 @@ export default function SignIn(){
             token : "token"
         }
         setSession(info)
-        if (formData.remember) localStorage.setItem("session", JSON.stringify(info))
+
+        // if (formData.remember) localStorage.setItem("session", JSON.stringify(info))
+        localStorage.setItem("session", JSON.stringify(info))
 
         navigate(`/${info.type}/`)
     }

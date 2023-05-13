@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { MySession } from '../../../main.jsx';
 import Banner from './Banner';
 import Filters from './Filters';
 import Results from './Results';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
 
 export default function Exercises(){
-    const profId = 1;
+    const { session } = useContext(MySession);
+    const profId = session.user.id;
 
     const [filter, setFilter] = useState({
         'title': '',

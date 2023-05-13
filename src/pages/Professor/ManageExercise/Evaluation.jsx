@@ -9,12 +9,20 @@ export default function Evaluation(props){
 
     const {exercise, handleChange, metrics} = props
     const [show, setShow] = useState(false)
+
 	const handleChangeDate = (selectedDate) => {
-		console.log(selectedDate)
+		handleChange({target: {name: "deadline", value: selectedDate.toISOString().split('T')[0]}})
 	}
+
 	const handleClose = (state) => {
 		setShow(state)
 	}
+
+    const handleChangeMetrics = (selectedMetrics) => {
+        handleChange({target: {name: "metrics", 
+            value: metrics.filter((m) => selectedMetrics.map((s) => s.value).includes(m.id))
+        }})
+    }
 
     const value = exercise.evaluationRules || "# Evaluation rules"
     const setValue = (value) => {
@@ -22,8 +30,6 @@ export default function Evaluation(props){
     }
 
     const metricsOptions= metrics.map((m) => { return {value: m.id, label: m.title}})
-
-    const inicialMetrics = exercise.metrics? exercise.metrics.map((m) => { return {value: m.id, label: m.title}}) : []
 
     const customClassNames = {
         control: (state) => {
@@ -59,7 +65,8 @@ export default function Evaluation(props){
                 <div className="relative w-[296px]">
                     <Label>Deadline date</Label>
                     <div className='mt-2'/>
-                    <DatePicker 
+                    <DatePicker
+                        value={Date.parse(exercise.deadline)}
                         onChange={handleChangeDate} 
                         show={show} 
                         setShow={handleClose} 
@@ -80,8 +87,8 @@ export default function Evaluation(props){
                         name="attemptsLimit" 
                         type="number" 
                         placeholder="Unlimited" 
-                        onChange={props.handleChange} 
-                        value={props.exercise.attemptsLimit} 
+                        onChange={handleChange} 
+                        value={exercise.limit_of_attempts}
                     />
                 </div>
 
@@ -90,12 +97,13 @@ export default function Evaluation(props){
                     <div className='mt-2'/>
                     <Select
                         closeMenuOnSelect={false}
-                        defaultValue={inicialMetrics}
+                        value={exercise.metrics.map((m) => { return {value: m.id, label: m.title}})}
                         isMulti
                         options={metricsOptions}
                         classNames={customClassNames}
                         className='z-20'
-                        isSearchable={true}                        
+                        isSearchable={true}
+                        onChange={handleChangeMetrics}      
                     />
                 </div>
 

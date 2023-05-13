@@ -85,6 +85,70 @@ export const ProfessorAPI = {
         return response.data;
     },
 
+    createExercise: async function(profId, exerciseData) {
+
+        exerciseData.metrics = exerciseData.metrics.map((metric) => metric.id)
+        exerciseData.students_class = exerciseData.students_class.id;
+        exerciseData.train_dataset = exerciseData.dataset.training;
+        exerciseData.test_dataset = exerciseData.dataset.test;
+        delete exerciseData.dataset;
+
+        const formData = new FormData();
+        Object.keys(exerciseData).forEach((key) => {
+            if (key === 'metrics') return;
+            formData.append(key, exerciseData[key]);
+        });
+        exerciseData.metrics.forEach((metricId) => {
+            formData.append('metrics', metricId);
+        });
+
+        const response = await axios.post(`${API_URL}/professors/${profId}/exercises`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .catch((error) => {
+            console.log("Error while creating exercise");
+        });
+
+    },
+
+    updateExercise: async function(profId, exerciseId, exerciseData) {
+
+        exerciseData.metrics = exerciseData.metrics.map((metric) => metric.id)
+        exerciseData.students_class = exerciseData.students_class.id;
+        exerciseData.train_dataset = exerciseData.dataset.training;
+        exerciseData.test_dataset = exerciseData.dataset.test;
+        delete exerciseData.dataset;
+
+        const formData = new FormData();
+        Object.keys(exerciseData).forEach((key) => {
+            if (key === 'metrics') return;
+            formData.append(key, exerciseData[key]);
+        });
+        exerciseData.metrics.forEach((metricId) => {
+            formData.append('metrics', metricId);
+        });
+
+        const response = await axios.put(`${API_URL}/professors/${profId}/exercises/${exerciseId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .catch((error) => {
+            console.log("Error while updating exercise");
+        });
+
+    },
+
+    deleteExercise: async function(profId, exerciseId) {
+
+        const response = await axios.delete(`${API_URL}/professors/${profId}/exercises/${exerciseId}`)
+        .catch((error) => {
+            console.log("Error while deleting exercise");
+        });
+    },
+
 
     getExercises: async function(profId) {
 

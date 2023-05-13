@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import { MySession } from '../../../main.jsx';
 import Banner from './Banner';
 import MyClasses from './MyClasses';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
 
 export default function Classes(){
-    const profId = 1;
+    const { session } = useContext(MySession);
+    const profId = session.user.id;
 
     const [loading, setLoading] = useState(false);
     const [classes, setClasses] = useState([]);
