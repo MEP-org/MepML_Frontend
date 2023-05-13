@@ -13,7 +13,7 @@ export default function Submissions(props){
     const { id } = useParams();
     const navigate = useNavigate();
     const { session, setSession } = useContext(MySession);
-    const { submission, loading } = props;
+    const { assignment, submission, loading } = props;
     const [results, setResults] = useState();
     const [model, setModel] = useState();
     const [showModal, setShowModal] = useState(false);
@@ -44,6 +44,10 @@ export default function Submissions(props){
             result_submission: results,
             code_submission: model
         }
+
+        //clear files
+        setResults();
+        setModel();
         
         StudentAPI.postSubmission(session.user.id, id, payload)
             .then(() => {})
@@ -134,7 +138,8 @@ export default function Submissions(props){
 
 
                 <div className="flex justify-end mt-2">
-                    <Button 
+                    <Button
+                        disabled={submission && (Object.keys(assignment).length != 0) ? assignment.exercise.limit_of_attempts <= submission.quantity_of_submissions : false}
                         onClick={() => {setShowModal(true); setShowAlert(false)}}>
                         Submit my answer
                     </Button>

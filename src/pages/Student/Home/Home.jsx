@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import { MySession } from '../../../main.jsx';
 import { StudentAPI } from '../../../api/StudentAPI';
 import Classes from "./Classes";
 import Dashboard from "./Dashboard";
 
 export default function Home(){
-    const studentID = 100001;
+
+    const { session, setSession } = useContext(MySession);
     const [loadingStats, setLoadingStats] = useState(false);
     const [loadingClasses, setLoadingClasses] = useState(false);
     const [classes, setClasses] = useState([]);
     const [stats, setStats] = useState({});
 
+
     useEffect(() => {
         setLoadingStats(true);
         setLoadingClasses(true);
 
-        StudentAPI.getHome(studentID)
+        StudentAPI.getHome(session.user.id)
         .then((data) => {
             setStats(data);
         })
@@ -22,7 +25,7 @@ export default function Home(){
             setLoadingStats(false);
         })
 
-        StudentAPI.getClasses(studentID)
+        StudentAPI.getClasses(session.user.id)
         .then((data) => {
             setClasses(data);
         })
@@ -31,6 +34,7 @@ export default function Home(){
         })
 
     }, []);
+
 
     return (
         <>

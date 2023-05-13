@@ -4,7 +4,7 @@ import { Spinner } from 'flowbite-react';
 
 export default function Description(props) {
     
-    const { exercise, loading } = props;
+    const { exercise, submission, loading } = props;
 
     const renderLoading = () => {
         return (
@@ -70,7 +70,7 @@ export default function Description(props) {
                         <div className='lg:text-right'>
                             <span className="inline-block text-xs font-light pr-1">Total submissions:</span>
                             <span className="inline-block text-xs font-bold">
-                                {"Add API------------"}
+                                {submission? submission.quantity_of_submissions : 0}
                             </span>
                         </div>
                     </div>

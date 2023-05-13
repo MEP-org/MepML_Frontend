@@ -65,7 +65,7 @@ export default function AssignmentTab(props){
                     icon={BsFillCloudUploadFill}
                     active={activeTab === "#submission"}
                 >
-                    <Submissions submission={submission} loading={loading} />
+                    <Submissions assignment={assignment} submission={submission} loading={loading} />
                 </Tabs.Item>
 
 

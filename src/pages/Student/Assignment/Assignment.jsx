@@ -35,7 +35,7 @@ export default function Assignment(){
     return (
         <>
             <div className='w-full container mt-8'>
-                <Banner exercise={assignment.exercise || {}} loading={loading} />
+                <Banner exercise={assignment.exercise || {}} submission={submission} loading={loading} />
                 <AssignmentTab assignment={assignment} submission={submission} results={results} loading={loading} />
             </div>
         </>

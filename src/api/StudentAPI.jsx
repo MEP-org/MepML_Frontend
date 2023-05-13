@@ -19,9 +19,13 @@ export const StudentAPI = {
 
 
     getClasses: async function(studentId) {
-        // add a delay to simulate a network request
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return classes;
+
+        const response = await axios.get(`${API_URL}/students/${studentId}/classes`)
+        .catch((error) => {
+            console.log("Error while fetching assignment");
+        });
+
+        return response.data;
     },
 
 
@@ -48,9 +52,13 @@ export const StudentAPI = {
 
 
     getHome: async function(studentId) {
-       // add a delay to simulate a network request
-       await new Promise((resolve) => setTimeout(resolve, 1000));
-       return home; 
+
+        const response = await axios.get(`${API_URL}/students/${studentId}/home`)
+        .catch((error) => {
+            console.log("Error while fetching home stats");
+        });
+
+        return response.data;
     },
 
 

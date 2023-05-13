@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../../api/env";
 import { FaUser, FaUserFriends } from "react-icons/fa";
 
 
@@ -20,7 +21,7 @@ export default function ClassCard(props){
                 onClick={() => handleClassClick(class_)}
             >
                 <div className="relative h-36 w-full">
-                    <img className="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg" src={class_.image} alt="" />
+                    <img className="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg" src={API_URL + class_.image} alt={class_.name} />
                 </div>
 
 

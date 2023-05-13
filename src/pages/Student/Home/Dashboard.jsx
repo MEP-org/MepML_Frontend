@@ -56,8 +56,8 @@ export default function Dashboard(props){
                         </div>
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
-                            <p className="font-light text-sm">Waiting for change</p>
-                            <p className="font-semibold text-2xl mr-2">{stats.next_deadline}</p>
+                            <p className="font-semibold text-2xl mr-2">{stats.next_deadline_title}</p>
+                            <p className="font-light text-sm">{stats.next_deadline}</p>
                             </div>
                         </div>
                     </div>
