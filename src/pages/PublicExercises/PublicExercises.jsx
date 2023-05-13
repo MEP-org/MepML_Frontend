@@ -8,15 +8,17 @@ export default function PublicExercises(props){
 
     const [filter, setFilter] = useState({
         'title': '',
-        'minSize': 0,
-        'maxSize': 100000,
+        'min_size': 0,
+        'max_size': 100000,
         'prof': 'all',
-        'sort': 'recent'
+        'sort': 'recent',
+        'page': 1,
     });
 
     const [loading, setLoading] = useState(false);
     const [exercises, setExercises] = useState([]);
     const [profs, setProfs] = useState([]);
+    const [page, setPage] = useState({ 'current_page': 1, 'total_pages': 1 });
 
     useEffect(() => {
         setLoading(true);
@@ -24,6 +26,7 @@ export default function PublicExercises(props){
         .then((data) => { 
             setExercises(data.results.exercises)
             setProfs(data.results.professors)
+            setPage({ 'current_page': data.current_page, 'total_pages': data.total_pages })
         })
         .finally(() => { setLoading(false) })
     }, [filter]);
@@ -35,7 +38,13 @@ export default function PublicExercises(props){
                 <div className='mb-10' />
                 <Filters filter={filter} setFilter={setFilter} profs={profs}/>
                 <div className='mb-10' />
-                <Results exercises={exercises} loading={loading} user={props.user} />
+                <Results 
+                    exercises={exercises} 
+                    loading={loading} 
+                    user={props.user} 
+                    setFilter={setFilter} 
+                    filter={filter} 
+                    page={page}/>
             </div>
         </>
     )

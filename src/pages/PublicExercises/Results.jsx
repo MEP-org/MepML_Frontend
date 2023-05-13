@@ -1,10 +1,15 @@
-import { Spinner } from 'flowbite-react';
+import { Spinner, Pagination } from 'flowbite-react';
 import { FaFileAlt } from 'react-icons/fa';
 import ExerciseCard from './ExerciseCard';
 
 export default function Results(props){
 
-    const {exercises, loading} = props;
+    const {exercises, loading, setFilter, filter, page} = props;
+
+    const onPageChange = (page) => {
+        setFilter({...filter, page: page});
+    }
+
 
     const renderLoading = () => {
         return (
@@ -36,6 +41,14 @@ export default function Results(props){
                             <ExerciseCard exercise={exercise} key={exercise.id} user={props.user} />
                         )
                     })}
+                </div>
+                <div className='mt-10 flex justify-center my-pages'>
+                    <Pagination
+                        currentPage={page.current_page}
+                        onPageChange={onPageChange}
+                        showIcons={true}
+                        totalPages={page.total_pages}
+                    />
                 </div>
             </>
         )

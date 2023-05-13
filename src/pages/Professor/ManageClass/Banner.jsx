@@ -1,21 +1,31 @@
 import { useState, useEffect } from "react"
+import { API_URL } from "../../../api/env"
 import { Button} from "flowbite-react"
 import { FaPlusCircle, FaEye, FaEdit, FaTrash} from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
+import { ProfessorAPI } from "../../../api/ProfessorAPI"
 
 import ClassNameModal from "./ClassNameModal"
 
-export default function Banner({classData, setClassData, loading}) {
+export default function Banner({profId, classData, setClassData, loading}) {
 
     const [showModal, setShowModal] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (classData.id === undefined && loading) setShowModal(true)
+        if (classData.id === undefined) setShowModal(true)
     }, [classData.id])
 
     const handleSubmit = () => {
-        navigate('/professor/classes')
+
+        if (classData.id !== undefined) {
+            ProfessorAPI.updateClass(profId, classData.id, classData)
+                .finally(() => navigate('/professor/classes'))
+        }
+        else {
+            ProfessorAPI.createClass(profId, classData)
+                .finally(() => navigate('/professor/classes'))
+        }
     }
 
     const handleEditImage = () => {
@@ -27,36 +37,30 @@ export default function Banner({classData, setClassData, loading}) {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {
-                setClassData({...classData, image: reader.result})
+                setClassData({...classData, image: reader.result, newImage: file})
             };
         }
         input.click();
     }
 
     const handleDelete = () => {
-        console.log('delete')
-        navigate('/professor/classes')
+        ProfessorAPI.deleteClass(profId, classData.id)
+            .finally(() => navigate('/professor/classes'))
     }
 
     const addNmecs = (n_mecs) => {
-        n_mecs = n_mecs.filter((n_mec) => !isNaN(n_mec))
+        n_mecs = n_mecs.filter((n_mec) => !isNaN(n_mec) && n_mec.length > 0)
         n_mecs = [...new Set(n_mecs)]
 
-        let newStudents = n_mecs.map((n_mec) => {
-            return {
-                id: n_mec,
-                user : {
-                    nmec: n_mec,
-                    name: 'name',
-                    email: 'email'
-                }
-            }
-        })
-        newStudents = newStudents.filter((student) => !classData.students.some((s) => s.id === student.id))
-        setClassData({
-            ...classData,
-            students: [...classData.students, ...newStudents]
-        })
+        ProfessorAPI.getStudentsByNmecs(n_mecs)
+            .then((res) => {
+                let newStudents = res
+                newStudents = newStudents.filter((student) => !classData.students.some((s) => s.id === student.id))
+                setClassData({
+                    ...classData,
+                    students: [...classData.students, ...newStudents]
+                })
+            }) 
     }
 
     const handleImportStudents = () => {
@@ -100,8 +104,9 @@ export default function Banner({classData, setClassData, loading}) {
 
             <div className="grid grid-cols-3 gap-6">
                 
-                <div className='drop-shadow-lg h-52 relative'>
-                    <img src={classData.image} alt="class img" className="h-full w-full object-cover rounded-lg"/>
+                <div className='drop-shadow-lg h-52 relative border-2 border-gray-200 dark:border-gray-800 rounded-lg'>
+                    <img 
+                        src={classData.image} alt="class img" className="h-full w-full object-cover rounded-lg"/>
                     <div className="absolute top-0 right-0 p-4">
                         <Button className="dark:bg-gray-800 hover:!text-blue-500 dark:!border-gray-800" color='light' onClick={handleEditImage}>
                             <FaEdit size={20} />

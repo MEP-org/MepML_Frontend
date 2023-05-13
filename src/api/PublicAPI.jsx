@@ -1,15 +1,20 @@
-import publicExercices from './data/publicExercises.json'
+import axios from 'axios';
+import { API_URL } from './env';
+
+// import publicExercices from './data/publicExercises.json'
 import publicExercise from './data/publicExercises_id.json'
 
 export const PublicAPI = {
     getPublicExercises: async function(filters) {
-        // add a delay to simulate a network request
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return publicExercices;
+
+        if (filters.prof === 'all') delete filters.prof
+
+        const response = await axios.get(`${API_URL}/publicexercises` , { params: filters });
+        return response.data;
     },
     getPublicExercise: async function(exerciseId) {
-        // add a delay to simulate a network request
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return publicExercise;
+        
+        const response = await axios.get(`${API_URL}/publicexercises/${exerciseId}`);
+        return response.data;
     }
 }

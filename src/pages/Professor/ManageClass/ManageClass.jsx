@@ -1,20 +1,22 @@
-import {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Spinner } from "flowbite-react"
+import { MySession } from '../../../main.jsx';
 
 import Banner from './Banner';
 import StudentsTable from './StudentsTable';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
 
 export default function ManageClass(){
-    const profId = 1;
+    const { session } = useContext(MySession);
+    const profId = session.user.id;
 
     const id = useParams().id || undefined
     const [loading, setLoading] = useState(false)
     const [classData, setClassData] = useState({
         "id": undefined,
         "name": '',
-        "image": "https://flowbite.com/docs/images/carousel/carousel-1.svg",
+        "image": 'https://flowbite.com/docs/images/carousel/carousel-1.svg',
         "students": []
     })
 
@@ -37,7 +39,7 @@ export default function ManageClass(){
     const renderContent = () => {
         return (
             <>
-                <Banner classData={classData} loading={loading} setClassData={setClassData}/>
+                <Banner classData={classData} loading={loading} setClassData={setClassData} profId={profId}/>
                 <div className="mb-10"/>
                 <StudentsTable classData={classData} setClassData={setClassData}/>
             </>

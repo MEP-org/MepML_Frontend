@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Table, Button } from "flowbite-react"
 import { FaTrash, FaPlusCircle } from "react-icons/fa"
 import CreatableSelect from 'react-select/creatable';
+import { ProfessorAPI } from "../../../api/ProfessorAPI"
 
 
 export default function StudentsTable({classData, setClassData}){
@@ -11,22 +12,16 @@ export default function StudentsTable({classData, setClassData}){
     const handleAddStudents = () => {
         const n_mecs = students.map((student) => student.value)
 
-        let newStudents = n_mecs.map((n_mec) => {
-            return {
-                id: n_mec,
-                user : {
-                    nmec: n_mec,
-                    name: 'name',
-                    email: 'email'
-                }
-            }
-        })
-        newStudents = newStudents.filter((student) => !classData.students.some((s) => s.id === student.id))
-        setClassData({
-            ...classData,
-            students: [...classData.students, ...newStudents]
-        })
-        setStudents([])
+        ProfessorAPI.getStudentsByNmecs(n_mecs)
+            .then((res) => {
+                let newStudents = res
+                newStudents = newStudents.filter((student) => !classData.students.some((s) => s.id === student.id))
+                setClassData({
+                    ...classData,
+                    students: [...classData.students, ...newStudents]
+                })
+                setStudents([])
+            }) 
     }
 
     const handleDeleteStudent = (id) => {

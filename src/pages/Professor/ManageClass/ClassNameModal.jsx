@@ -46,10 +46,7 @@ export default function ClassNameModal({classData, setClassData, showModal, setS
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <Button type="submit" onClick={handleSubmitModal} >
-                                {classData.name ? 
-                                    'Save' :
-                                    'Create'
-                                }
+                                Save
                             </Button>
                             <Button color="gray" onClick={handleCloseModal} >
                                 No, cancel

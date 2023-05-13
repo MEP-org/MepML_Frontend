@@ -21,7 +21,7 @@ export default function SignIn(){
 
         const info = {
             user : { name : "Leonardo Almeida" , email : "email@email.com", id : 1 },
-            type : formData.remember ? "student" : "professor",
+            type : formData.remember ? "professor" : "student",
             token : "token"
         }
         setSession(info)

@@ -42,7 +42,7 @@ export default function FIlters(props){
                         id="minSize"
                         type="number"
                         placeholder="0"
-                        onChange={(e) => handleFilter(e, 'minSize')}
+                        onChange={(e) => handleFilter(e, 'min_size')}
                     />
                 </div>
 
@@ -53,7 +53,7 @@ export default function FIlters(props){
                         id="maxSize"
                         type="number"
                         placeholder="100000"
-                        onChange={(e) => handleFilter(e, 'maxSize')}
+                        onChange={(e) => handleFilter(e, 'max_size')}
                     />
                 </div>
 
@@ -82,10 +82,10 @@ export default function FIlters(props){
                     >
                         <option value="recent">Recent</option>
                         <option value="oldest">Oldest</option>
-                        <option value="abcUp">Alphabetic up</option>
-                        <option value="abcDown">Alphabetic down</option>
-                        <option value="sizeUp">Size up</option>
-                        <option value="sizeDown">Size down</option>
+                        <option value="alphabetic up">Alphabetic up</option>
+                        <option value="alphabetic down">Alphabetic down</option>
+                        <option value="size up">Size up</option>
+                        <option value="size down">Size down</option>
                     </Select>
                 </div>
 

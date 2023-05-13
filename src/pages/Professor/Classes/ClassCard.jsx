@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../../api/env";
 import { FaUser, FaUserFriends } from "react-icons/fa";
 
 
@@ -11,6 +12,13 @@ export default function ClassCard(props){
         navigate('/professor/classes/' + item.id);
     }
 
+    const checkImage = (image) => {
+        if (image === null) {
+            return 'https://flowbite.com/docs/images/carousel/carousel-1.svg';
+        } else {
+            return API_URL + image;
+        }
+    }
 
     return (
         <>
@@ -19,7 +27,7 @@ export default function ClassCard(props){
                 onClick={() => handleClassClick(item)}
             >
                 <div className="relative h-36 w-full">
-                    <img className="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg" src={item.image} alt="" />
+                    <img className="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg" src={checkImage(item.image)} alt={item.name} />
                 </div>
 
 
