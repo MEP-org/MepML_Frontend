@@ -12,7 +12,7 @@ export default function Assignment(){
     const [loading, setLoading] = useState(false);
     const [assignment, setAssignment] = useState({});
     const [submission, setSubmission] = useState({});
-    const [results, setResults] = useState({});
+    const [results, setResults] = useState([]);
     const studentId = 1;
 
 

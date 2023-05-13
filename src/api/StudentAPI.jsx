@@ -37,9 +37,13 @@ export const StudentAPI = {
 
 
     getAssignments: async function(studentId) {
-        // add a delay to simulate a network request
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return assignments;
+
+        const response = await axios.get(`${API_URL}/students/${studentId}/assignments`)
+        .catch((error) => {
+            console.log("Error while fetching assignments");
+        });
+
+        return response.data;
     },
 
 
