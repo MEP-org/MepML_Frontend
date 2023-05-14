@@ -11,7 +11,8 @@ export default function Evaluation(props){
     const [show, setShow] = useState(false)
 
 	const handleChangeDate = (selectedDate) => {
-		handleChange({target: {name: "deadline", value: selectedDate.toISOString().split('T')[0]}})
+        let date = selectedDate.getFullYear() + '-' + ('0' + (selectedDate.getMonth() + 1)).slice(-2) + '-' + ('0' + selectedDate.getDate()).slice(-2)
+		handleChange({target: {name: "deadline", value: date}})
 	}
 
 	const handleClose = (state) => {

@@ -1,11 +1,12 @@
-import { Spinner, useThemeMode, Table } from 'flowbite-react';
+import { Spinner, useThemeMode, Table, Tooltip } from 'flowbite-react';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import {BiHelpCircle} from "react-icons/bi"
 import 'react-circular-progressbar/dist/styles.css';
 
 export default function Results(props) {
     
     const [mode,, toggleMode] = useThemeMode(); 
-    const { my_results, results, loading } = props;
+    const { exercise, my_results, results, loading } = props;
     let aux = 0;
 
     const renderLoading = () => {
@@ -37,15 +38,27 @@ export default function Results(props) {
                 {/* Students results */}
                 <div>
                     <p className='font-semibold text-2xl mb-10'>Evaluation of your model</p>
-                    <div className='grid grid-cols-4 place-items-center'>
-                        {my_results.map((res) => {
-                            return (
-                                <div key={aux++} className='w-1/2'>
+
+                    {my_results.length === 0 ?
+                        <p className='text-center'>You have no results yet.</p>
+
+                        :
+
+                        <div className='flex flex-wrap'>
+                            {my_results.map((res, index) =>
+                                <div key={aux++} className='w-1/5 m-auto mb-10 px-10'>
                                     <CircularProgressbar value={(res.score * 100).toFixed(2)} text={`${(res.score * 100).toFixed(2)}%`} styles={chartStyle} />
-                                    <p className='text-center mt-2'>{res.metric.title}</p>
+
+                                    <div className="mt-2 flex justify-center items-center">
+                                        <p className='mr-2'>{res.metric.title}</p>
+                                        <Tooltip content={exercise.metrics[index].description} placement="bottom">
+                                            <BiHelpCircle />
+                                        </Tooltip>
+                                    </div>
                                 </div>
-                            )})}
-                    </div>
+                            )}
+                        </div>
+                    }
                 </div>
 
 
@@ -60,30 +73,45 @@ export default function Results(props) {
                         <Table.Head>
                             <Table.HeadCell>Nmec</Table.HeadCell>
                             <Table.HeadCell>Name</Table.HeadCell>
-                            {my_results.map((res) => {
-                                return (
-                                    <Table.HeadCell key={res.metric.id}>
-                                        {res.metric.title}
-                                    </Table.HeadCell>
-                            )})}
+
+                            {exercise.metrics.map((m) => 
+                                <Table.HeadCell key={m.id}>
+                                    {m.title}
+                                </Table.HeadCell>
+                            )}
+
                         </Table.Head>
 
+
                         <Table.Body className="divide-y">
+
                             {results.map((res) => {
                                 let student = res.student;
                                 let studentResults = res.results;
+
+                                if (studentResults.length === 0) {
+                                    return (
+                                        <Table.Row key={student.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{student.user.nmec}</Table.Cell>
+                                            <Table.Cell>{student.user.name}</Table.Cell>
+
+                                            {exercise.metrics.map((m) =>
+                                                <Table.Cell key={aux++}>-</Table.Cell>
+                                            )}
+                                        </Table.Row>
+                                    )
+                                }
 
                                 return (
                                     <Table.Row key={student.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{student.user.nmec}</Table.Cell>
                                         <Table.Cell>{student.user.name}</Table.Cell>
 
-                                        {studentResults.map((r) => {
-                                            return (
-                                                <Table.Cell key={aux++}>
-                                                    {r.score.toFixed(4)}
-                                                </Table.Cell>
-                                            )})}
+                                        {studentResults.map((r) => 
+                                            <Table.Cell key={aux++}>
+                                                {r.score.toFixed(4)}
+                                            </Table.Cell>
+                                        )}
 
                                     </Table.Row>
                                 )})}

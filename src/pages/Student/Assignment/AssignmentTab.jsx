@@ -51,8 +51,7 @@ export default function AssignmentTab(props){
                     title="Results"
                     icon={BsBarChartFill}
                 >
-                    <Results my_results={assignment.my_results || []} results={results} loading={loading} />
-                </Tabs.Item>
+                    <Results exercise={assignment.exercise || {metrics: []}} my_results={assignment.my_results || []} results={results} loading={loading} />                </Tabs.Item>
 
 
                 <Tabs.Item
