@@ -21,13 +21,13 @@ export default function MarkdownViewer(props) {
     return (
         <>
              <div className='center flex h-full w-full relative'>
-                <div className='absolute top-0 right-0 mt-4 mr-4 z-10'>
-                    <Button color='gray' onClick={() => downloadClick()} className='flex'>
+                <div className='absolute top-0 right-0 mt-2 mr-2 z-10'>
+                    <Button color='gray' onClick={() => downloadClick()} className='flex shadow-md'>
                         {type}.md
                         <BsDownload className='ml-2' />
                     </Button>
                 </div>
-                <div className='scale-125 h-4/5 w-4/5' data-color-mode={mode}>
+                <div className='scale-100 h-full w-full' data-color-mode={mode}>
                     <MDEditor
                         value={value}
                         highlightEnable={false}

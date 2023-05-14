@@ -46,7 +46,7 @@ export default function Results(props) {
 
                         <div className='flex flex-wrap'>
                             {my_results.map((res, index) =>
-                                <div key={aux++} className='w-1/5 m-auto mb-10 px-10'>
+                                <div key={aux++} className='w-1/5 m-auto mb-10 px-12'>
                                     <CircularProgressbar value={(res.score * 100).toFixed(2)} text={`${(res.score * 100).toFixed(2)}%`} styles={chartStyle} />
 
                                     <div className="mt-2 flex justify-center items-center">

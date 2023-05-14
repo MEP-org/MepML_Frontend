@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { StudentAPI } from '../../../api/StudentAPI';
 import { MySession } from '../../../main.jsx';
 
-import { Spinner, Button, Modal, Alert } from "flowbite-react";
+import { Spinner, Button, Modal, Alert, Tooltip } from "flowbite-react";
 import PreviousSubmissions from "./PreviousSubmissions";
 import { BsBarChartFill, BsCodeSlash } from "react-icons/bs";
+import { BiHelpCircle } from "react-icons/bi"
 import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function Submissions(props){
@@ -70,7 +71,7 @@ export default function Submissions(props){
     const renderSubmission = () => {
         return (
             <>
-                <p className='mb-2 font-semibold text-2xl'>Results Submission</p>
+                <p className='mb-2 font-semibold text-2xl'>Submission</p>
 
                 <div className="grid lg:grid-cols-2 gap-4">
                     <div className="flex items-center justify-center w-full relative">
@@ -79,7 +80,13 @@ export default function Submissions(props){
                                 <BsBarChartFill className="w-12 h-12 text-gray-400" />
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> your results here</p>
                                 <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
+                                <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
+                                <Tooltip
+                                    content="The results file must be a CSV file without header"
+                                    placement="bottom"
+                                >
+                                    <BiHelpCircle size={20} className="text-gray-500 dark:text-gray-400" />
+                                </Tooltip>
                             </div>
                             <input id="dropzone-results" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "results")} />
                         </label>
@@ -110,7 +117,7 @@ export default function Submissions(props){
                                 <BsCodeSlash className="w-12 h-12 text-gray-400" />
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> your model here</p>
                                 <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">Python file (.py)</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">Python file (.ipynb, .py)</p>
                             </div>
                             <input id="dropzone-model" type="file" accept=".ipynb,.py" className="hidden" onChange={(e) => handleFileUpload(e, "model")} />
                         </label>
