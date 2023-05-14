@@ -1,4 +1,5 @@
 import {BsCloudDownload} from "react-icons/bs";
+import { API_URL } from "../../../api/env";
 
 
 export default function PreviousDataset(props){
@@ -8,7 +9,7 @@ export default function PreviousDataset(props){
 
     const downloadFile = (event, downloadLink) => {
         event.preventDefault();
-        window.location.href = downloadLink;
+        window.location.href = API_URL + downloadLink;
     }
     
 
@@ -17,7 +18,7 @@ export default function PreviousDataset(props){
             <div className="mt-5">
                 <p className='mb-2 font-semibold text-2xl'>Your previous datasets</p>
                 
-                <div className="w-64 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
+                <div className="w-full h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
                     <div className="flex items-center justify-between w-full h-full p-2">
                         <div>
                             <div className="flex items-center">
@@ -40,7 +41,7 @@ export default function PreviousDataset(props){
                     </div>
                 </div>
 
-                <div className="mt-2 w-64 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
+                <div className="mt-2 w-full h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
                     <div className="flex items-center justify-between w-full h-full p-2">
                         <div>
                             <div className="flex items-center">
