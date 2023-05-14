@@ -11,32 +11,48 @@ export default function Results({exercise, results}){
                     <Table.Head>
                         <Table.HeadCell>Nmec</Table.HeadCell>
                         <Table.HeadCell>Name</Table.HeadCell>
-                        {exercise.metrics.map((m) => {
-                            return (
-                                <Table.HeadCell key={m.id}>
-                                    {m.title}
-                                </Table.HeadCell>
-                        )})}
+
+                        {exercise.metrics.map((m) => 
+                            <Table.HeadCell key={m.id}>
+                                {m.title}
+                            </Table.HeadCell>
+                        )}
                     </Table.Head>
 
-                    <Table.Body className="divide-y">
-                        {results.map((res) => {
-                            return (
 
+                    <Table.Body className="divide-y">
+
+                        {results.map((res) => {
+                            let student = res.student;
+                            let studentResults = res.results;
+
+                            if (studentResults.length === 0) {
+                                return (
+                                    <Table.Row key={res.student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{res.student.user.nmec}</Table.Cell>
+                                        <Table.Cell>{res.student.user.name}</Table.Cell>
+
+                                        {exercise.metrics.map((r, i) => 
+                                            <Table.Cell key={i}>-</Table.Cell>
+                                        )}
+
+                                    </Table.Row>
+                                )
+                            }
+
+                            return (
                                 <Table.Row key={res.student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{res.student.user.nmec}</Table.Cell>
                                     <Table.Cell>{res.student.user.name}</Table.Cell>
 
-                                    {res.results.map((r, i) => {
-                                        return (
-                                            <Table.Cell key={i}>
-                                                {r.score}
-                                            </Table.Cell>
-                                        )})}
-
+                                    {studentResults.map((r, i) => 
+                                        <Table.Cell key={i}>
+                                            {r.score.toFixed(4)}
+                                        </Table.Cell>
+                                    )}
                                 </Table.Row>
-
-                            )})}
+                            )
+                        })}
                     </Table.Body>
                 </Table>
             </div>
