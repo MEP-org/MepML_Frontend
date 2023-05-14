@@ -23,13 +23,14 @@ export default function MetricCard({ metric, my }) {
                         <div className="font-bold text-2xl mb-2">
                             {metric.title}
                         </div>
-                        <div className="text-lg mb-2 text-justify">
+                        <div className="mb-2">
                             {metric.description}
                         </div>
                     </div>
                     <div className="flex justify-end items-end">
                         <div className="text-sm text-gray-500">
-                            Metric added by: <span className="font-bold">{metric.created_by? metric.created_by.user.name : "MepML"}</span>
+                            <span className='font-light'>By: </span>
+                            <span className="font-bold">{metric.created_by? metric.created_by.user.name : "MepML"}</span>
                         </div>
                     </div>
                 </div>
