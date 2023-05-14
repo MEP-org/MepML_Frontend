@@ -88,7 +88,8 @@ export default function Evaluation(props){
                     <div className='mt-2'/>
                     <TextInput 
                         name="limit_of_attempts" 
-                        type="number" 
+                        type="number"
+                        min={1}
                         placeholder="Unlimited" 
                         onChange={handleChange} 
                         value={exercise.limit_of_attempts}
