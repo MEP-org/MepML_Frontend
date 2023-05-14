@@ -56,8 +56,8 @@ export default function Dashboard(props){
                         </div>
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
-                            <p className="font-semibold text-2xl mr-2">{stats.next_deadline_title}</p>
-                            <p className="font-light text-sm">{stats.next_deadline}</p>
+                            <p className="font-semibold text-2xl mr-2">{stats.next_deadline_title? stats.next_deadline_title : ""}</p>
+                            <p className="font-light text-sm">{stats.next_deadline? stats.next_deadline: "No assignments" }</p>
                             </div>
                         </div>
                     </div>
@@ -65,12 +65,12 @@ export default function Dashboard(props){
                     <div>
                         <div className="h-9 student-stats-sections">
                             <FaGraduationCap className='inline-block mr-2' />
-                            <span className="inline-block font-semibold">Ranking</span>
+                            <span className="inline-block font-semibold">Last Ranking</span>
                         </div>
 
                         <div className="h-24 flex justify-center items-center">
                             <div className="items-end">
-                                <span className="font-light text-sm mr-2">Top</span>
+                                <span className="font-light text-sm mr-2">{stats.last_ranking? "Top" : "No submissions"}</span>
                                 <span className="font-semibold text-3xl">{stats.last_ranking}</span>
                             </div>
                         </div>
