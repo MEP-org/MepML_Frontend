@@ -4,6 +4,7 @@ import Banner from './Banner';
 import Filters from './Filters';
 import Results from './Results';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
+import FadeIn from 'react-fade-in';
 
 export default function Exercises(){
     const { session } = useContext(MySession);
@@ -33,11 +34,11 @@ export default function Exercises(){
     return (
         <>
             <div className='container pt-12 pb-20'>
+                <FadeIn>
                 <Banner />
-                <div className='mb-14' />
                 <Filters filter={filter} setFilter={setFilter} classes={classes}/>
-                <div className='mb-10' />
                 <Results exercises={exercises} loading={loading} filter={filter}/>
+                </FadeIn>
             </div>
         </>
     )

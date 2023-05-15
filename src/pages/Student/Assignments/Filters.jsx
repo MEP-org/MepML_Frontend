@@ -20,7 +20,7 @@ export default function Filters(props){
 
     return (
         <>
-            <div className='grid sm:grid-cols-2 lg:grid-cols-5 gap-6'>
+            <div className='grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-10'>
 
                 <div className='col-span-2 '>
                     <Label htmlFor="search" value="Tittle" />

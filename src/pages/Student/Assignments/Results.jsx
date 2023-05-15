@@ -1,6 +1,7 @@
 import { Spinner } from 'flowbite-react';
 import { FaFileAlt } from 'react-icons/fa';
 import AssignmentCard from './AssignmentCard';
+import FadeIn from 'react-fade-in';
 
 export default function Results(props){
 
@@ -56,13 +57,13 @@ export default function Results(props){
 
         return (
             <>
-                <div className='grid lg:grid-cols-2 gap-6'>
+                <FadeIn className='grid lg:grid-cols-2 gap-6'>
                     {filteredAssignments.map((assignment) => {
                         return (
                             <AssignmentCard assignment={assignment} key={assignment.id} />
                         )
                     })}
-                </div>
+                </FadeIn>
             </>
         )
     }

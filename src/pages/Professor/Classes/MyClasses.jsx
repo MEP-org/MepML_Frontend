@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import {FaUserFriends} from 'react-icons/fa'
 import {Spinner} from 'flowbite-react';
 import ClassCard from './ClassCard';
+import FadeIn from 'react-fade-in';
 
 export default function MyClasses(props){
 
@@ -29,11 +30,11 @@ export default function MyClasses(props){
         }
 
         return (
-            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' >
+            <FadeIn className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                 {classes.map((item) => 
                     <ClassCard key={item.id} item={item} />
                 )}
-            </div>
+            </FadeIn>
         );
     }
 

@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Filters from './Filters';
 import Results from './Results';
 import {PublicAPI} from '../../api/PublicAPI';
+import FadeIn from 'react-fade-in';
 
 export default function PublicExercises(props){
 
@@ -34,17 +35,18 @@ export default function PublicExercises(props){
     return (
         <>
             <div className='container pt-12 pb-20'>
+                <FadeIn>
                 <Banner />
-                <div className='mb-14' />
                 <Filters filter={filter} setFilter={setFilter} profs={profs}/>
-                <div className='mb-10' />
                 <Results 
                     exercises={exercises} 
                     loading={loading} 
                     user={props.user} 
                     setFilter={setFilter} 
                     filter={filter} 
-                    page={page}/>
+                    page={page}
+                />
+                </FadeIn>
             </div>
         </>
     )

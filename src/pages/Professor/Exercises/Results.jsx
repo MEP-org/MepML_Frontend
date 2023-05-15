@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
 import { FaFileAlt } from 'react-icons/fa';
 import ExerciseCard from './ExerciseCard';
+import FadeIn from 'react-fade-in';
 
 export default function Results(props){
 
@@ -55,13 +56,13 @@ export default function Results(props){
         }
         return (
             <>
-                <div>
+                <FadeIn>
                     {filteredExercises.map((exercise) => {
                         return (
                             <ExerciseCard exercise={exercise} key={exercise.id} />
                         )
                     })}
-                </div>
+                </FadeIn>
             </>
         )
     }

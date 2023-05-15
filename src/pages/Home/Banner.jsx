@@ -1,5 +1,6 @@
 import { Button } from 'flowbite-react'
 import { Link } from 'react-router-dom'
+import FadeIn from 'react-fade-in';
 
 
 export default function Banner(){
@@ -8,6 +9,7 @@ export default function Banner(){
     return (
         <div className='flex items-center justify-center fixed top-0 left-0 w-full h-full'>
             <div className='sm:w-3/4 xl:w-2/4 px-10'>
+                <FadeIn>
                 <p className='text-white font-extrabold text-6xl mb-3'>MepML</p>
                 <p className='text-white font-norma text-lg mb-4 text-justify'>
                     Welcome to our platform, where we bring together professors and students to explore the fascinating world of Machine Learning (ML). 
@@ -19,6 +21,7 @@ export default function Banner(){
                 <Link to="/auth/signin">
                     <Button className='w-60 mt-6'>Start using now</Button>
                 </Link>
+                </FadeIn>
             </div>
         </div>
     )

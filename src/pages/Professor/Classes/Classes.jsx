@@ -3,6 +3,7 @@ import { MySession } from '../../../main.jsx';
 import Banner from './Banner';
 import MyClasses from './MyClasses';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
+import FadeIn from 'react-fade-in';
 
 export default function Classes(){
     const { session } = useContext(MySession);
@@ -21,9 +22,10 @@ export default function Classes(){
     return (
         <>
             <div className='container pt-12 pb-20'>
-                <Banner />
-                <div className='h-12'></div>
+                <FadeIn>
+                <Banner/>
                 <MyClasses classes={classes} loading={loading} />
+                </FadeIn>
             </div>
         </>
     )

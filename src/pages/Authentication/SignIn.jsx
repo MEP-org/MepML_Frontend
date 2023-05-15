@@ -1,7 +1,9 @@
 import { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, Label, TextInput, Checkbox, Button, DarkThemeToggle } from 'flowbite-react'
+import { AuthAPI } from '../../api/AuthAPI.jsx';
 import { MySession } from '../../main.jsx';
+import FadeIn from 'react-fade-in';
 
 export default function SignIn(){
 
@@ -36,6 +38,7 @@ export default function SignIn(){
         <>
             <div className='absolute top-0 left-0 flex center w-full h-screen'>
             <Card size='xl' className='w-1/3'>
+                <FadeIn>
                 <div className="mb-4 flex">
                     <h1 className="text-3xl font-extrabold">Sign in</h1>
                     <div className="ml-auto">
@@ -68,7 +71,7 @@ export default function SignIn(){
                     <TextInput
                         id="password1"
                         type="password"
-                        placeholder='********'
+                        placeholder='••••••••'
                         required={true}
                         onChange={(e) => setFormData({...formData, password : e.target.value})}
                     />
@@ -86,6 +89,7 @@ export default function SignIn(){
                 <Button 
                     type="submit"
                     onClick={handleSubmit}
+                    className='mb-2'
                 >
                     Sign in
                 </Button>
@@ -99,7 +103,7 @@ export default function SignIn(){
                         {" "}Sign up
                     </Link>
                 </span>
-
+                </FadeIn>
             </Card>
             </div>
         </>

@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { AuthAPI } from '../../api/AuthAPI.jsx';
 import { Link } from 'react-router-dom'
 import { Card, Label, TextInput, Select, Button, DarkThemeToggle } from 'flowbite-react'
+import FadeIn from 'react-fade-in';
 
 
 export default function SignUp(){
@@ -25,6 +27,7 @@ export default function SignUp(){
         <>
             <div className='absolute top-0 left-0 flex center w-full h-screen'>
             <Card size='xl' className='w-1/3'>
+                <FadeIn>
                 <div className="mb-4 flex">
                     <h1 className="text-3xl font-extrabold">Sign up</h1>
                     <div className="ml-auto">
@@ -118,7 +121,7 @@ export default function SignUp(){
                 <Button 
                     type="submit"
                     onClick={handleSubmit}
-                    className='mt-2'
+                    className='my-2'
                 >
                     Sign up
                 </Button>
@@ -132,7 +135,7 @@ export default function SignUp(){
                         {" "}Sign in
                     </Link>
                 </span>
-
+                </FadeIn>
             </Card>
             </div>
         </>

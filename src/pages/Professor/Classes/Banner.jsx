@@ -6,7 +6,7 @@ export default function Banner(){
 
     return (
         <>
-            <div className='grid lg:grid-cols-3'>
+            <div className='grid lg:grid-cols-3 mb-12'>
 
                 <div className='col-span-2'>
                     <div className='font-bold text-5xl mb-2'>

@@ -3,7 +3,7 @@ export default function Banner(){
 
     return (
         <>
-            <div>
+            <div className="mb-14">
                 <div className='font-bold text-5xl mb-2'>
                     Assignments
                 </div>

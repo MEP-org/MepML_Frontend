@@ -4,6 +4,7 @@ import Banner from './Banner';
 import Filters from './Filters';
 import Results from './Results';
 import { StudentAPI } from '../../../api/StudentAPI';
+import FadeIn from 'react-fade-in';
 
 export default function Assignments(){
 
@@ -39,11 +40,11 @@ export default function Assignments(){
     return (
         <>
             <div className='container pt-12 pb-20'>
+                <FadeIn>
                 <Banner />
-                <div className='mb-14' />
                 <Filters filter={filter} setFilter={setFilter} assignments={assignments} classes={classes}/>
-                <div className='mb-10' />
                 <Results assignments={assignments} loading={loading} filter={filter}/>
+                </FadeIn>
             </div>
         </>
     )

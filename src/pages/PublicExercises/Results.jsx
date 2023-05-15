@@ -1,6 +1,7 @@
 import { Spinner, Pagination } from 'flowbite-react';
 import { FaFileAlt } from 'react-icons/fa';
 import ExerciseCard from './ExerciseCard';
+import FadeIn from 'react-fade-in';
 
 export default function Results(props){
 
@@ -35,13 +36,14 @@ export default function Results(props){
         }
         return (
             <>
-                <div className='grid lg:grid-cols-2 gap-6'>
+                <FadeIn className='grid lg:grid-cols-2 gap-6'>
                     {exercises.map((exercise) => {
                         return (
                             <ExerciseCard exercise={exercise} key={exercise.id} user={props.user} />
                         )
                     })}
-                </div>
+                </FadeIn>
+                {page.total_pages !== 1 && 
                 <div className='mt-10 flex justify-center my-pages'>
                     <Pagination
                         currentPage={page.current_page}
@@ -50,6 +52,7 @@ export default function Results(props){
                         totalPages={page.total_pages}
                     />
                 </div>
+                }
             </>
         )
     }

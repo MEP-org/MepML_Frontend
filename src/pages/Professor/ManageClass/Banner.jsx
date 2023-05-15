@@ -66,13 +66,16 @@ export default function Banner({profId, classData, setClassData, loading}) {
     const handleImportStudents = () => {
         const input = document.createElement("input");
         input.type = "file";
-        input.accept = ".csv";
+        input.accept = ".csv, .xls, .xlsx, .tab";
         input.onchange = (e) => {
             const file = e.target.files[0];
             const reader = new FileReader();
             reader.readAsText(file);
             reader.onload = () => {
-                const n_mecs = reader.result.split('\n').map((line) => line.split(',')[0])
+                const data_ = reader.result.split('\n').map((line) => line.split(/[\t,]/))
+                const n_mec_col = data_[0].indexOf("NMecAluno")
+                const n_mecs = data_.map((line) => line[n_mec_col])
+                console.log(n_mecs)
                 addNmecs(n_mecs)       
             };
         }
