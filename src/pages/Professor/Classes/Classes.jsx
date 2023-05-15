@@ -20,9 +20,9 @@ export default function Classes(){
 
     return (
         <>
-            <div className='container py-10'>
+            <div className='container pt-12 pb-20'>
                 <Banner />
-                <div className='h-8'></div>
+                <div className='h-12'></div>
                 <MyClasses classes={classes} loading={loading} />
             </div>
         </>

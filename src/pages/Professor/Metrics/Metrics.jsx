@@ -36,11 +36,11 @@ export default function Metrics(){
 
     return (
         <>
-            <div className="container my-8">
-                <div className='font-bold text-5xl mb-4'>
+            <div className="container pt-12 pb-20">
+                <div className='font-bold text-5xl mb-2'>
                     Metrics
                 </div>
-                <div className='mt-2 text-lg'>
+                <div className='text-lg mb-8'>
                     Metrics are used to evaluate the performance of your students.
                 </div>
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
 import { FaFileAlt } from 'react-icons/fa';
 import ExerciseCard from './ExerciseCard';
@@ -17,8 +18,10 @@ export default function Results(props){
     const noResults = () => {
         return (
             <>
-                <div className='font-bold text-xl text-center'>
-                    No results found
+                <div className='text-xl text-center mt-16'>
+                    You have not created any exercise yet
+                    <br />
+                    <Link to='/professor/exercises/add' className='text-blue-500 hover:underline'> Create one</Link>
                 </div>
             </>
         )
@@ -66,8 +69,8 @@ export default function Results(props){
     return (
         <>
             <div>
-                <div className='font-semibold text-3xl mb-10 flex items-center'>
-                    <FaFileAlt className='mr-2' size={25} />
+                <div className='font-semibold text-3xl mt-12 mb-5 flex items-center'>
+                    <FaFileAlt className='mr-2' size={23} />
                     Exercises
                 </div>
             </div>

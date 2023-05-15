@@ -65,12 +65,13 @@ export default function ManageExercise(props){
 
     return (
         <>
-            <div className="container">
+            <div className="container pt-12 pb-20">
                 <Banner 
                     exercise={exercise} 
                     loading={loading} 
                     profId={profId}
                 />
+                <div className="h-8"></div>
                 <ExercisesTab 
                     exercise={exercise} 
                     classes={classes}

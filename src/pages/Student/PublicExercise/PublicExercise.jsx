@@ -27,7 +27,7 @@ export default function PublicExercise(){
     
     return (
         <>
-            <div className='w-full container mt-8'>
+            <div className='w-full container mt-12 mb-20'>
                 <Banner exercise={publicExercise} loading={loading} />
                 <PublicExerciseTab exercise={publicExercise} loading={loading} />
             </div>

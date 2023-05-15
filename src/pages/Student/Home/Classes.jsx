@@ -18,26 +18,31 @@ export default function Classes(props){
 
     const renderClasses = () => {
 
+        if (classes.length === 0) {
+            return (
+                <div className="text-xl text-center mt-16">
+                    You do not belong to any class yet
+                </div>
+            )
+        }
+
         return (
-            <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-4'>
+            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                 {classes.map((c) => 
                     <ClassCard key={c.id} class_={c} />
-                )}
+                )}           
             </div>
         );
     }
 
     return (
         <>
-            <div >
-                <div className='font-semibold text-3xl mb-4 flex items-center'>
-                    <FaUserFriends className='inline-block mr-2' size={23} />
-                    Classes
-                </div>
+            <div className='font-semibold text-3xl mt-12 mb-4 flex items-center'>
+                <FaUserFriends className='inline-block mr-2' size={23} />
+                Classes
             </div>
 
-            {loading ? renderLoading() : renderClasses()}
-            
+            {loading ? renderLoading() : renderClasses()} 
         </>
     )
 }

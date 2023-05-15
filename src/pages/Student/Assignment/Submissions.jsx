@@ -71,7 +71,7 @@ export default function Submissions(props){
     const renderSubmission = () => {
         return (
             <>
-                <p className='mb-2 font-semibold text-2xl'>Submission</p>
+                <p className='mb-5 font-semibold text-2xl'>Submission</p>
 
                 <div className="grid lg:grid-cols-2 gap-4">
                     <div className="flex items-center justify-center w-full relative">

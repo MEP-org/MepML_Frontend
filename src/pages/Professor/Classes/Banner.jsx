@@ -6,10 +6,10 @@ export default function Banner(){
 
     return (
         <>
-            <div className='grid grid-cols-3'>
+            <div className='grid lg:grid-cols-3'>
 
                 <div className='col-span-2'>
-                    <div className='font-bold text-5xl mb-4'>
+                    <div className='font-bold text-5xl mb-2'>
                         Classes
                     </div>
                     <div className='text-lg'>
@@ -17,9 +17,9 @@ export default function Banner(){
                     </div>
                 </div>
 
-                <div className='flex justify-end items-end'>
+                <div className='lg:flex lg:justify-end lg:items-end lg:m-0 mt-4'>
                     <Link to='/professor/classes/add'>
-                        <Button className='dark:bg-gray-800' color='light'>
+                        <Button className='dark:bg-gray-800 shadow-md' color='light'>
                             <div className='w-40 text-center'>Create a new class</div>
                             <FaPlusCircle />
                         </Button>

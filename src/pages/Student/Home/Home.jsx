@@ -39,7 +39,7 @@ export default function Home(){
 
     return (
         <>
-            <div className='w-full container mt-8'>
+            <div className='w-full container mt-12 mb-20'>
                 <Dashboard stats={stats} session={session} loading={loadingStats}/>
                 <Classes classes={classes} loading={loadingClasses} />
             </div>

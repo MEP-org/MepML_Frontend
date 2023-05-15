@@ -20,7 +20,7 @@ export default function Dashboard(props){
 
         return (
             <>
-            <Card className='mt-4 mb-8'>
+            <Card className='mt-5 mb-8'>
                 <div className="grid sm:grid-cols-2 lg:sm:grid-cols-4 gap-8">
 
                     <div>
@@ -69,9 +69,9 @@ export default function Dashboard(props){
                         </div>
 
                         <div className="h-24 flex justify-center items-center">
-                            <div className="items-end">
-                                <span className="font-light text-sm mr-2">{stats.last_ranking? "Top" : "No submissions"}</span>
-                                <span className="font-semibold text-3xl">{stats.last_ranking}</span>
+                            <div className="items-end flex">
+                                <p className="font-light text-sm mr-2">{stats.last_ranking? "Top" : "No submissions"}</p>
+                                <p className="font-semibold text-3xl">{stats.last_ranking}</p>
                             </div>
                         </div>
                     </div>

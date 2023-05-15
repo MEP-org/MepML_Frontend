@@ -61,9 +61,9 @@ export default function Evaluation(props){
 
 	return (
         <>
-            <div className='flex gap-6'>
+            <div className='lg:flex lg:gap-6'>
 
-                <div className="relative w-[296px]">
+                <div className="relative lg:w-[296px] lg:mb-0 mb-16">
                     <Label>Deadline date</Label>
                     <div className='mt-2'/>
                     {(exercise.deadline !== undefined || exercise.id === undefined )&&

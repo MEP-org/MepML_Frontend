@@ -39,7 +39,7 @@ export default function ClassCard(props){
 
                     <div className="text-gray-700 dark:text-gray-400 font-light">
                         <FaUserFriends className='inline-block mr-2' size={15} />
-                        <span className="inline-block text-sm">{item.num_students} members</span>
+                        <span className="inline-block text-sm">{item.num_students} member(s)</span>
                     </div>
                 </div>
             </div>

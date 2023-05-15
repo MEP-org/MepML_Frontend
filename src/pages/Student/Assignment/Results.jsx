@@ -37,16 +37,16 @@ export default function Results(props) {
 
                 {/* Students results */}
                 <div>
-                    <p className='font-semibold text-2xl mb-10'>Evaluation of your model</p>
+                    <p className='font-semibold text-2xl mb-5'>Evaluation of your model</p>
 
                     {my_results.length === 0 ?
-                        <p className='text-center'>You have no results yet.</p>
+                        <p className='text-center'>You have no results yet</p>
 
                         :
 
                         <div className='flex flex-wrap'>
                             {my_results.map((res, index) =>
-                                <div key={aux++} className='w-1/5 m-auto mb-10 px-12'>
+                                <div key={aux++} className='m-auto mb-10 md:w-1/3 px-28 md:px-12 lg:w-1/5 lg:px-10'>
                                     <CircularProgressbar value={(res.score * 100).toFixed(2)} text={`${(res.score * 100).toFixed(2)}%`} styles={chartStyle} />
 
                                     <div className="mt-2 flex justify-center items-center">
@@ -62,12 +62,12 @@ export default function Results(props) {
                 </div>
 
 
-                <hr className="h-px mt-14 mb-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+                <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
 
                 {/* Class results */}
-                <div className='mb-20'>
-                    <p className='font-semibold text-2xl mb-10'>Evaluation of class models</p>
+                <div>
+                    <p className='font-semibold text-2xl mb-5'>Evaluation of class models</p>
 
                     <Table hoverable={true}>
                         <Table.Head>
