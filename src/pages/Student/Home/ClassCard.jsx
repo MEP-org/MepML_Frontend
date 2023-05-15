@@ -12,6 +12,14 @@ export default function ClassCard(props){
         navigate(`/student/classes/${class_.id}`);
     }
 
+    const checkImage = (image) => {
+        if (image === null) {
+            return 'https://flowbite.com/docs/images/carousel/carousel-1.svg';
+        } else {
+            return API_URL + image;
+        }
+    }
+
 
     return (
 
@@ -21,7 +29,7 @@ export default function ClassCard(props){
                 onClick={() => handleClassClick(class_)}
             >
                 <div className="relative h-36 w-full">
-                    <img className="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg" src={API_URL + class_.image} alt={class_.name} />
+                    <img className="absolute inset-0 w-full h-full object-cover object-center rounded-t-lg" src={checkImage(class_.image)} alt={class_.name} />
                 </div>
 
 

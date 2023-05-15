@@ -1,5 +1,6 @@
 import {Spinner, Card} from 'flowbite-react';
 import {FaCheckCircle, FaFileAlt, FaHourglassHalf, FaGraduationCap} from 'react-icons/fa'
+import FadeIn from 'react-fade-in';
 
 
 export default function Dashboard(props){
@@ -21,7 +22,7 @@ export default function Dashboard(props){
         return (
             <>
             <Card className='mt-5 mb-8'>
-                <div className="grid sm:grid-cols-2 lg:sm:grid-cols-4 gap-8">
+                <FadeIn className="grid sm:grid-cols-2 lg:sm:grid-cols-4 gap-8">
 
                     <div>
                         <div className="h-9 student-stats-sections">
@@ -76,7 +77,7 @@ export default function Dashboard(props){
                         </div>
                     </div>
                 
-                </div>
+                </FadeIn>
             </Card>
             </>
         );

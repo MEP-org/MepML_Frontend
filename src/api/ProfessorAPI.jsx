@@ -9,7 +9,12 @@ export const ProfessorAPI = {
         .catch((error) => {
             console.log("Error while fetching classes");
         });
-        response.data.image = `${API_URL}/${response.data.image}`;
+        if (response.data.image) {
+            response.data.image = `${API_URL}${response.data.image}`;
+        }
+        else {
+            response.data.image = `https://flowbite.com/docs/images/carousel/carousel-1.svg`;
+        }
 
         return response.data;
     },
