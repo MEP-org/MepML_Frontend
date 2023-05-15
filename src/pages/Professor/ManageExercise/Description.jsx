@@ -59,7 +59,7 @@ export default function Description(props){
                             id="visible" 
                             name="visible" 
                             value={exercise.visibility} 
-                            onChange={handleChange} 
+                            onChange={() => handleChange({target: {name: "visibility", value: !exercise.visibility}})}
                         />
                         <Tooltip
                             content="If checked, the description and training dataset will publically available"

@@ -6,7 +6,7 @@ export default function AllMetrics({metrics}) {
 
     return (
         <>
-            <div className='grid grid-cols-3 gap-8'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {allMetrics.map((metric) => {
                     return (
                         <MetricCard metric={metric} key={metric.id} />

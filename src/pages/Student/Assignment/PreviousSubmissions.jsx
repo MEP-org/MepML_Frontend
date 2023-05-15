@@ -16,9 +16,9 @@ export default function PreviousSubmissions(props){
     return (
         <>
             <div>
-                <p className='mb-2 font-semibold text-2xl'>Your previous submission</p>
+                <p className='my-5 font-semibold text-2xl'>Your previous submission</p>
                 
-                <div className="w-1/2 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
+                <div className="lg:w-1/2 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
                     <div className="flex items-center justify-between w-full h-full p-2">
                         <div>
                             <div className="flex items-center">
@@ -41,7 +41,7 @@ export default function PreviousSubmissions(props){
                     </div>
                 </div>
 
-                <div className="mt-2 w-1/2 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
+                <div className="mt-2 lg:w-1/2 h-16 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md px-2">
                     <div className="flex items-center justify-between w-full h-full p-2">
                         <div>
                             <div className="flex items-center">

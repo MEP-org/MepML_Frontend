@@ -17,7 +17,7 @@ export default function ClassCard(props){
 
         <>
             <div 
-                className=" cursor-pointer max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                className="cursor-pointer max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 onClick={() => handleClassClick(class_)}
             >
                 <div className="relative h-36 w-full">
@@ -37,7 +37,7 @@ export default function ClassCard(props){
 
                     <div className="text-gray-700 dark:text-gray-400 font-light">
                         <FaUserFriends className='inline-block mr-2' size={15} />
-                        <span className="inline-block text-sm">{class_.num_students} members</span>
+                        <span className="inline-block text-sm">{class_.num_students} member(s)</span>
                     </div>
                 </div>
             </div>

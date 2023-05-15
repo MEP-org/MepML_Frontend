@@ -37,7 +37,7 @@ export default function MetricCard({ metric, my }) {
                 {my && (
                 <div className="absolute top-0 right-0 p-4">
                     <div className=" cursor-pointer text-red-700 hover:text-red-500 ml-2">
-                        <FaTrash size={24} onClick={() => handleDelete(metric.id)} />
+                        <FaTrash size={23} onClick={() => handleDelete(metric.id)} />
                     </div>
                 </div>
                 )}

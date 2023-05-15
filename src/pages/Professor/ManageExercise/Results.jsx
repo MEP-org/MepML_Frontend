@@ -5,7 +5,7 @@ export default function Results({exercise, results}){
     return (
         <>
             <div className='mb-20'>
-                <p className='font-semibold text-2xl mb-10'>Evaluation of class models</p>
+                <p className='font-semibold text-2xl mb-5'>Evaluation of class models</p>
 
                 <Table hoverable={true}>
                     <Table.Head>
@@ -28,9 +28,9 @@ export default function Results({exercise, results}){
 
                             if (studentResults.length === 0) {
                                 return (
-                                    <Table.Row key={res.student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{res.student.user.nmec}</Table.Cell>
-                                        <Table.Cell>{res.student.user.name}</Table.Cell>
+                                    <Table.Row key={student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{student.user.nmec}</Table.Cell>
+                                        <Table.Cell>{student.user.name}</Table.Cell>
 
                                         {exercise.metrics.map((r, i) => 
                                             <Table.Cell key={i}>-</Table.Cell>
@@ -41,9 +41,9 @@ export default function Results({exercise, results}){
                             }
 
                             return (
-                                <Table.Row key={res.student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{res.student.user.nmec}</Table.Cell>
-                                    <Table.Cell>{res.student.user.name}</Table.Cell>
+                                <Table.Row key={student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{student.user.nmec}</Table.Cell>
+                                    <Table.Cell>{student.user.name}</Table.Cell>
 
                                     {studentResults.map((r, i) => 
                                         <Table.Cell key={i}>

@@ -38,9 +38,9 @@ export default function Assignments(){
 
     return (
         <>
-            <div className='container py-8'>
+            <div className='container pt-12 pb-20'>
                 <Banner />
-                <div className='mb-10' />
+                <div className='mb-14' />
                 <Filters filter={filter} setFilter={setFilter} assignments={assignments} classes={classes}/>
                 <div className='mb-10' />
                 <Results assignments={assignments} loading={loading} filter={filter}/>

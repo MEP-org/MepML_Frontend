@@ -17,7 +17,7 @@ export default function Results(props){
     const noResults = () => {
         return (
             <>
-                <div className=' font-bold text-xl text-center'>
+                <div className='text-xl text-center mt-16'>
                     No results found
                 </div>
             </>
@@ -56,7 +56,7 @@ export default function Results(props){
 
         return (
             <>
-                <div className='grid lg:grid-cols-2 gap-4'>
+                <div className='grid lg:grid-cols-2 gap-6'>
                     {filteredAssignments.map((assignment) => {
                         return (
                             <AssignmentCard assignment={assignment} key={assignment.id} />
@@ -70,8 +70,8 @@ export default function Results(props){
     return (
         <>
             <div >
-                <div className='font-semibold text-3xl mb-10 flex items-center'>
-                    <FaFileAlt className='inline-block mr-2' size={25} />
+                <div className='font-semibold text-3xl mt-12 mb-5 flex items-center'>
+                    <FaFileAlt className='inline-block mr-2' size={23} />
                     Assignments
                 </div>
             </div>

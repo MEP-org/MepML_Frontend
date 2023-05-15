@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {FaUserFriends} from 'react-icons/fa'
 import {Spinner} from 'flowbite-react';
 import ClassCard from './ClassCard';
@@ -17,8 +18,18 @@ export default function MyClasses(props){
     }
 
     const renderClasses = () => {
+        if (classes.length === 0) {
+            return (
+                <div className="text-xl text-center mt-16">
+                    You have not created any class yet
+                    <br />
+                    <Link to='/professor/classes/add' className='text-blue-500 hover:underline'> Create one</Link>
+                </div>
+            )
+        }
+
         return (
-            <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-6' >
+            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' >
                 {classes.map((item) => 
                     <ClassCard key={item.id} item={item} />
                 )}

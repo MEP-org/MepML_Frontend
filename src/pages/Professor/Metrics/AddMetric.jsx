@@ -64,7 +64,7 @@ export default function AddMetric() {
         <>
 
             <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-3 gap-8">
+                <div className="grid lg:grid-cols-3 lg:gap-6">
 
                     <div className="col-span-2">
                         <Label>Name</Label>
@@ -74,7 +74,7 @@ export default function AddMetric() {
                         <Textarea className="mt-2" placeholder="Metric description" rows={4} id="description" onChange={(e) => {setMetric({...metric, description: e.target.value})}} />
                     </div>
 
-                    <div className="flex items-center justify-center w-full relative">
+                    <div className="flex items-center justify-center w-full relative mt-5 lg:mt-0">
                         <label htmlFor="metric" className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> Metric here</p>

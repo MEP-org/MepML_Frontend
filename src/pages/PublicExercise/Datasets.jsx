@@ -27,9 +27,9 @@ export default function Datasets(props){
 
         return (
             <>
-                <p className='mb-2 font-semibold text-2xl'>Exercise Dataset</p>
+                <p className='mb-5 font-semibold text-2xl'>Exercise Dataset</p>
 
-                <div className='grid grid-cols-2 gap-4'>
+                <div className='grid lg:grid-cols-2'>
                     <div className="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-md p-3">
                         <p className='text-lg'>Training Dataset</p>
                         <hr className="h-px mt-1 mb-2 bg-gray-200 border-0 dark:bg-gray-700" />

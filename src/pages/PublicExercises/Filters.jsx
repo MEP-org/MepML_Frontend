@@ -21,9 +21,9 @@ export default function FIlters(props){
     return (
         <>
             <form>
-            <div className='grid grid-cols-7 gap-6'>
+            <div className='grid md:grid-cols-3 lg:grid-cols-7 gap-6'>
 
-                <div className='col-span-2 '>
+                <div className='lg:col-span-2'>
                     <Label htmlFor="search" value="Tittle" />
                     <div className='mb-2' />
                     <TextInput

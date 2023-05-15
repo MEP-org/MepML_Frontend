@@ -81,7 +81,7 @@ export default function Bannner(props) {
 
     return (
         <>
-            <div className="grid grid-cols-2 gap-4 my-4">
+            <div className="grid lg:grid-cols-2 gap-4">
                 <div>
                     <div className="font-bold text-4xl">
                         {exercise.id ? 
@@ -90,7 +90,7 @@ export default function Bannner(props) {
                         }
                         {exercise.id !== undefined &&
                         <div className="inline-block cursor-pointer text-red-700 hover:text-red-500 ml-2">
-                            <FaTrash size={32} onClick={() => setShowDeleteModal(true)}/>
+                            <FaTrash size={25} onClick={() => setShowDeleteModal(true)}/>
                         </div>
                     }
                     </div>
@@ -102,7 +102,7 @@ export default function Bannner(props) {
                 </div>
                 
             
-                <div className="flex justify-end items-end">
+                <div className="flex lg:justify-end lg:items-end">
                     <Button onClick={handleSubmit} className='w-36'>
                         {exercise.id ? 'Save' : 'Create'}
                     </Button>
