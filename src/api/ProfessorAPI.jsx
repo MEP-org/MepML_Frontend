@@ -103,6 +103,7 @@ export const ProfessorAPI = {
         .catch((error) => {
             console.log("Error while fetching exercise");
         });
+        if (response.data.exercise.limit_of_attempts === null) { response.data.exercise.limit_of_attempts = undefined; }
         return response.data;
     },
 
@@ -122,8 +123,6 @@ export const ProfessorAPI = {
         exerciseData.metrics.forEach((metricId) => {
             formData.append('metrics', metricId);
         });
-
-        console.log(formData)
 
         const response = await axios.post(`${API_URL}/professors/${profId}/exercises`, formData, {
             headers: {

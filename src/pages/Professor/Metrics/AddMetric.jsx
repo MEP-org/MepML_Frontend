@@ -64,7 +64,7 @@ export default function AddMetric() {
         <>
 
             <form onSubmit={handleSubmit}>
-                <div className="grid lg:grid-cols-3 lg:gap-6">
+                <div className="grid lg:grid-cols-3 lg:gap-6 mb-6">
 
                     <div className="col-span-2">
                         <Label>Name</Label>
@@ -124,7 +124,7 @@ export default function AddMetric() {
                     </SyntaxHighlighter>
                 }
 
-                <div className="flex justify-center mt-5 mb-10">
+                <div className="flex justify-center mt-5">
                     <Button className="w-64" type="submit">Submit</Button>
                 </div>
             </form>

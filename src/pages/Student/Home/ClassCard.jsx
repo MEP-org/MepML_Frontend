@@ -25,7 +25,7 @@ export default function ClassCard(props){
 
         <>
             <div 
-                className="cursor-pointer max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                className="cursor-pointer max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-200 ease-in-out"
                 onClick={() => handleClassClick(class_)}
             >
                 <div className="relative h-36 w-full">
