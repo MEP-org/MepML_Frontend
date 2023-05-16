@@ -112,24 +112,22 @@ export default function AddMetric() {
                     </div>
                 </div>
 
+                {codeString &&
+                    <SyntaxHighlighter 
+                        className="important rounded-lg max-h-[500px] overflow-y-auto drop-shadow-md border border-gray-200 dark:border-gray-700 !bg-white dark:!bg-gray-800"
+                        language="python" 
+                        style={mode === 'dark' ? DarkTheme : LightTheme}
+                        showLineNumbers={true} 
+                        wrapLongLines={true}
+                    >
+                        {codeString}
+                    </SyntaxHighlighter>
+                }
+
                 <div className="flex justify-center mt-5 mb-10">
                     <Button className="w-64" type="submit">Submit</Button>
                 </div>
             </form>
-
-
-            {codeString &&
-                <SyntaxHighlighter 
-                    className="important rounded-lg max-h-[500px] overflow-y-auto drop-shadow-md border border-gray-200 dark:border-gray-700 !bg-white dark:!bg-gray-800"
-                    language="python" 
-                    style={mode === 'dark' ? DarkTheme : LightTheme}
-                    showLineNumbers={true} 
-                    wrapLongLines={true}
-                >
-                    {codeString}
-                </SyntaxHighlighter>
-            }
-
 
             {/* Invalid Fields Modal */}
             <Modal

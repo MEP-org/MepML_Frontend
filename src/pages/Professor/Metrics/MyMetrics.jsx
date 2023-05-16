@@ -3,7 +3,7 @@ import MetricCard from "./MetricCard";
 
 export default function MyMetrics({metrics}) {
 
-    const myMetrics = [...metrics.my_metrics];
+    const myMetrics = [...metrics.my_metrics]
 
     return (
         <>

@@ -16,7 +16,7 @@ export default function Metrics(){
 
     const location = useLocation();
     const tabsRef = useRef(null)
-    const [metrics, setMetrics] = useState([])
+    const [metrics, setMetrics] = useState({ my_metrics: [], other_metrics: [] })
     const [loading, setLoading] = useState(true)
 
     const hash2index = {
