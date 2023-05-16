@@ -73,11 +73,13 @@ export default function Evaluation(props){
                             setShow={handleClose} 
                             classNames="absolute"
                             options={{
-                                autoHide: false,
+                                autoHide: true,
                                 theme:{
                                     selected: "hover:bg-blue-500 dark:hover:bg-blue-500",
+                                    disabledText: "text-gray-300 dark:text-gray-400",
                                 },
                                 defaultDate: exercise.deadline? new Date(exercise.deadline.split(' ')[0].split('/').reverse().join('-')) : new Date(),
+                                minDate: new Date(),
                             }}
                         />
                     }

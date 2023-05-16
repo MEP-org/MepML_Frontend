@@ -11,5 +11,5 @@ export default defineConfig({
       exclude: ['node_modules', 'dist', 'build', 'public'],
     })
   ],
-  base: '/Prototype/'
+  // base: '/Prototype/'
 })

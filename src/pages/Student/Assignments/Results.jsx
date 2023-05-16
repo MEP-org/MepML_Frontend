@@ -26,11 +26,12 @@ export default function Results(props){
     }
 
     const assignmentFilter = (assignment) => {
+        const exDate = new Date(assignment.deadline.split(' ')[0].split('/').reverse().join('-') + 'T' + assignment.deadline.split(' ')[1]);
         return (
             assignment.title.toLowerCase().includes(filter.title.toLowerCase()) &&
             (filter.deadline === 'all' || 
-            (filter.deadline === 'closed' && assignment.deadline < new Date()) ||
-            (filter.deadline === 'open' && assignment.deadline > new Date())
+            (filter.deadline === 'closed' && exDate < new Date()) ||
+            (filter.deadline === 'open' && exDate > new Date())
             ) &&
             (filter.filter === 'all' || 
             (filter.filter == assignment.students_class.id))
@@ -38,14 +39,12 @@ export default function Results(props){
     }   
 
     const sortAssignments = (a1, a2) => {
+        const date1 = new Date(a1.publish_date.split(' ')[0].split('/').reverse().join('-') + 'T' + a1.publish_date.split(' ')[1]);
+        const date2 = new Date(a2.publish_date.split(' ')[0].split('/').reverse().join('-') + 'T' + a2.publish_date.split(' ')[1]);
         if(filter.sort === 'recent'){
-            return a1.publish_date < a2.publish_date;
+            return date1 < date2;
         } else if(filter.sort === 'oldest'){
-            return a1.publish_date > a2.publish_date;
-        } else if(filter.sort === 'closestDeadline'){
-            return a1.deadline < a2.deadline;
-        } else if(filter.sort === 'farthestDeadline'){
-            return a1.deadline > a2.deadline;
+            return date1 > date2;
         }
     }
 

@@ -37,14 +37,12 @@ export default function Results(props){
     }
 
     const sortExercises = (e1, e2) => {
+        const date1 = new Date(e1.publish_date.split(' ')[0].split('/').reverse().join('-') + 'T' + e1.publish_date.split(' ')[1]);
+        const date2 = new Date(e2.publish_date.split(' ')[0].split('/').reverse().join('-') + 'T' + e2.publish_date.split(' ')[1]);
         if(filter.sort === 'recent'){
-            return e1.publish_date < e2.publish_date;
+            return date1 < date2;
         } else if(filter.sort === 'oldest'){
-            return e1.publish_date > e2.publish_date;
-        } else if(filter.sort === 'closestDeadline'){
-            return e1.deadline < e2.deadline;
-        } else if(filter.sort === 'farthestDeadline'){
-            return e1.deadline > e2.deadline;
+            return date1 > date2;
         }
     }
 
@@ -56,7 +54,7 @@ export default function Results(props){
         }
         return (
             <>
-                <FadeIn>
+                <FadeIn className='grid grid-cols-2 gap-6'>
                     {filteredExercises.map((exercise) => {
                         return (
                             <ExerciseCard exercise={exercise} key={exercise.id} />

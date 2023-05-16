@@ -1,4 +1,4 @@
-import {createHashRouter, RouterProvider, Navigate} from "react-router-dom";
+import {createBrowserRouter, RouterProvider, Navigate} from "react-router-dom";
 
 import MyNavbar from '../components/MyNavbar'
 
@@ -26,7 +26,7 @@ import Error from '../pages/Error/Error.jsx'
 
 export default function Router(){
 
-    const router = createHashRouter(
+    const router = createBrowserRouter(
         [
             { path: "/", element: <Home /> },
             { 

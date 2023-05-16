@@ -1,7 +1,7 @@
 
 import { Card, Button } from "flowbite-react";
 import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ExerciseCard(props){
 
@@ -10,14 +10,14 @@ export default function ExerciseCard(props){
 
     return (
         <>
-            <Card className="border-l-8 !border-l-blue-500">
+            <Card className="border-l-8 !border-l-blue-500 hover:scale-105 transition-all duration-200 ease-in-out" onClick={() => {navigate("/"+user+"/publicExercises/" + exercise.id)}}>
                 <div className="overflow-auto flex flex-col h-44">
                     <div>
                         <p className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                            {exercise.title}
+                                {exercise.title}
                         </p>
 
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
                             {exercise.subtitle}
                         </p>
                     </div>

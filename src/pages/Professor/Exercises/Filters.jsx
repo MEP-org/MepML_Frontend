@@ -59,8 +59,6 @@ export default function Filters(props){
                     >
                         <option value="recent">Recent</option>
                         <option value="oldest">Oldest</option>
-                        <option value="closestDeadline">Closest Deadline</option>
-                        <option value="farthestDeadline">Farthest Deadline</option>
                     </Select>
                 </div>
 

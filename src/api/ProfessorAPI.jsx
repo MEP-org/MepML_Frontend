@@ -123,6 +123,8 @@ export const ProfessorAPI = {
             formData.append('metrics', metricId);
         });
 
+        console.log(formData)
+
         const response = await axios.post(`${API_URL}/professors/${profId}/exercises`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'

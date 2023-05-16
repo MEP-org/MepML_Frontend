@@ -10,14 +10,14 @@ export default function AssignmentCard(props){
     return (
         <>
 
-        <Card className="border-l-8 !border-l-blue-500">
-            <div className="overflow-auto flex flex-col h-64">
+        <Card className="border-l-8 !border-l-blue-500 hover:scale-105 transition-all duration-200 ease-in-out" onClick={() => {navigate("/student/assignments/" + assignment.id)}}>
+            <div className="overflow-auto flex flex-col h-52">
                 <div>
                     <p className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                         {assignment.title}
                     </p>
 
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
                         {assignment.subtitle}
                     </p>
                 </div>
