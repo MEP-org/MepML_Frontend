@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, Label, TextInput, Checkbox, Button, DarkThemeToggle } from 'flowbite-react'
+import { Card, Label, TextInput, Checkbox, Button, DarkThemeToggle, Alert } from 'flowbite-react'
 import { AuthAPI } from '../../api/AuthAPI.jsx';
 import { MySession } from '../../main.jsx';
 import FadeIn from 'react-fade-in';
+import { HiInformationCircle } from 'react-icons/hi';
 
 export default function SignIn(){
 
@@ -48,7 +49,7 @@ export default function SignIn(){
                     token : data.token
                 }
                 setNewSession(info)
-                setSession(info)   
+                setSession(info)
             }
         })
     }
@@ -80,7 +81,7 @@ export default function SignIn(){
                         <DarkThemeToggle />
                     </div>
                 </div>
-                <form className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div>
                     <div className="mb-2 block">
                     <Label
@@ -123,14 +124,24 @@ export default function SignIn(){
                 </div>
                 <Button 
                     type="submit"
-                    onClick={handleSubmit}
                     className='mb-2'
                 >
                     Sign in
                 </Button>
                 </form>
 
-                {error && <p className="text-red-500 text-center">{error}</p>}
+                {error && 
+                    <Alert
+                        color="failure"
+                        className='my-2'
+                        icon={HiInformationCircle}
+                    >
+                        <span>
+                            <span className="font-medium mr-2">Error!</span>
+                            {error}
+                        </span>
+                    </Alert>
+                }
                 
                 <span className="text-sm">
                     Don't have an account?

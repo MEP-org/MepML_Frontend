@@ -22,6 +22,13 @@ export default function SignUp(){
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        //validate password
+        if (formData.password.length < 8){
+            setError("Password must have at least 8 characters")
+            return
+        }
+
         AuthAPI.register(formData)
         .then((data) => {
             console.log(data)
@@ -46,7 +53,7 @@ export default function SignUp(){
                         <DarkThemeToggle />
                     </div>
                 </div>
-                <form className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 
                 <div>
                     <div className="mb-2 block">
@@ -125,7 +132,7 @@ export default function SignUp(){
                     <TextInput
                         id="password1"
                         type="password"
-                        placeholder='********'
+                        placeholder='••••••••'
                         required={true}
                         onChange={(e) => setFormData({...formData, password : e.target.value})}
                     />
@@ -145,7 +152,6 @@ export default function SignUp(){
                 
                 <Button 
                     type="submit"
-                    onClick={handleSubmit}
                     className='my-2'
                 >
                     Sign up
