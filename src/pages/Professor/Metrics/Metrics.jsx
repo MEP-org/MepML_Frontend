@@ -2,6 +2,7 @@ import { useEffect, useState, useContext, useRef } from 'react'
 import { useLocation } from 'react-router-dom';
 import { MySession } from '../../../main.jsx';
 import {Tabs} from 'flowbite-react'
+import FadeIn from 'react-fade-in';
 
 import AllMetrics from './AllMetrics'
 import MyMetrics from './MyMetrics'
@@ -16,6 +17,7 @@ export default function Metrics(){
 
     const location = useLocation();
     const tabsRef = useRef(null)
+    const [activeTab, setActiveTab] = useState(0)
     const [metrics, setMetrics] = useState({ my_metrics: [], other_metrics: [] })
     const [loading, setLoading] = useState(true)
 
@@ -36,7 +38,7 @@ export default function Metrics(){
 
     return (
         <>
-            <div className="container pt-12 pb-20">
+            <FadeIn className="container pt-12 pb-20">
                 <div className='font-bold text-5xl mb-2'>
                     Metrics
                 </div>
@@ -49,27 +51,36 @@ export default function Metrics(){
                     style="underline"
                     className="sticky top-0 z-10 bg-white dark:bg-gray-900"
                     ref={tabsRef}
+                    onActiveTabChange={(activeTab) => {
+                        setActiveTab(activeTab)
+                    }}
                 >
                     <Tabs.Item
                         title="All Metrics"
                         // icon={}
                     >
-                        {loading ? <Loading /> : <AllMetrics metrics={metrics} />}
+                        <FadeIn key={activeTab}>
+                            {loading ? <Loading /> : <AllMetrics metrics={metrics} />}
+                        </FadeIn>
                     </Tabs.Item>
                     <Tabs.Item
                         title="My Metrics"
                         // icon={}
                     >
-                        {loading ? <Loading /> : <MyMetrics metrics={metrics} />}
+                        <FadeIn key={activeTab}>
+                            {loading ? <Loading /> : <MyMetrics metrics={metrics} />}
+                        </FadeIn>
                     </Tabs.Item>
                     <Tabs.Item
                         title="Add Metric"
                         // icon={}
                     >
-                        {loading ? <Loading /> : <AddMetric metrics={metrics} />}
+                        <FadeIn key={activeTab}>
+                            {loading ? <Loading /> : <AddMetric metrics={metrics} />}
+                        </FadeIn>
                     </Tabs.Item>
                 </Tabs.Group>
-            </div>
+            </FadeIn>
         </>
     )
 }

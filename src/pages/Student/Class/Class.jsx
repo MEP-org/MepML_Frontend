@@ -1,6 +1,7 @@
 import {useEffect, useState, useContext} from 'react';
 import { MySession } from '../../../main.jsx';
 import {useParams} from 'react-router-dom';
+import FadeIn from 'react-fade-in';
 
 import Banner from './Banner';
 import StudentsTable from './StudentsTable';
@@ -42,9 +43,10 @@ export default function Class() {
     const renderContent = () => {
         return (
             <>
-                <Banner classData={classData} loading={loading}/>
-                <div className="mb-10"/>
-                <StudentsTable classData={classData}/>
+                <FadeIn>
+                    <Banner classData={classData} loading={loading}/>
+                    <StudentsTable classData={classData}/>
+                </FadeIn>
             </>
         )
     }

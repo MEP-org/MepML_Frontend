@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { MySession } from '../../../main.jsx';
 import { Spinner } from "flowbite-react"
+import FadeIn from 'react-fade-in';
 
 import Banner from './Banner';
 import StudentsTable from './StudentsTable';
@@ -39,9 +40,10 @@ export default function ManageClass(){
     const renderContent = () => {
         return (
             <>
+                <FadeIn>
                 <Banner classData={classData} loading={loading} setClassData={setClassData} profId={profId}/>
-                <div className="mb-10"/>
                 <StudentsTable classData={classData} setClassData={setClassData}/>
+                </FadeIn>
             </>
         )
     }

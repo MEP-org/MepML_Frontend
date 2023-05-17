@@ -1,14 +1,17 @@
 import {Tabs, Spinner} from "flowbite-react"
+import { useState } from "react";
 import { BsFileRichtextFill, BsDatabaseDown, BsBarChartFill } from "react-icons/bs";
 import { BiCog } from "react-icons/bi";
 import Description from "./Description"
 import Evaluation from "./Evaluation"
 import Datasets from "./Datasets"
 import Results from "./Results"
+import FadeIn from 'react-fade-in';
 
 export default function ExercisesTab(props){
 
     const {handleChange, exercise, classes, metrics, results, loading, setExercise} = props
+    const [activeTab, setActiveTab] = useState(0)
 
     const renderLoading = () => {
         return (
@@ -52,6 +55,9 @@ export default function ExercisesTab(props){
                 aria-label="Exercise Tabs"
                 style="underline"
                 className="sticky top-0 z-10 bg-white dark:bg-gray-900"
+                onActiveTabChange={(activeTab) => {
+                    setActiveTab(activeTab)
+                }}
             >
                 {tabs.map((tab) => {
                     return (
@@ -60,7 +66,9 @@ export default function ExercisesTab(props){
                             title={tab.title}
                             icon={tab.icon}
                         >
-                            {tab.content}
+                            <FadeIn key={activeTab}>
+                                {tab.content}
+                            </FadeIn>
                         </Tabs.Item>
                     )
                 })}

@@ -17,7 +17,7 @@ export default function Banner({classData}) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-6 mb-10">
                 
                 <div className='drop-shadow-lg h-52 relative border-2 border-gray-200 dark:border-gray-800 rounded-lg'>
                     <img src={classData.image} alt="class img" className="h-full w-full object-cover rounded-lg"/>

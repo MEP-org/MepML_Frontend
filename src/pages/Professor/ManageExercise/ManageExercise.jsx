@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { MySession } from '../../../main.jsx';
+import FadeIn from 'react-fade-in';
 
 import { ProfessorAPI } from "../../../api/ProfessorAPI"
 import Banner from "./Banner"
@@ -65,13 +66,12 @@ export default function ManageExercise(props){
 
     return (
         <>
-            <div className="container pt-12 pb-20">
+            <FadeIn className="container pt-12 pb-20">
                 <Banner 
                     exercise={exercise} 
                     loading={loading} 
                     profId={profId}
                 />
-                <div className="h-8"></div>
                 <ExercisesTab 
                     exercise={exercise} 
                     classes={classes}
@@ -81,7 +81,7 @@ export default function ManageExercise(props){
                     loading={loading} 
                     setExercise={setExercise}
                 />
-            </div>
+            </FadeIn>
             
         </>
     )

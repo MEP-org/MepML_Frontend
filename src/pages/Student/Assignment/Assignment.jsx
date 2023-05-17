@@ -4,6 +4,7 @@ import { MySession } from '../../../main.jsx';
 import AssignmentTab from "./AssignmentTab";
 import { StudentAPI } from '../../../api/StudentAPI';
 import Banner from "./Banner";
+import FadeIn from 'react-fade-in';
 
 
 export default function Assignment(){
@@ -45,10 +46,10 @@ export default function Assignment(){
     
     return (
         <>
-            <div className='w-full container mt-12 mb-20'>
+            <FadeIn className='w-full container mt-12 mb-20'>
                 <Banner exercise={assignment.exercise || {}} submission={submission} loading={loading} />
                 <AssignmentTab assignment={assignment} submission={submission} results={results} loading={loading} tabsRef={tabsRef} />
-            </div>
+            </FadeIn>
         </>
     )
 }

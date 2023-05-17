@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import PublicExerciseTab from "./PublicExerciseTab";
 import Banner from "./Banner";
 import { PublicAPI } from "../../api/PublicAPI";
+import FadeIn from 'react-fade-in';
 
 
 export default function PublicExercise(){
@@ -26,8 +27,10 @@ export default function PublicExercise(){
     return (
         <>
             <div className='w-full container mt-12 mb-20'>
+                <FadeIn>
                 <Banner exercise={publicExercise} loading={loading} />
                 <PublicExerciseTab exercise={publicExercise} loading={loading} />
+                </FadeIn>
             </div>
         </>
     )

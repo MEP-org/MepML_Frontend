@@ -95,7 +95,7 @@ export default function SignUp(){
                             onChange={(e) => setFormData({...formData, userType : e.target.value})}
                         >
                             <option value="student">Student</option>
-                            <option value="teacher">Teacher</option>
+                            <option value="professor">Teacher</option>
                         </Select>
                     </div>
                 </div>
