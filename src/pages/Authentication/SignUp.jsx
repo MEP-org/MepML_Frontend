@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { AuthAPI } from '../../api/AuthAPI.jsx';
 import { Link } from 'react-router-dom'
-import { Card, Label, TextInput, Select, Button, DarkThemeToggle } from 'flowbite-react'
+import { Card, Label, TextInput, Select, Button, DarkThemeToggle, Alert } from 'flowbite-react'
 import FadeIn from 'react-fade-in';
-
+import { useNavigate } from 'react-router-dom';
+import { HiInformationCircle } from 'react-icons/hi';
 
 export default function SignUp(){
+
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         name : "",
@@ -19,8 +22,17 @@ export default function SignUp(){
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
-        setError("aa")
+        AuthAPI.register(formData)
+        .then((data) => {
+            console.log(data)
+            if (data.error){
+                setError(data.error)
+            }
+            else{
+                navigate('/auth/signin')
+            }
+        })
+
     }
     
     return (
@@ -118,6 +130,19 @@ export default function SignUp(){
                         onChange={(e) => setFormData({...formData, password : e.target.value})}
                     />
                 </div>
+
+                {error && 
+                    <Alert
+                        color="failure"
+                        icon={HiInformationCircle}
+                    >
+                        <span>
+                            <span className="font-medium mr-2">Error!</span>
+                            {error}
+                        </span>
+                    </Alert>
+                }
+                
                 <Button 
                     type="submit"
                     onClick={handleSubmit}
@@ -127,7 +152,6 @@ export default function SignUp(){
                 </Button>
                 </form>
 
-                {error && <p className="text-red-500 text-center">{error}</p>}
                 
                 <span className="text-sm">
                     Already have an account?

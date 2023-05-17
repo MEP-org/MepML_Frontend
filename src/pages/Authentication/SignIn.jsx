@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, Label, TextInput, Checkbox, Button, DarkThemeToggle } from 'flowbite-react'
 import { AuthAPI } from '../../api/AuthAPI.jsx';
@@ -9,6 +9,15 @@ export default function SignIn(){
 
     const navigate = useNavigate();
     const { session, setSession } = useContext(MySession);
+    const [ new_session, setNewSession ] = useState({
+        user : {
+            name : "",
+            email : "",
+            id : ""
+        },
+        type : "",
+        token : ""
+    })
 
     const [formData, setFormData] = useState({
         email : "",
@@ -18,21 +27,47 @@ export default function SignIn(){
 
     const [error, setError] = useState("")
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const info = {
-            user : { name : "Leonardo Almeida" , email : "email@email.com", id : 1 },
-            type : formData.remember ? "professor" : "student",
-            token : "token"
-        }
-        setSession(info)
-
-        // if (formData.remember) localStorage.setItem("session", JSON.stringify(info))
-        localStorage.setItem("session", JSON.stringify(info))
-
-        navigate(`/${info.type}/`)
+        AuthAPI.login(formData)
+        .then((data) => {
+            if (data === undefined){
+                setError("Invalid credentials")
+            }
+            else{
+                setError("")
+                const info = {
+                    user : { 
+                        name : data.name, 
+                        email : data.email,
+                        id : data.id
+                    },
+                    type : data.user_type,
+                    token : data.token
+                }
+                setNewSession(info)
+                setSession(info)   
+            }
+        })
     }
+
+    useEffect(() => {
+        if (new_session.token === ""){
+            return
+        }
+        if (formData.remember){
+            document.cookie = `MEPMLsession=${JSON.stringify(new_session)};max-age=604800;path=/;samesite=strict`
+        }
+        navigate(`/${new_session.type}/`)
+    }, [new_session])
+
+    useEffect(() => {
+        if (session.token !== null){
+            navigate(`/${session.type}/`)
+        }
+    }, [])
 
     return (
         <>

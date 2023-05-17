@@ -4,8 +4,6 @@ import {Navbar, Dropdown, Avatar, DarkThemeToggle} from 'flowbite-react'
 import {FaSignOutAlt} from 'react-icons/fa'
 import Particles from "react-tsparticles";
 import {loadFull} from "tsparticles";
-import { auth } from '../utils/firebase';
-import { signOut } from "firebase/auth";
 
 import options from './particles.json'
 import logo from '../assets/logo.svg'
@@ -29,15 +27,13 @@ export default function MyNavbar(){
 
 
     const handleLogout = () => {               
-        // signOut(auth).then(() => {
-            setSession({
-                user : { name : "null" , email : null, id : null },
-                type : null,
-                token : null
-            })
-            localStorage.removeItem("session")
-            navigate("/");
-        // })
+        setSession({
+            user : { name : "null" , email : null, id : null },
+            type : null,
+            token : null
+        })
+        document.cookie = "MEPMLsession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;samesite=strict"
+        navigate("/");
     }
 
     const nameInitials = () => {

@@ -63,7 +63,7 @@ export default function Description(props) {
                         <div className='lg:text-right'>
                             <span className="inline-block text-xs font-light pr-1">Nº attempts:</span>
                             <span className="inline-block text-xs font-bold">
-                                {exercise.limit_of_attempts}
+                                {exercise.limit_of_attempts? exercise.limit_of_attempts : 'Unlimited'}
                             </span>
                         </div>
 
