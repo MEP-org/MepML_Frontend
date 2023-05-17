@@ -15,6 +15,7 @@ export default function AddMetric() {
     const navigate = useNavigate();
     const [showValidationModal, setShowValidationModal] = useState(false)
     const [showConfimationModal, setShowConfimationModal] = useState(false)
+    const [showModalError, setShowModalError] = useState(false)
 
     const [codeString, setCodeString] = useState('');
     const [metric, setMetric] = useState({
@@ -38,8 +39,6 @@ export default function AddMetric() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(metric)
-
         if (metric.name === "" || metric.name === undefined || metric.description === "" || metric.description === undefined || metric.file === undefined) {
             setShowValidationModal(true);
             return;
@@ -55,8 +54,23 @@ export default function AddMetric() {
             metric_file: metric.file
         }
 
+        let success = false;
         ProfessorAPI.addMetric(session.user.id, payload)
-        .finally(() => {navigate('/professor/metrics#my-metrics')})
+        .then((res) => {
+            if (res.status === 201) {
+                success = true;
+            }
+        })
+        .catch((err) => {
+            setShowModalError(true);
+        })
+        .finally(() => {
+            setShowConfimationModal(false);
+
+            if (success) {
+                navigate('/professor/metrics#my-metrics')
+            }
+        })
     }
 
 
@@ -172,6 +186,33 @@ export default function AddMetric() {
                             </Button>
                         </div>
                     </div>
+                </Modal.Body>
+            </Modal>
+
+
+            {/* Error Modal */}
+            <Modal
+                show={showModalError}
+                size="md"
+                popup={true}
+                onClose={() => {setShowModalError(false)} }
+            >
+                <Modal.Header />
+                <Modal.Body>
+                <div className="text-center">
+                    <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                    <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                        Error submitting your metric. Make sure your function follows the format:
+                        <code className="block text-sm font-mono bg-gray-100 dark:bg-gray-800 dark:text-gray-400 p-2 rounded-lg mt-2">
+                            {"def score(true_labels: np.ndarray, pred_labels: np.ndarray) -> float:"}
+                        </code>
+                    </h3>
+                    <div className="flex justify-center gap-4">
+                    <Button onClick={() => {setShowModalError(false)}} color="gray">
+                        Cancel
+                    </Button>
+                    </div>
+                </div>
                 </Modal.Body>
             </Modal>
         </>
