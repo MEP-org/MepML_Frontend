@@ -1,6 +1,10 @@
 import { Table } from 'flowbite-react';
+import { HiOutlineDocumentDownload } from 'react-icons/hi'
+import { API_URL } from '../../../api/env';
 
 export default function Results({exercise, results}){
+
+    console.log(results)
 
     return (
         <>
@@ -9,7 +13,9 @@ export default function Results({exercise, results}){
 
                 <Table hoverable={true}>
                     <Table.Head>
-                        <Table.HeadCell>Nmec</Table.HeadCell>
+                        <Table.HeadCell>
+                            <span className="pl-10">nmec</span>
+                        </Table.HeadCell>
                         <Table.HeadCell>Name</Table.HeadCell>
 
                         {exercise.metrics.map((m) => 
@@ -25,11 +31,15 @@ export default function Results({exercise, results}){
                         {results.map((res) => {
                             let student = res.student;
                             let studentResults = res.results;
+                            let studentCode = res.code;
 
                             if (studentResults.length === 0) {
                                 return (
                                     <Table.Row key={student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{student.user.nmec}</Table.Cell>
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                            <HiOutlineDocumentDownload className='inline-block mr-5 text-gray-400 cursor-not-allowed' size={20} onClick={() => {window.open(API_URL + studentCode.code_submission)}} />
+                                            {student.user.nmec}
+                                        </Table.Cell>
                                         <Table.Cell>{student.user.name}</Table.Cell>
 
                                         {exercise.metrics.map((r, i) => 
@@ -42,7 +52,11 @@ export default function Results({exercise, results}){
 
                             return (
                                 <Table.Row key={student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{student.user.nmec}</Table.Cell>
+                                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                        <HiOutlineDocumentDownload className='inline-block mr-5 hover:text-green-500 hover:cursor-pointer' size={20} onClick={() => {window.open(API_URL + studentCode.code_submission)}} />
+                                        {student.user.nmec}
+                                    </Table.Cell>
+                                    
                                     <Table.Cell>{student.user.name}</Table.Cell>
 
                                     {studentResults.map((r, i) => 

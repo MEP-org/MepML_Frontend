@@ -79,7 +79,7 @@ export default function Evaluation(props){
                                     disabledText: "text-gray-300 dark:text-gray-400",
                                 },
                                 defaultDate: exercise.deadline? new Date(exercise.deadline.split(' ')[0].split('/').reverse().join('-')) : new Date(),
-                                minDate: new Date(),
+                                minDate: new Date().setDate(new Date().getDate() - 1)
                             }}
                         />
                     }
