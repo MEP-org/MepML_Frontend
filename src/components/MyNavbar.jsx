@@ -18,6 +18,12 @@ export default function MyNavbar(){
     const { session, setSession } = useContext(MySession);
 
     useEffect(() => {
+        let user_session = document.cookie.split('; ').find(row => row.startsWith('MEPMLsession=')) || null
+        user_session = user_session ? JSON.parse(user_session.split('=')[1]) : null
+        if(user_session !== null){
+            document.cookie = `MEPMLsession=${JSON.stringify(user_session)};max-age=604800;path=/;samesite=strict`
+        }
+
         const path = location.pathname.split('/')
         if(session.type !== path[1]){
             navigate("/auth/signin")
