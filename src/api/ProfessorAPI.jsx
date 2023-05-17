@@ -219,7 +219,7 @@ export const ProfessorAPI = {
             console.log("Error while creating metric");
         });
 
-        return response.data;
+        return response;
     },
 
 

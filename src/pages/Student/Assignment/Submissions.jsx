@@ -8,6 +8,7 @@ import PreviousSubmissions from "./PreviousSubmissions";
 import { BsBarChartFill, BsCodeSlash } from "react-icons/bs";
 import { BiHelpCircle } from "react-icons/bi"
 import { AiFillCloseCircle } from "react-icons/ai";
+import { HiOutlineExclamationCircle, HiInformationCircle } from "react-icons/hi";
 
 export default function Submissions(props){
 
@@ -19,6 +20,33 @@ export default function Submissions(props){
     const [model, setModel] = useState();
     const [showModal, setShowModal] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+    const [showModalError, setShowModalError] = useState(false);
+
+
+    const ableToSubmit = () => {
+
+        if (submission && (Object.keys(assignment).length != 0)) {
+
+            if (!assignment.exercise.limit_of_attempts) {
+                return true;
+            }
+
+            if (assignment.exercise.limit_of_attempts <= submission.quantity_of_submissions) {
+                return false;
+            }
+        }
+
+        if (Object.keys(assignment).length != 0) {
+
+            const deadline = new Date(assignment.exercise.deadline);
+            const today = new Date();
+            if (deadline < today) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 
     const handleFileUpload = (event, type) => {
@@ -45,17 +73,26 @@ export default function Submissions(props){
             result_submission: results,
             code_submission: model
         }
-
-        //clear files
-        setResults();
-        setModel();
         
+        let success = false;
         StudentAPI.postSubmission(session.user.id, id, payload)
-            .then(() => {})
+            .then((res) => {
+                if (res.status === 201) {
+                    success = true;
+                }
+            })
+            .catch((err) => {
+                setShowModalError(true);
+            })
             .finally(() => {
                 setShowModal(false);
-                navigate(`/student/assignments/${id}/#results`);
-            })        
+                
+                if (success) {
+                    setResults();
+                    setModel();
+                    navigate(`/student/assignments/${id}/#results`);
+                }
+            })
     }
     
 
@@ -143,47 +180,120 @@ export default function Submissions(props){
                     </div>
                 </div>
 
-
-                <div className="flex justify-end mt-2">
-                    <Button
-                        disabled={submission && (Object.keys(assignment).length != 0) ? assignment.exercise.limit_of_attempts <= submission.quantity_of_submissions : false}
-                        onClick={() => {setShowModal(true); setShowAlert(false)}}>
-                        Submit my answer
-                    </Button>
-
-                    <Modal
-                        show={showModal}
-                        size="md"
-                        popup={true}
-                        onClose={() => {setShowModal(false); setShowAlert(false)} }
+                
+                { !ableToSubmit() && 
+                    <Alert
+                        color="failure"
+                        icon={HiInformationCircle}
+                        className="mt-4"
                     >
-                        <Modal.Header />
-                        <Modal.Body>
-                            <div className="text-center">
-                                <p className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                    Are you sure you want to submit your answer?
-                                </p>
-                                <div className="flex justify-center gap-4">
-                                    <Button onClick={() => handleSubmit()} color="success">Yes, I'm sure</Button>
-                                    <Button onClick={() => {setShowModal(false); setShowAlert(false)}} color="gray">
-                                            No, cancel
-                                    </Button>
-                                </div>
-                            </div>
+                        <span>
+                        <span className="font-medium">
+                            Warning!
+                        </span>
+                        {' '}You cannot submit your results after the deadline or after you have reached the maximum number of attempts.
+                        </span>
+                    </Alert>
+                }
 
-                            <div>
-                                { showAlert && (
-                                    <Alert color="failure" className="mt-4">
-                                        <span>
-                                            You need to upload your results and model to submit your answer.
-                                        </span>
-                                    </Alert>
-                                )}
-                            </div>
 
-                        </Modal.Body>
-                    </Modal>
-                </div>
+                { ableToSubmit() &&
+                    <div className="flex justify-end mt-2">
+                        <Button onClick={() => {setShowModal(true); setShowAlert(false)}}>
+                            Submit my answer
+                        </Button>
+                    </div>
+                }
+
+
+                <Modal
+                    show={showModal}
+                    size="md"
+                    popup={true}
+                    onClose={() => {setShowModal(false); setShowAlert(false)} }
+                >
+                    <Modal.Header />
+                    <Modal.Body>
+                        <div className="text-center">
+                            <p className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                Are you sure you want to submit your answer?
+                            </p>
+                            <div className="flex justify-center gap-4">
+                                <Button onClick={() => handleSubmit()} color="success">Yes, I'm sure</Button>
+                                <Button onClick={() => {setShowModal(false); setShowAlert(false)}} color="gray">
+                                        No, cancel
+                                </Button>
+                            </div>
+                        </div>
+
+                        <div>
+                            { showAlert && (
+                                <Alert color="failure" className="mt-4">
+                                    <span>
+                                        You need to upload your results and model to submit your answer.
+                                    </span>
+                                </Alert>
+                            )}
+                        </div>
+
+                    </Modal.Body>
+                </Modal>
+
+                <Modal
+                    show={showModal}
+                    size="md"
+                    popup={true}
+                    onClose={() => {setShowModal(false); setShowAlert(false)} }
+                >
+                    <Modal.Header />
+                    <Modal.Body>
+                        <div className="text-center">
+                            <p className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                Are you sure you want to submit your answer?
+                            </p>
+                            <div className="flex justify-center gap-4">
+                                <Button onClick={() => handleSubmit()} color="success">Yes, I'm sure</Button>
+                                <Button onClick={() => {setShowModal(false); setShowAlert(false)}} color="gray">
+                                        No, cancel
+                                </Button>
+                            </div>
+                        </div>
+
+                        <div>
+                            { showAlert && (
+                                <Alert color="failure" className="mt-4">
+                                    <span>
+                                        You need to upload your results and model to submit your answer.
+                                    </span>
+                                </Alert>
+                            )}
+                        </div>
+
+                    </Modal.Body>
+                </Modal>
+
+                <Modal
+                    show={showModalError}
+                    size="md"
+                    popup={true}
+                    onClose={() => {setShowModalError(false)} }
+                >
+                    <Modal.Header />
+                    <Modal.Body>
+                    <div className="text-center">
+                        <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                            Error submitting your results! Verify that your results file is a CSV file without header.
+                        </h3>
+                        <div className="flex justify-center gap-4">
+                        <Button onClick={() => {setShowModalError(false)}} color="gray">
+                            Cancel
+                        </Button>
+                        </div>
+                    </div>
+                    </Modal.Body>
+                </Modal>
+
 
                 { submission && (
                     <PreviousSubmissions submission={submission} />

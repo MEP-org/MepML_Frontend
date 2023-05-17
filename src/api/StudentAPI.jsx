@@ -67,15 +67,15 @@ export const StudentAPI = {
 
     postSubmission: async function(studentId, exerciseId, payload) {
 
-        await axios.post(`${API_URL}/students/${studentId}/assignments/${exerciseId}`, payload, {
+        const response = await axios.post(`${API_URL}/students/${studentId}/assignments/${exerciseId}`, payload, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        .then((response) => {
-            console.log(response.data);
-        }).catch((error) => {
-            console.log("Error while posting submission: ");
+        .catch((error) => {
+            console.log("Error while posting submission");
         });
+
+        return response;
     }
 }
