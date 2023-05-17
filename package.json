@@ -12,7 +12,6 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@uiw/react-md-editor": "^3.20.5",
     "axios": "^1.4.0",
-    "firebase": "^9.21.0",
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
     "localforage": "^1.10.0",
