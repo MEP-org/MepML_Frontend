@@ -4,8 +4,6 @@ import { API_URL } from '../../../api/env';
 
 export default function Results({exercise, results}){
 
-    console.log(results)
-
     return (
         <>
             <div className='mb-20'>

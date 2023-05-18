@@ -75,7 +75,6 @@ export default function Banner({profId, classData, setClassData, loading}) {
                 const data_ = reader.result.split('\n').map((line) => line.split(/[\t,]/))
                 const n_mec_col = data_[0].indexOf("NMecAluno")
                 const n_mecs = data_.map((line) => line[n_mec_col])
-                console.log(n_mecs)
                 addNmecs(n_mecs)       
             };
         }

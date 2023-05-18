@@ -31,7 +31,6 @@ export default function SignUp(){
 
         AuthAPI.register(formData)
         .then((data) => {
-            console.log(data)
             if (data.error){
                 setError(data.error)
             }

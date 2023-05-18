@@ -122,13 +122,6 @@ export default function SignIn(){
                         Remember me
                     </Label>
                 </div>
-                <Button 
-                    type="submit"
-                    className='mb-2'
-                >
-                    Sign in
-                </Button>
-                </form>
 
                 {error && 
                     <Alert
@@ -142,6 +135,15 @@ export default function SignIn(){
                         </span>
                     </Alert>
                 }
+                
+                <Button 
+                    type="submit"
+                    className='mb-2'
+                >
+                    Sign in
+                </Button>
+                </form>
+
                 
                 <span className="text-sm">
                     Don't have an account?
