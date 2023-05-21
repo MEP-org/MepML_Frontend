@@ -10,7 +10,7 @@ export default function ExerciseCard(props) {
     return ( 
         <>
 
-            <Card className='mb-4 h-64 border-l-8 !border-l-blue-500 hover:scale-105 transition-all duration-200 ease-in-out' onClick={() => {navigate("/professor/exercises/" + exercise.id)}}>
+            <Card className='mb-4 h-72 border-l-8 !border-l-blue-500 hover:scale-105 transition-all duration-200 ease-in-out' onClick={() => {navigate("/professor/exercises/" + exercise.id)}}>
                 <div className='grid grid-cols-12'>
                     <div className='lg:col-span-10 col-span-12 mr-4'>
                         <p className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">

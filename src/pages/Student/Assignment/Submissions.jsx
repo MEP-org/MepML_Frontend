@@ -3,10 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { StudentAPI } from '../../../api/StudentAPI';
 import { MySession } from '../../../main.jsx';
 
-import { Spinner, Button, Modal, Alert, Tooltip } from "flowbite-react";
+import { Spinner, Button, Modal, Alert } from "flowbite-react";
 import PreviousSubmissions from "./PreviousSubmissions";
 import { BsBarChartFill, BsCodeSlash } from "react-icons/bs";
-import { BiHelpCircle } from "react-icons/bi"
 import { AiFillCloseCircle } from "react-icons/ai";
 import { HiOutlineExclamationCircle, HiInformationCircle } from "react-icons/hi";
 
@@ -110,22 +109,25 @@ export default function Submissions(props){
             <>
                 <p className='mb-5 font-semibold text-2xl'>Submission</p>
 
+                <Alert
+                    color="info"
+                    rounded={true}
+                    className="mb-6"
+                    >
+                    <p className="font-bold">Important!</p>
+                    <p>The results file must be a CSV file without header</p>
+                </Alert>
+
                 <div className="grid lg:grid-cols-2 gap-4">
                     <div className="flex items-center justify-center w-full relative">
-                        <label htmlFor="dropzone-results" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <label htmlFor="dropzone-results" className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <BsBarChartFill className="w-12 h-12 text-gray-400" />
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> your results here</p>
                                 <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                                 <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
-                                <Tooltip
-                                    content="The results file must be a CSV file without header"
-                                    placement="bottom"
-                                >
-                                    <BiHelpCircle size={20} className="text-gray-500 dark:text-gray-400" />
-                                </Tooltip>
                             </div>
-                            <input id="dropzone-results" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "results")} />
+                            <input id="dropzone-results" type="file" accept=".csv,.txt" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={(e) => handleFileUpload(e, "results")} />
                         </label>
     
                         { results && (
@@ -149,14 +151,14 @@ export default function Submissions(props){
                     </div> 
     
                     <div className="flex items-center justify-center w-full relative">
-                        <label htmlFor="dropzone-model" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <label htmlFor="dropzone-model" className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <BsCodeSlash className="w-12 h-12 text-gray-400" />
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> your model here</p>
                                 <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">Python file (.ipynb, .py)</p>
                             </div>
-                            <input id="dropzone-model" type="file" accept=".ipynb,.py" className="hidden" onChange={(e) => handleFileUpload(e, "model")} />
+                            <input id="dropzone-model" type="file" accept=".ipynb,.py" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={(e) => handleFileUpload(e, "model")} />
                         </label>
     
                         { model && (

@@ -54,7 +54,7 @@ export default function Results(props){
         }
         return (
             <>
-                <FadeIn className='grid grid-cols-2 gap-6'>
+                <FadeIn className='grid lg:grid-cols-2 gap-6'>
                     {filteredExercises.map((exercise) => {
                         return (
                             <ExerciseCard exercise={exercise} key={exercise.id} />

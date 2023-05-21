@@ -70,14 +70,14 @@ export default function Datasets(props){
             <div className="grid lg:grid-cols-2 gap-4">
 
                 <div className="flex items-center justify-center w-full relative">
-                    <label htmlFor="dropzone-train" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <label htmlFor="dropzone-train" className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <BsBarChartFill className="w-12 h-12 text-gray-400" />
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> Training dataser here</p>
                             <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                             <p className="text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
                         </div>
-                        <input id="dropzone-train" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "training")} />
+                        <input id="dropzone-train" type="file" accept=".csv,.txt" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={(e) => handleFileUpload(e, "training")} />
                     </label>
 
                     {exercise.dataset.training && (
@@ -101,14 +101,14 @@ export default function Datasets(props){
                 </div> 
 
                 <div className="flex items-center justify-center w-full relative">
-                    <label htmlFor="dropzone-test" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <label htmlFor="dropzone-test" className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <MdAssignment className="w-12 h-12 text-gray-400" />
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> Test dataset here</p>
                             <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                             <p className="text-xs text-gray-500 dark:text-gray-400">CSV file (.csv)</p>
                         </div>
-                        <input id="dropzone-test" type="file" accept=".csv,.txt" className="hidden" onChange={(e) => handleFileUpload(e, "test")} />
+                        <input id="dropzone-test" type="file" accept=".csv,.txt" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={(e) => handleFileUpload(e, "test")} />
                     </label>
 
                     {exercise.dataset.test && (
