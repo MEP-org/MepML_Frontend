@@ -73,6 +73,12 @@ export default function MyNavbar(){
                 >
                     Exercises
                 </Navbar.Link>
+                <Navbar.Link className='text-base cursor-pointer' 
+                    active={active === 'metrics'}
+                    onClick={() => handleNav('metrics')}
+                >
+                    Metrics
+                </Navbar.Link>
             </>
         )
     }

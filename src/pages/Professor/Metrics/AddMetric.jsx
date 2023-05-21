@@ -3,7 +3,7 @@ import { MySession } from '../../../main.jsx';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark as DarkTheme, oneLight as LightTheme } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useThemeMode, Label, TextInput, Textarea, Button, Tooltip, Modal } from "flowbite-react";
+import { useThemeMode, Label, TextInput, Textarea, Button, Modal, Alert } from "flowbite-react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { BiHelpCircle } from "react-icons/bi"
@@ -89,20 +89,13 @@ export default function AddMetric() {
                     </div>
 
                     <div className="flex items-center justify-center w-full relative mt-5 lg:mt-0">
-                        <label htmlFor="metric" className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <label htmlFor="metric" className="relative flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> Metric here</p>
+                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Drop</span> your Metric here</p>
                                 <p className="mb-2 text-xs text-gray-500 dark:text-gray-400"><span className="font-light">Or click</span></p>
                                 <p className="text-xs mb-4 text-gray-500 dark:text-gray-400">Python file (.py)</p>
-
-                                <Tooltip
-                                    content="def score(true_labels: np.ndarray, pred_labels: np.ndarray) -> float:"
-                                    placement="bottom"
-                                >
-                                    <BiHelpCircle size={20} className="text-gray-500 dark:text-gray-400" />
-                                </Tooltip>
                             </div>
-                            <input id="metric" type="file" accept=".py" className="hidden" onChange={handleFileUpload} />
+                            <input id="metric" type="file" accept=".py" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={handleFileUpload} />
                         </label>
 
                         {metric.file && (
@@ -124,6 +117,24 @@ export default function AddMetric() {
                             </div>
                         )}
                     </div>
+                </div>
+
+                <div>
+                    { codeString == "" &&
+                        <Alert
+                            color="info"
+                            rounded={true}
+                            className="mb-6"
+                            >
+                            <p className="font-bold">Important!</p>
+                            <p>The metric function must have the following definition:</p>
+                            
+                            {/* python code snippet */}
+                            <code className="block mt-2 text-sm font-mono text-gray-500 dark:text-gray-400">
+                                {"def score(true_labels: np.ndarray, pred_labels: np.ndarray) -> float:"}
+                            </code>
+                        </Alert>
+                    }
                 </div>
 
                 {codeString &&

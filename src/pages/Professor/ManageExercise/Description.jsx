@@ -33,6 +33,7 @@ export default function Description(props){
                         placeholder="Title"
                         className="w-full mt-2"
                         helperText="(max 50 characters)"
+                        maxLength={50}
                     />
                 </div>
 
@@ -81,6 +82,7 @@ export default function Description(props){
                     placeholder="Short description"
                     className="w-full mt-2"
                     helperText="(max 100 characters)"
+                    maxLength={100}
                 />
             </div>
 
