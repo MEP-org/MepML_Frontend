@@ -59,8 +59,8 @@ export default function StudentsTable({classData, setClassData}){
 
     return (
         <>
-                <div className='grid grid-cols-6 gap-6 mb-8'>
-                    <div className='col-span-4'>
+                <div className='grid lg:grid-cols-6 gap-6 mb-8'>
+                    <div className='lg:col-span-4'>
                         <CreatableSelect
                             isMulti
                             classNames={customClassNames}
@@ -87,7 +87,7 @@ export default function StudentsTable({classData, setClassData}){
                 </div>
 
             {classData.students.length === 0 &&
-                <div className="font-bold text-4xl text-center">
+                <div className="text-2xl text-center">
                     No students yet
                 </div>
             }

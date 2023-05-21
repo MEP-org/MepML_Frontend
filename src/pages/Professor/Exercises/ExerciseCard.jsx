@@ -12,7 +12,7 @@ export default function ExerciseCard(props) {
 
             <Card className='mb-4 h-72 border-l-8 !border-l-blue-500 hover:scale-105 transition-all duration-200 ease-in-out' onClick={() => {navigate("/professor/exercises/" + exercise.id)}}>
                 <div className='grid grid-cols-12'>
-                    <div className='lg:col-span-10 col-span-12 mr-4'>
+                    <div className='lg:col-span-9 col-span-12 mr-4'>
                         <p className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                             {exercise.title}
                         </p>
@@ -22,7 +22,7 @@ export default function ExerciseCard(props) {
                         </p>
                     </div>
 
-                    <div className='lg:col-span-2 col-span-10'>
+                    <div className='lg:col-span-3 col-span-10'>
                         <div className="text-gray-700 dark:text-gray-400 lg:text-right"> 
                             <span id="badge-dismiss-green" className="inline-flex items-center px-2 py-1 text-sm font-medium text-green-800 bg-green-100 rounded dark:bg-green-900 dark:text-green-300">
                                 <FaGlobeAmericas className='inline-block mr-2' size={12}  />
@@ -40,7 +40,7 @@ export default function ExerciseCard(props) {
                         <div className="text-gray-700 dark:text-gray-400 lg:text-right">
                             <span className="inline-block text-xs font-light pr-1">Nº attempts</span>
                             <span className="inline-block text-xs font-bold">
-                                {exercise.limit_of_attempts}
+                                {exercise.limit_of_attempts? exercise.limit_of_attempts : '∞'}
                             </span>
                         </div>
 
