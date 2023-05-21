@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AuthAPI } from '../../api/AuthAPI.jsx';
 import { Link } from 'react-router-dom'
-import { Card, Label, TextInput, Select, Button, DarkThemeToggle, Alert } from 'flowbite-react'
+import { Card, Label, TextInput, Select, Button, DarkThemeToggle, Alert, Spinner } from 'flowbite-react'
 import FadeIn from 'react-fade-in';
 import { useNavigate } from 'react-router-dom';
 import { HiInformationCircle } from 'react-icons/hi';
@@ -19,18 +19,22 @@ export default function SignUp(){
     })
 
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
 
         //validate password
         if (formData.password.length < 8){
             setError("Password must have at least 8 characters")
+            setLoading(false)
             return
         }
 
         AuthAPI.register(formData)
         .then((data) => {
+            setLoading(false)
             if (data.error){
                 setError(data.error)
             }
@@ -149,11 +153,8 @@ export default function SignUp(){
                     </Alert>
                 }
                 
-                <Button 
-                    type="submit"
-                    className='my-2'
-                >
-                    Sign up
+                <Button type="submit" className='my-2'>
+                    {loading? <Spinner size={'sm'} /> : "Sign Up" }
                 </Button>
                 </form>
 
