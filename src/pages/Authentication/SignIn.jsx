@@ -73,7 +73,7 @@ export default function SignIn(){
     return (
         <>
             <div className='absolute top-0 left-0 flex center w-full h-screen'>
-            <Card size='xl' className='w-1/3'>
+            <Card size='xl' className='md:w-1/2 lg:w-1/3 w-full'>
                 <FadeIn>
                 <div className="mb-4 flex">
                     <h1 className="text-3xl font-extrabold">Sign in</h1>
