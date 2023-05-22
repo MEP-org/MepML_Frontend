@@ -9,7 +9,7 @@ export const ProfessorAPI = {
         .catch((error) => {
             console.log("Error while fetching classes");
         });
-        if (response.data.image === undefined) {
+        if (!response.data.image) {
             response.data.image = `https://flowbite.com/docs/images/carousel/carousel-1.svg`;
         }
 
