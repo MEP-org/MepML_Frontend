@@ -34,6 +34,13 @@ export default function Banner({profId, classData, setClassData, loading}) {
         input.accept = ".png, .jpg, .jpeg";
         input.onchange = (e) => {
             const file = e.target.files[0];
+            if (
+                !/\.(jpe?g|png)$/i.test(file.name) || file.size > 1024 * 1024 * 5
+            ){
+                alert("Invalid image file or size > 5MB");
+                return;
+            }
+
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {

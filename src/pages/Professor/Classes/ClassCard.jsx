@@ -16,7 +16,7 @@ export default function ClassCard(props){
         if (image === null) {
             return 'https://flowbite.com/docs/images/carousel/carousel-1.svg';
         } else {
-            return API_URL + image;
+            return image;
         }
     }
 

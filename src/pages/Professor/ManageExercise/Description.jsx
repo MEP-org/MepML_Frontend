@@ -59,7 +59,7 @@ export default function Description(props){
                         <Checkbox 
                             id="visible" 
                             name="visible" 
-                            value={exercise.visibility} 
+                            checked={exercise.visibility} 
                             onChange={() => handleChange({target: {name: "visibility", value: !exercise.visibility}})}
                         />
                         <Tooltip

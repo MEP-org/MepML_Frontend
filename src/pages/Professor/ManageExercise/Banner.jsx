@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal, Spinner } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { FaTrash } from 'react-icons/fa'
 import { HiOutlineExclamationCircle } from "react-icons/hi";
@@ -14,6 +14,7 @@ export default function Bannner(props) {
     const [showValidationModal, setShowValidationModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [showConfimationModal, setShowConfimationModal] = useState(false)
+    const [loadingSubmit, setLoadingSubmit] = useState(false);
 
     const fieldsNames = {
         title: "Title",
@@ -61,13 +62,21 @@ export default function Bannner(props) {
 
 
     const handleConfirm = () => {
+        setLoadingSubmit(true);
+
         if (exercise.id) {
             ProfessorAPI.updateExercise(profId, exercise.id, exercise)
-            .finally(() => { navigate('/professor/exercises') })
+            .finally(() => {
+                setLoadingSubmit(false);
+                navigate('/professor/exercises')
+            })
         }
         else {
             ProfessorAPI.createExercise(profId, exercise)
-            .finally(() => { navigate('/professor/exercises') })
+            .finally(() => {
+                setLoadingSubmit(false);
+                navigate('/professor/exercises')
+            })
         }
     }
 
@@ -185,7 +194,7 @@ export default function Bannner(props) {
 
                         <div className="flex justify-center gap-4">
                             <Button color="success" onClick={handleConfirm}>
-                                Yes, I'm sure
+                                {loadingSubmit? <Spinner size={'sm'} /> : "Yes, I'm sure" }
                             </Button>
                             <Button color="gray" onClick={() => setShowConfimationModal(false)}>
                                 No, cancel

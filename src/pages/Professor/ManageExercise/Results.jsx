@@ -35,7 +35,7 @@ export default function Results({exercise, results}){
                                 return (
                                     <Table.Row key={student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                            <HiOutlineDocumentDownload className='inline-block mr-5 text-gray-400 cursor-not-allowed' size={20} onClick={() => {window.open(API_URL + studentCode.code_submission)}} />
+                                            <HiOutlineDocumentDownload className='inline-block mr-5 text-gray-400 cursor-not-allowed' size={20} onClick={() => {window.open(studentCode.code_submission)}} />
                                             {student.user.nmec}
                                         </Table.Cell>
                                         <Table.Cell>{student.user.name}</Table.Cell>
@@ -51,7 +51,7 @@ export default function Results({exercise, results}){
                             return (
                                 <Table.Row key={student.user.nmec} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                        <HiOutlineDocumentDownload className='inline-block mr-5 hover:text-green-500 hover:cursor-pointer' size={20} onClick={() => {window.open(API_URL + studentCode.code_submission)}} />
+                                        <HiOutlineDocumentDownload className='inline-block mr-5 hover:text-green-500 hover:cursor-pointer' size={20} onClick={() => {window.open(studentCode.code_submission)}} />
                                         {student.user.nmec}
                                     </Table.Cell>
                                     

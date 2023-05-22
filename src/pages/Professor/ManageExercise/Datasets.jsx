@@ -13,6 +13,17 @@ export default function Datasets(props){
 
     const handleFileUpload = (event, type) => {
         const file = event.target.files[0]
+        // verify file type -> csv and for type="training" -> 50 mb and test -> 1 mb
+        if( 
+            !/\.(csv|txt)$/i.test(file.name) || 
+            (type === "training" && file.size > 50*1024*1024) ||
+            (type === "test" && file.size > 5*1024*1024)
+        ){
+            alert("Invalid file type or size, must be csv or txt and less than 50 mb for training and 5 mb for test")
+            return
+        }
+
+
         handleChange({target: {name: "dataset", value: {...exercise.dataset, [type]: file}}})
         
         const reader = new FileReader()
@@ -132,7 +143,6 @@ export default function Datasets(props){
                 </div>
 
                 <div>
-                    
                     {renderTable(training)}
                 </div>
                 

@@ -20,6 +20,7 @@ export default function Submissions(props){
     const [showModal, setShowModal] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [showModalError, setShowModalError] = useState(false);
+    const [loadingSubmit, setLoadingSubmit] = useState(false);
 
 
     const ableToSubmit = () => {
@@ -50,6 +51,21 @@ export default function Submissions(props){
 
     const handleFileUpload = (event, type) => {
         const file = event.target.files[0];
+        if (
+            type === "results" && 
+            (!/\.(csv|txt)$/i.test(file.name) || file.size > 0.5 * 1024 * 1024)
+        ) {
+            alert("Invalid file type or size. Please upload a CSV file without header and with a maximum size of 500KB");
+            return;
+        }
+        if (
+            type !== "results" &&
+            (!/\.(py|ipynb)$/i.test(file.name) || file.size > 1 * 1024 * 1024)
+        ) {
+            alert("Invalid file type or size. Please upload a Python file or a Jupyter Notebook with a maximum size of 1MB");
+            return;
+        }
+
         type === "results" ? setResults(file) : setModel(file);
     }
 
@@ -74,18 +90,20 @@ export default function Submissions(props){
         }
         
         let success = false;
+        setLoadingSubmit(true);
         StudentAPI.postSubmission(session.user.id, id, payload)
             .then((res) => {
                 if (res.status === 201) {
                     success = true;
+                    
                 }
             })
             .catch((err) => {
                 setShowModalError(true);
             })
             .finally(() => {
+                setLoadingSubmit(false);
                 setShowModal(false);
-                
                 if (success) {
                     setResults();
                     setModel();
@@ -181,6 +199,7 @@ export default function Submissions(props){
                         )}
                     </div>
                 </div>
+                
 
                 
                 { !ableToSubmit() && 
@@ -207,7 +226,6 @@ export default function Submissions(props){
                     </div>
                 }
 
-
                 <Modal
                     show={showModal}
                     size="md"
@@ -221,40 +239,9 @@ export default function Submissions(props){
                                 Are you sure you want to submit your answer?
                             </p>
                             <div className="flex justify-center gap-4">
-                                <Button onClick={() => handleSubmit()} color="success">Yes, I'm sure</Button>
-                                <Button onClick={() => {setShowModal(false); setShowAlert(false)}} color="gray">
-                                        No, cancel
-                                </Button>
-                            </div>
-                        </div>
-
-                        <div>
-                            { showAlert && (
-                                <Alert color="failure" className="mt-4">
-                                    <span>
-                                        You need to upload your results and model to submit your answer.
-                                    </span>
-                                </Alert>
-                            )}
-                        </div>
-
-                    </Modal.Body>
-                </Modal>
-
-                <Modal
-                    show={showModal}
-                    size="md"
-                    popup={true}
-                    onClose={() => {setShowModal(false); setShowAlert(false)} }
-                >
-                    <Modal.Header />
-                    <Modal.Body>
-                        <div className="text-center">
-                            <p className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Are you sure you want to submit your answer?
-                            </p>
-                            <div className="flex justify-center gap-4">
-                                <Button onClick={() => handleSubmit()} color="success">Yes, I'm sure</Button>
+                                <Button onClick={() => handleSubmit()} color="success">
+                                    {loadingSubmit? <Spinner size={'sm'} /> : "Yes, I'm sure" }
+                                    </Button>
                                 <Button onClick={() => {setShowModal(false); setShowAlert(false)}} color="gray">
                                         No, cancel
                                 </Button>

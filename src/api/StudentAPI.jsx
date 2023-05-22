@@ -10,10 +10,7 @@ export const StudentAPI = {
         .catch((error) => {
             console.log("Error while fetching assignment");
         });
-        if (response.data.image) {
-            response.data.image = `${API_URL}${response.data.image}`;
-        }
-        else {
+        if (!response.data.image) {
             response.data.image = `https://flowbite.com/docs/images/carousel/carousel-1.svg`;
         }
 

@@ -1,5 +1,4 @@
 import {BsCloudDownload} from "react-icons/bs";
-import { API_URL } from "../../../api/env";
 
 
 export default function PreviousDataset(props){
@@ -9,7 +8,7 @@ export default function PreviousDataset(props){
 
     const downloadFile = (event, downloadLink) => {
         event.preventDefault();
-        window.location.href = API_URL + downloadLink;
+        window.location.href = downloadLink;
     }
     
 

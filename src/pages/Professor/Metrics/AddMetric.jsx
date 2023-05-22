@@ -3,7 +3,7 @@ import { MySession } from '../../../main.jsx';
 import { ProfessorAPI } from '../../../api/ProfessorAPI';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark as DarkTheme, oneLight as LightTheme } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useThemeMode, Label, TextInput, Textarea, Button, Modal, Alert } from "flowbite-react";
+import { useThemeMode, Label, TextInput, Textarea, Button, Modal, Alert, Spinner } from "flowbite-react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { BiHelpCircle } from "react-icons/bi"
@@ -16,6 +16,7 @@ export default function AddMetric() {
     const [showValidationModal, setShowValidationModal] = useState(false)
     const [showConfimationModal, setShowConfimationModal] = useState(false)
     const [showModalError, setShowModalError] = useState(false)
+    const [loadingSubmit, setLoadingSubmit] = useState(false);
 
     const [codeString, setCodeString] = useState('');
     const [metric, setMetric] = useState({
@@ -26,6 +27,13 @@ export default function AddMetric() {
 
     const handleFileUpload = (e) => {
         const file = e.target.files[0]
+        if (
+            !/\.py$/.test(file.name) || file.size > 10*1024
+        ){
+            alert("Invalid file type or size. Please upload a Python file (.py) with maximum size of 10KB.")
+            return
+        }
+
         const reader = new FileReader()
         reader.onload = (e) => {
             const text = e.target.result
@@ -55,6 +63,7 @@ export default function AddMetric() {
         }
 
         let success = false;
+        setLoadingSubmit(true);
         ProfessorAPI.addMetric(session.user.id, payload)
         .then((res) => {
             if (res.status === 201) {
@@ -65,6 +74,7 @@ export default function AddMetric() {
             setShowModalError(true);
         })
         .finally(() => {
+            setLoadingSubmit(false);
             setShowConfimationModal(false);
 
             if (success) {
@@ -190,7 +200,7 @@ export default function AddMetric() {
 
                         <div className="flex justify-center gap-4">
                             <Button color="success" onClick={handleConfirm}>
-                                Yes, I'm sure
+                                {loadingSubmit? <Spinner size={'sm'} /> : "Yes, I'm sure" }
                             </Button>
                             <Button color="gray" onClick={() => setShowConfimationModal(false)}>
                                 No, cancel

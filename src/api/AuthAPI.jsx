@@ -6,8 +6,6 @@ export const AuthAPI = {
 
     register: async function(form) {
 
-        console.log(form);
-
         const formData = new FormData();
         formData.append('name', form.name);
         formData.append('nmec', form.nMec);
